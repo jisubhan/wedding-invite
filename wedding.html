@@ -407,106 +407,107 @@
     galleryPrev.addEventListener('click', prevPage);
     
     // Lightbox functions
-    function openLightbox(index) {
-      currentImageIndex = index;
-      lbImg.src = allImages[index];
-      lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
+function openLightbox(index) {
+  currentImageIndex = index;
+  lbImg.src = allImages[index];
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function showPrevImage() {
+  currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
+  lbImg.src = allImages[currentImageIndex];
+}
+
+function showNextImage() {
+  currentImageIndex = (currentImageIndex + 1) % allImages.length;
+  lbImg.src = allImages[currentImageIndex];
+}
+
+// === Swipe & Drag Support ===
+let startX = 0;
+let startY = 0;
+let endX = 0;
+let endY = 0;
+let isSwiping = false;
+
+// Touch start
+function handleTouchStart(e) {
+  startX = e.touches[0].clientX;
+  startY = e.touches[0].clientY;
+  isSwiping = true;
+}
+
+// Touch end
+function handleTouchEnd(e) {
+  if (!isSwiping) return;
+  endX = e.changedTouches[0].clientX;
+  endY = e.changedTouches[0].clientY;
+
+  const diffX = startX - endX;
+  const diffY = startY - endY;
+
+  if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+    if (diffX > 0) {
+      showNextImage(); // swipe left
+    } else {
+      showPrevImage(); // swipe right
     }
-    
-    function closeLightbox() {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = '';
+  }
+
+  isSwiping = false;
+}
+
+// Mouse drag
+function handleMouseDown(e) {
+  startX = e.clientX;
+  startY = e.clientY;
+  isSwiping = true;
+}
+
+function handleMouseUp(e) {
+  if (!isSwiping) return;
+  endX = e.clientX;
+  endY = e.clientY;
+
+  const diffX = startX - endX;
+  const diffY = startY - endY;
+
+  if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+    if (diffX > 0) {
+      showNextImage(); // drag left
+    } else {
+      showPrevImage(); // drag right
     }
-    
-    function showPrevImage() {
-      currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
-      lbImg.src = allImages[currentImageIndex];
-    }
-    
-    function showNextImage() {
-      currentImageIndex = (currentImageIndex + 1) % allImages.length;
-      lbImg.src = allImages[currentImageIndex];
-    }
-    
-    // Lightbox swipe functions
-    function handleLightboxTouchStart(e) {
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-      isSwiping = true;
-    }
-    
-    function handleLightboxTouchMove(e) {
-      if (!isSwiping) return;
-      endX = e.touches[0].clientX;
-      endY = e.touches[0].clientY;
-    }
-    
-    function handleLightboxTouchEnd(e) {
-      if (!isSwiping) return;
-      
-      const diffX = startX - endX;
-      const diffY = startY - endY;
-      
-      // Check if it's a horizontal swipe (not vertical)
-      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
-        if (diffX > 0) {
-          // Swipe left - next image
-          showNextImage();
-        } else {
-          // Swipe right - previous image
-          showPrevImage();
-        }
-      }
-      
-      isSwiping = false;
-    }
-    
-    // Mouse drag support for lightbox
-    function handleLightboxMouseDown(e) {
-      startX = e.clientX;
-      startY = e.clientY;
-      isSwiping = true;
-    }
-    
-    function handleLightboxMouseMove(e) {
-      if (!isSwiping) return;
-      endX = e.clientX;
-      endY = e.clientY;
-    }
-    
-    function handleLightboxMouseUp(e) {
-      if (!isSwiping) return;
-      
-      const diffX = startX - endX;
-      const diffY = startY - endY;
-      
-      // Check if it's a horizontal drag (not vertical)
-      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
-        if (diffX > 0) {
-          // Drag left - next image
-          showNextImage();
-        } else {
-          // Drag right - previous image
-          showPrevImage();
-        }
-      }
-      
-      isSwiping = false;
-    }
-    
-    // Lightbox event listeners
-    lbClose.addEventListener('click', (e) => {e.stopPropagation(); closeLightbox()});
-    lightbox.addEventListener('click', (e) => {if(e.target === lightbox) closeLightbox()});
-    
-    // Add lightbox swipe event listeners
-    lightbox.addEventListener('touchstart', handleLightboxTouchStart, { passive: true });
-    lightbox.addEventListener('touchmove', handleLightboxTouchMove, { passive: true });
-    lightbox.addEventListener('touchend', handleLightboxTouchEnd, { passive: true });
-    
-    lightbox.addEventListener('mousedown', handleLightboxMouseDown);
-    lightbox.addEventListener('mousemove', handleLightboxMouseMove);
-    lightbox.addEventListener('mouseup', handleLightboxMouseUp);
+  }
+
+  isSwiping = false;
+}
+
+// Lightbox event listeners
+lbClose.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+// Add swipe/drag events to the IMAGE itself
+lbImg.addEventListener('touchstart', handleTouchStart, { passive: true });
+lbImg.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+lbImg.addEventListener('mousedown', handleMouseDown);
+lbImg.addEventListener('mouseup', handleMouseUp);
+
+// Keyboard navigation
+window.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('active')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') showPrevImage();
+  if (e.key === 'ArrowRight') showNextImage();
+});
+
     
     // Keyboard navigation
     window.addEventListener('keydown', (e) => {
