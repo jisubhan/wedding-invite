@@ -26,49 +26,101 @@
     }
     *{box-sizing:border-box; margin:0; padding:0}
     html,body{height:100%}
-    body{font-family:'Noto Serif KR',serif; background:var(--bg); color:var(--ink); line-height:1.65}
+    body{
+      font-family:'Noto Serif KR',serif; 
+      background:var(--bg); 
+      color:var(--ink); 
+      line-height:1.65;
+      position:relative;
+      overflow-x:hidden;
+    }
     h1,h2,h3{font-family:'Marcellus',serif; font-weight:400}
     img{max-width:100%; display:block}
     a{color:inherit; text-decoration:none}
     section{padding:56px 20px; max-width:980px; margin:0 auto}
 
+    /* Global Snowflakes - 전체 페이지에 적용 */
+    .global-snowflakes{
+      position:absolute; 
+      top:0; 
+      left:0; 
+      width:100%; 
+      height:100%; 
+      pointer-events:none; 
+      z-index:10000;
+      overflow:hidden;
+    }
+    .snowflake{
+      position:fixed; 
+      color:#fff; 
+      font-size:8px; 
+      opacity:0.8;
+      animation:snowfall linear infinite;
+      z-index:10000;
+    }
+    
+    /* 다양한 눈송이들 - 각기 다른 시작점과 속도 */
+    .snowflake:nth-child(1){left:5%; animation-duration:12s; animation-delay:0s; font-size:6px;}
+    .snowflake:nth-child(2){left:15%; animation-duration:8s; animation-delay:1s; font-size:8px;}
+    .snowflake:nth-child(3){left:25%; animation-duration:15s; animation-delay:2s; font-size:7px;}
+    .snowflake:nth-child(4){left:35%; animation-duration:10s; animation-delay:3s; font-size:9px;}
+    .snowflake:nth-child(5){left:45%; animation-duration:13s; animation-delay:4s; font-size:6px;}
+    .snowflake:nth-child(6){left:55%; animation-duration:9s; animation-delay:5s; font-size:8px;}
+    .snowflake:nth-child(7){left:65%; animation-duration:14s; animation-delay:6s; font-size:7px;}
+    .snowflake:nth-child(8){left:75%; animation-duration:11s; animation-delay:7s; font-size:9px;}
+    .snowflake:nth-child(9){left:85%; animation-duration:16s; animation-delay:8s; font-size:6px;}
+    .snowflake:nth-child(10){left:95%; animation-duration:12s; animation-delay:9s; font-size:8px;}
+    .snowflake:nth-child(11){left:10%; animation-duration:9s; animation-delay:10s; font-size:7px;}
+    .snowflake:nth-child(12){left:30%; animation-duration:13s; animation-delay:11s; font-size:9px;}
+    .snowflake:nth-child(13){left:50%; animation-duration:11s; animation-delay:12s; font-size:6px;}
+    .snowflake:nth-child(14){left:70%; animation-duration:14s; animation-delay:13s; font-size:8px;}
+    .snowflake:nth-child(15){left:90%; animation-duration:10s; animation-delay:14s; font-size:7px;}
+    .snowflake:nth-child(16){left:8%; animation-duration:11s; animation-delay:15s; font-size:8px;}
+    .snowflake:nth-child(17){left:18%; animation-duration:14s; animation-delay:16s; font-size:7px;}
+    .snowflake:nth-child(18){left:28%; animation-duration:9s; animation-delay:17s; font-size:9px;}
+    .snowflake:nth-child(19){left:38%; animation-duration:12s; animation-delay:18s; font-size:6px;}
+    .snowflake:nth-child(20){left:48%; animation-duration:15s; animation-delay:19s; font-size:8px;}
+    .snowflake:nth-child(21){left:58%; animation-duration:10s; animation-delay:20s; font-size:7px;}
+    .snowflake:nth-child(22){left:68%; animation-duration:13s; animation-delay:21s; font-size:9px;}
+    .snowflake:nth-child(23){left:78%; animation-duration:8s; animation-delay:22s; font-size:6px;}
+    .snowflake:nth-child(24){left:88%; animation-duration:16s; animation-delay:23s; font-size:8px;}
+    .snowflake:nth-child(25){left:98%; animation-duration:11s; animation-delay:24s; font-size:7px;}
+    
+    @keyframes snowfall{
+      0%{
+        transform:translateY(-20vh) translateX(-50px) rotate(0deg); 
+        opacity:0;
+      }
+      10%{
+        opacity:0.8;
+      }
+      90%{
+        opacity:0.8;
+      }
+      100%{
+        transform:translateY(120vh) translateX(150px) rotate(360deg); 
+        opacity:0;
+      }
+    }
+
     /* HERO */
     .hero{position:relative; min-height:100vh; display:flex; align-items:flex-end; justify-content:center; text-align:center; color:#fff;}
-    .hero::before{content:""; position:absolute; inset:0; background:url('w7.jpeg') center/contain no-repeat;}
+    .hero::before{content:""; position:absolute; inset:0; background:url('w7.jpeg') center/cover no-repeat;}
     .hero::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.5));}
-    .hero-inner{position:relative; z-index:1; display:grid; gap:16px; padding:20px; margin-bottom:60px}
+    .hero-inner{position:relative; z-index:2; display:grid; gap:16px; padding:20px; margin-bottom:60px}
     .hero-date{font-family:'Marcellus',serif; font-size:clamp(20px,4vw,28px); color:#fff; letter-spacing:.15em; text-shadow:0 2px 10px rgba(0,0,0,.4)}
     .hero .countdown{display:flex; gap:8px; justify-content:center; flex-wrap:wrap}
     .hero .cd-box{min-width:50px; padding:8px 6px; border-radius:8px; background:rgba(255,255,255,.15); backdrop-filter:blur(4px); border:1px solid rgba(255,255,255,.2)}
     .hero .cd-box .num{font-size:clamp(14px,3vw,20px); font-weight:500; color:#fff}
     .hero .cd-box .lab{font-size:10px; color:rgba(255,255,255,.9); margin-top:2px}
-    
-    /* Snowflakes */
-    .snowflakes{position:absolute; inset:0; pointer-events:none; overflow:hidden}
-    .snowflake{position:absolute; color:#fff; font-size:1em; text-shadow:0 0 5px rgba(255,255,255,.3); animation:fall linear infinite}
-    .snowflake:nth-child(1){left:10%; animation-duration:10s; animation-delay:0s}
-    .snowflake:nth-child(2){left:20%; animation-duration:7s; animation-delay:1s}
-    .snowflake:nth-child(3){left:30%; animation-duration:12s; animation-delay:2s}
-    .snowflake:nth-child(4){left:40%; animation-duration:8s; animation-delay:3s}
-    .snowflake:nth-child(5){left:50%; animation-duration:11s; animation-delay:4s}
-    .snowflake:nth-child(6){left:60%; animation-duration:9s; animation-delay:5s}
-    .snowflake:nth-child(7){left:70%; animation-duration:13s; animation-delay:6s}
-    .snowflake:nth-child(8){left:80%; animation-duration:6s; animation-delay:7s}
-    .snowflake:nth-child(9){left:90%; animation-duration:10s; animation-delay:8s}
-    .snowflake:nth-child(10){left:95%; animation-duration:8s; animation-delay:9s}
-    
-    @keyframes fall{
-      0%{transform:translateY(-10vh) rotate(0deg); opacity:1}
-      100%{transform:translateY(110vh) rotate(360deg); opacity:0}
-    }
 
     /* INVITATION */
-    .invitation{ text-align:center }
+    .invitation{ text-align:center; position:relative; z-index:2; }
     .invitation h2{font-size:30px; margin-bottom:16px}
     .invitation p{margin:6px 0; color:#444}
 
     /* INTERVIEW / STORY */
-    .story{max-width:880px}
+    .story{max-width:880px; position:relative; z-index:2;}
     .story h2{font-size:26px; margin-bottom:22px}
     .qa{display:grid; gap:12px}
     .qac{padding:18px; border:1px solid var(--line); border-radius:var(--radius); background:#fff; box-shadow:var(--soft); text-align:left}
@@ -76,12 +128,13 @@
     .a{color:#4b4b4b; margin-top:6px}
 
     /* FAMILY */
-    .family{display:grid; gap:18px}
+    .family{display:grid; gap:18px; position:relative; z-index:2;}
     .fam-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:10px}
     .fam-card{border:1px solid var(--line); border-radius:var(--radius); padding:14px; background:#fff}
     .fam-card .role{font-size:13px; color:var(--muted)}
 
     /* GALLERY */
+    .gallery{position:relative; z-index:2;}
     .gallery h2{margin-bottom:14px}
     .gallery-container{position:relative}
     .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:16px}
@@ -104,8 +157,8 @@
       opacity:0; 
       visibility:hidden; 
       transition:.3s; 
-      z-index:100;
-      touch-action:none; /* 스크롤 방지 */
+      z-index:99999;
+      touch-action:none; 
       -webkit-user-select:none;
       user-select:none;
     }
@@ -183,6 +236,7 @@
     }
 
     /* LOCATION */
+    .location{position:relative; z-index:2;}
     .location h2{margin-bottom:10px}
     .loc-card{border:1px solid var(--line); border-radius:var(--radius); padding:18px; background:#fff; box-shadow:var(--soft)}
     .loc-meta{color:#555}
@@ -190,12 +244,14 @@
     .chip{padding:10px 14px; border-radius:999px; border:1px solid var(--line); background:#fff}
 
     /* ACCOUNT */
+    .account{position:relative; z-index:2;}
     .account .cards{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; max-width:720px; margin:16px auto 0}
     .acc{border:1px solid var(--line); border-radius:var(--radius); padding:14px; background:#fff}
     .acc .who{font-weight:500}
     .acc .bank{color:#555}
 
     /* RSVP */
+    .rsvp{position:relative; z-index:2;}
     .rsvp .form{max-width:760px; margin:0 auto; text-align:left}
     .field{display:grid; gap:6px; margin-bottom:10px}
     label{font-size:13px; color:#6b7280}
@@ -204,7 +260,7 @@
     .status{font-size:14px; color:#6b7280}
 
     /* SHAREBAR */
-    .sharebar{position:sticky; bottom:12px; display:flex; justify-content:center; gap:10px; padding:10px}
+    .sharebar{position:sticky; bottom:12px; display:flex; justify-content:center; gap:10px; padding:10px; z-index:2;}
     .sharebar .cta{display:inline-flex; align-items:center; gap:8px; padding:12px 16px; border-radius:14px; border:1px solid var(--line); background:#fff; box-shadow:var(--soft)}
     .sharebar .primary{background:var(--accent); color:#fff; border-color:transparent}
 
@@ -216,6 +272,35 @@
   </style>
 </head>
 <body>
+  <!-- Global Snowflakes - 전체 페이지 눈 효과 -->
+  <div class="global-snowflakes" aria-hidden="true">
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+  </div>
+
   <!-- HERO -->
   <header class="hero">
     <div class="hero-inner">
@@ -226,19 +311,6 @@
         <div class="cd-box"><div class="num" id="cd-m">00</div><div class="lab">MIN</div></div>
         <div class="cd-box"><div class="num" id="cd-s">00</div><div class="lab">SEC</div></div>
       </div>
-    </div>
-    <!-- Snowflakes -->
-    <div class="snowflakes" aria-hidden="true">
-      <div class="snowflake">❅</div>
-      <div class="snowflake">❆</div>
-      <div class="snowflake">❅</div>
-      <div class="snowflake">❆</div>
-      <div class="snowflake">❅</div>
-      <div class="snowflake">❆</div>
-      <div class="snowflake">❅</div>
-      <div class="snowflake">❆</div>
-      <div class="snowflake">❅</div>
-      <div class="snowflake">❆</div>
     </div>
   </header>
 
@@ -315,20 +387,6 @@
       <div class="acc"><div class="who">신부측</div><div class="bank">국민은행 476101-01-388646 (유지연)</div></div>
     </div>
   </section>
-
-  <!-- RSVP / GUESTBOOK -->
-   <!--
-  <section class="rsvp">
-    <h2>GUESTBOOK</h2>
-    <div class="form">
-      <div class="field"><label for="gb-name">이름</label><input id="gb-name" placeholder="홍길동" /></div>
-      <div class="field"><label for="gb-msg">메시지</label><textarea id="gb-msg" rows="3" placeholder="축하 메시지를 남겨주세요"></textarea></div>
-      <button class="primary" id="gb-send">남기기</button>
-      <p class="status" id="gb-status" role="status" aria-live="polite"></p>
-    </div>
-    <div id="gb-list" style="margin-top:18px; display:grid; gap:10px"></div>
-  </section>
-  -->
 
   <script>
     // ===== Countdown (KST) =====
@@ -550,7 +608,6 @@
       const deltaY = startY - endY;
       const deltaTime = Date.now() - startTime;
       
-      // 최소 이동 거리와 최대 시간 체크
       const minSwipeDistance = 50;
       const maxSwipeTime = 300;
       
@@ -559,16 +616,16 @@
           deltaTime < maxSwipeTime) {
         
         if (deltaX > 0) {
-          showNextImage(); // 왼쪽으로 스와이프 = 다음 이미지
+          showNextImage();
         } else {
-          showPrevImage(); // 오른쪽으로 스와이프 = 이전 이미지
+          showPrevImage();
         }
       }
       
       isDragging = false;
     }
     
-    // 마우스 이벤트 핸들러 (데스크톱 지원)
+    // 마우스 이벤트 핸들러
     function handleMouseDown(e) {
       e.preventDefault();
       startX = e.clientX;
@@ -629,7 +686,6 @@
     lbImg.addEventListener('mousemove', handleMouseMove);
     lbImg.addEventListener('mouseup', handleMouseUp);
     
-    // 마우스가 이미지 밖으로 나갔을 때 드래그 종료
     lbImg.addEventListener('mouseleave', () => {
       isDragging = false;
     });
@@ -641,68 +697,6 @@
       if (e.key === 'ArrowLeft') showPrevImage();
       if (e.key === 'ArrowRight') showNextImage();
     });
-
-    // ===== Guestbook (local demo) =====
-    const gbSend = document.getElementById('gb-send');
-    const gbName = document.getElementById('gb-name');
-    const gbMsg = document.getElementById('gb-msg');
-    const gbList = document.getElementById('gb-list');
-    const gbStatus = document.getElementById('gb-status');
-    const KEY = 'guestbook_v1';
-    function render(){
-      if (!gbList) return; // 방명록이 비활성화된 경우 처리
-      gbList.innerHTML='';
-      const items = JSON.parse(localStorage.getItem(KEY)||'[]');
-      items.forEach(({name,msg,at})=>{
-        const card = document.createElement('div');
-        card.style.cssText = 'border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff';
-        card.innerHTML = `<div style="font-weight:500">${name}</div><div style="color:#555;margin-top:4px">${msg}</div><div style="color:#999;margin-top:6px;font-size:12px">${new Date(at).toLocaleString()}</div>`;
-        gbList.appendChild(card);
-      });
-    }
-    
-    if (gbSend) {
-      gbSend.addEventListener('click',()=>{
-        const name = gbName.value.trim(); 
-        const msg = gbMsg.value.trim();
-        if(!name || !msg){ 
-          gbStatus.textContent='이름과 메시지를 입력해주세요.'; 
-          return; 
-        }
-        const items = JSON.parse(localStorage.getItem(KEY)||'[]');
-        items.unshift({name, msg, at: Date.now()});
-        localStorage.setItem(KEY, JSON.stringify(items));
-        gbName.value=''; 
-        gbMsg.value=''; 
-        gbStatus.textContent='남겨주셔서 감사합니다!';
-        render();
-      });
-    }
-    render();
-
-    // ===== Share & Call =====
-    const shareBtn = document.getElementById('shareBtn');
-    const callGroom = document.getElementById('callGroom');
-    const callBride = document.getElementById('callBride');
-    
-    if (shareBtn) {
-      shareBtn.addEventListener('click', async ()=>{
-        const data={title:document.title, text:'우리 결혼식에 초대합니다 💐', url:location.href};
-        if(navigator.share){ 
-          try{ await navigator.share(data);}catch{} 
-        } else { 
-          try{ await navigator.clipboard.writeText(data.url); alert('링크 복사됨'); }catch{} 
-        }
-      });
-    }
-    
-    if (callGroom) {
-      callGroom.onclick=()=> location.href='tel:01012345678';
-    }
-    
-    if (callBride) {
-      callBride.onclick=()=> location.href='tel:01098765432';
-    }
   </script>
 </body>
 </html>
