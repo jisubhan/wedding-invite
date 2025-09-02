@@ -89,8 +89,12 @@
     .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:16px}
     .grid img{border-radius:10px; cursor:pointer; aspect-ratio:1/1; object-fit:cover; transition:transform 0.2s}
     .grid img:hover{transform:scale(1.05)}
+    .gallery-nav{display:flex; justify-content:center; gap:12px; margin-bottom:12px}
+    .nav-btn{width:44px; height:44px; border-radius:50%; border:1px solid var(--line); background:#fff; color:var(--ink); font-size:20px; cursor:pointer; transition:all 0.2s}
+    .nav-btn:hover{background:var(--accent); color:#fff; border-color:var(--accent)}
+    .nav-btn:disabled{opacity:0.5; cursor:not-allowed}
     .gallery-info{text-align:center; color:var(--muted); font-size:14px}
-    .swipe-hint{color:var(--accent); font-size:12px; margin-top:8px; opacity:0.8}
+    .lightbox-swipe-hint{position:absolute; bottom:20px; left:50%; transform:translateX(-50%); color:#fff; font-size:14px; text-align:center; opacity:0.8; pointer-events:none}
     .lightbox{position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.85); opacity:0; visibility:hidden; transition:.3s; z-index:100}
     .lightbox.active{opacity:1; visibility:visible}
     .lightbox img{max-width:90%; max-height:82%; border-radius:12px; box-shadow:0 10px 25px rgba(0,0,0,.5)}
@@ -190,16 +194,18 @@
       <div class="grid" id="gallery">
         <!-- Images will be loaded here by JavaScript -->
       </div>
+      <div class="gallery-nav">
+        <button class="nav-btn prev" id="galleryPrev" aria-label="이전 페이지">‹</button>
+        <button class="nav-btn next" id="galleryNext" aria-label="다음 페이지">›</button>
+      </div>
       <div class="gallery-info">
         <span id="galleryPage">1</span> / <span id="galleryTotal">1</span>
-        <div class="swipe-hint">← 스와이프하여 더 많은 사진 보기 →</div>
       </div>
     </div>
     <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="확대 보기">
-      <button class="nav prev" id="lbPrev" aria-label="이전">‹</button>
       <img src="" alt="확대 이미지" id="lbImg">
-      <button class="nav next" id="lbNext" aria-label="다음">›</button>
       <button class="close" id="lbClose" aria-label="닫기">×</button>
+      <div class="lightbox-swipe-hint">← 스와이프하여 사진 넘기기 →</div>
     </div>
   </section>
 
@@ -328,14 +334,14 @@
       waitForKakaoMap();
     }
 
-    // ===== Gallery Swipe & Lightbox =====
+    // ===== Gallery Pagination & Lightbox Swipe =====
     const gallery = document.getElementById('gallery');
+    const galleryPrev = document.getElementById('galleryPrev');
+    const galleryNext = document.getElementById('galleryNext');
     const galleryPage = document.getElementById('galleryPage');
     const galleryTotal = document.getElementById('galleryTotal');
     const lightbox = document.getElementById('lightbox');
     const lbImg = document.getElementById('lbImg');
-    const lbPrev = document.getElementById('lbPrev');
-    const lbNext = document.getElementById('lbNext');
     const lbClose = document.getElementById('lbClose');
     
     // All image files from w1.jpeg to w21.jpeg
@@ -351,7 +357,7 @@
     let currentPage = 1;
     let currentImageIndex = 0;
     
-    // Swipe variables
+    // Lightbox swipe variables
     let startX = 0;
     let startY = 0;
     let endX = 0;
@@ -375,6 +381,10 @@
       // Update pagination info
       galleryPage.textContent = page;
       galleryTotal.textContent = Math.ceil(allImages.length / imagesPerPage);
+      
+      // Update button states
+      galleryPrev.disabled = page === 1;
+      galleryNext.disabled = page === Math.ceil(allImages.length / imagesPerPage);
     }
     
     function nextPage() {
@@ -391,84 +401,10 @@
       }
     }
     
-    // Swipe functions
-    function handleTouchStart(e) {
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-      isSwiping = true;
-    }
-    
-    function handleTouchMove(e) {
-      if (!isSwiping) return;
-      endX = e.touches[0].clientX;
-      endY = e.touches[0].clientY;
-    }
-    
-    function handleTouchEnd(e) {
-      if (!isSwiping) return;
-      
-      const diffX = startX - endX;
-      const diffY = startY - endY;
-      
-      // Check if it's a horizontal swipe (not vertical)
-      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
-        if (diffX > 0) {
-          // Swipe left - next page
-          nextPage();
-        } else {
-          // Swipe right - previous page
-          prevPage();
-        }
-      }
-      
-      isSwiping = false;
-    }
-    
-    // Mouse drag support
-    function handleMouseDown(e) {
-      startX = e.clientX;
-      startY = e.clientY;
-      isSwiping = true;
-    }
-    
-    function handleMouseMove(e) {
-      if (!isSwiping) return;
-      endX = e.clientX;
-      endY = e.clientY;
-    }
-    
-    function handleMouseUp(e) {
-      if (!isSwiping) return;
-      
-      const diffX = startX - endX;
-      const diffY = startY - endY;
-      
-      // Check if it's a horizontal drag (not vertical)
-      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
-        if (diffX > 0) {
-          // Drag left - next page
-          nextPage();
-        } else {
-          // Drag right - previous page
-          prevPage();
-        }
-      }
-      
-      isSwiping = false;
-    }
-    
-    // Initialize gallery with swipe support
+    // Initialize gallery
     loadGalleryPage(1);
-    
-    // Add touch event listeners
-    gallery.addEventListener('touchstart', handleTouchStart, { passive: true });
-    gallery.addEventListener('touchmove', handleTouchMove, { passive: true });
-    gallery.addEventListener('touchend', handleTouchEnd, { passive: true });
-    
-    // Add mouse event listeners for desktop
-    gallery.addEventListener('mousedown', handleMouseDown);
-    gallery.addEventListener('mousemove', handleMouseMove);
-    gallery.addEventListener('mouseup', handleMouseUp);
+    galleryNext.addEventListener('click', nextPage);
+    galleryPrev.addEventListener('click', prevPage);
     
     // Lightbox functions
     function openLightbox(index) {
@@ -493,11 +429,84 @@
       lbImg.src = allImages[currentImageIndex];
     }
     
+    // Lightbox swipe functions
+    function handleLightboxTouchStart(e) {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      isSwiping = true;
+    }
+    
+    function handleLightboxTouchMove(e) {
+      if (!isSwiping) return;
+      endX = e.touches[0].clientX;
+      endY = e.touches[0].clientY;
+    }
+    
+    function handleLightboxTouchEnd(e) {
+      if (!isSwiping) return;
+      
+      const diffX = startX - endX;
+      const diffY = startY - endY;
+      
+      // Check if it's a horizontal swipe (not vertical)
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+        if (diffX > 0) {
+          // Swipe left - next image
+          showNextImage();
+        } else {
+          // Swipe right - previous image
+          showPrevImage();
+        }
+      }
+      
+      isSwiping = false;
+    }
+    
+    // Mouse drag support for lightbox
+    function handleLightboxMouseDown(e) {
+      startX = e.clientX;
+      startY = e.clientY;
+      isSwiping = true;
+    }
+    
+    function handleLightboxMouseMove(e) {
+      if (!isSwiping) return;
+      endX = e.clientX;
+      endY = e.clientY;
+    }
+    
+    function handleLightboxMouseUp(e) {
+      if (!isSwiping) return;
+      
+      const diffX = startX - endX;
+      const diffY = startY - endY;
+      
+      // Check if it's a horizontal drag (not vertical)
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+        if (diffX > 0) {
+          // Drag left - next image
+          showNextImage();
+        } else {
+          // Drag right - previous image
+          showPrevImage();
+        }
+      }
+      
+      isSwiping = false;
+    }
+    
     // Lightbox event listeners
     lbClose.addEventListener('click', (e) => {e.stopPropagation(); closeLightbox()});
-    lbPrev.addEventListener('click', (e) => {e.stopPropagation(); showPrevImage()});
-    lbNext.addEventListener('click', (e) => {e.stopPropagation(); showNextImage()});
     lightbox.addEventListener('click', (e) => {if(e.target === lightbox) closeLightbox()});
+    
+    // Add lightbox swipe event listeners
+    lightbox.addEventListener('touchstart', handleLightboxTouchStart, { passive: true });
+    lightbox.addEventListener('touchmove', handleLightboxTouchMove, { passive: true });
+    lightbox.addEventListener('touchend', handleLightboxTouchEnd, { passive: true });
+    
+    lightbox.addEventListener('mousedown', handleLightboxMouseDown);
+    lightbox.addEventListener('mousemove', handleLightboxMouseMove);
+    lightbox.addEventListener('mouseup', handleLightboxMouseUp);
     
     // Keyboard navigation
     window.addEventListener('keydown', (e) => {
