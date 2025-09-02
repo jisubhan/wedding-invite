@@ -3,426 +3,446 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Invitation — 지섭 & 지연</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Pretendard:wght@300;400;500&display=swap" rel="stylesheet">
+  <title>Wedding — 한지섭 & 유지연</title>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Noto+Serif+KR:wght@400;500&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=384533d32fee31cf668087354623031d&libraries=services"></script>
   <style>
+    :root{
+      --bg:#faf9f7; --ink:#2a2a2a; --muted:#6b6b6b; --accent:#8b6e66; --line:#ece7e2;
+      --radius:16px; --soft:0 10px 30px rgba(17,24,39,.08);
+    }
     *{box-sizing:border-box; margin:0; padding:0}
     html,body{height:100%}
-    body{font-family:'Pretendard',sans-serif; color:#1b2230; background:#fff;}
-    a{color:inherit; text-decoration:none}
+    body{font-family:'Noto Serif KR',serif; background:var(--bg); color:var(--ink); line-height:1.65}
+    h1,h2,h3{font-family:'Marcellus',serif; font-weight:400}
     img{max-width:100%; display:block}
-    button{font-family:inherit}
+    a{color:inherit; text-decoration:none}
+    section{padding:56px 20px; max-width:980px; margin:0 auto}
 
-    /* 공통 화면(풀스크린) */
-    .screen{position:relative; height:100vh; width:100%; overflow:hidden}
-    .center{position:absolute; inset:0; display:flex; align-items:center; justify-content:center}
+    /* HERO */
+    .hero{position:relative; min-height:100vh; display:flex; align-items:flex-end; justify-content:center; text-align:center; color:#fff;}
+    .hero::before{content:""; position:absolute; inset:0; background:url('IMG_6131.JPG') center/contain no-repeat;}
+    .hero::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.5));}
+    .hero-inner{position:relative; z-index:1; display:grid; gap:16px; padding:20px; margin-bottom:60px}
+    .hero-date{font-family:'Marcellus',serif; font-size:clamp(20px,4vw,28px); color:#fff; letter-spacing:.15em; text-shadow:0 2px 10px rgba(0,0,0,.4)}
+    .hero .countdown{display:flex; gap:8px; justify-content:center; flex-wrap:wrap}
+    .hero .cd-box{min-width:50px; padding:8px 6px; border-radius:8px; background:rgba(255,255,255,.15); backdrop-filter:blur(4px); border:1px solid rgba(255,255,255,.2)}
+    .hero .cd-box .num{font-size:clamp(14px,3vw,20px); font-weight:500; color:#fff}
+    .hero .cd-box .lab{font-size:10px; color:rgba(255,255,255,.9); margin-top:2px}
+    
+    /* Snowflakes */
+    .snowflakes{position:absolute; inset:0; pointer-events:none; overflow:hidden}
+    .snowflake{position:absolute; color:#fff; font-size:1em; text-shadow:0 0 5px rgba(255,255,255,.3); animation:fall linear infinite}
+    .snowflake:nth-child(1){left:10%; animation-duration:10s; animation-delay:0s}
+    .snowflake:nth-child(2){left:20%; animation-duration:7s; animation-delay:1s}
+    .snowflake:nth-child(3){left:30%; animation-duration:12s; animation-delay:2s}
+    .snowflake:nth-child(4){left:40%; animation-duration:8s; animation-delay:3s}
+    .snowflake:nth-child(5){left:50%; animation-duration:11s; animation-delay:4s}
+    .snowflake:nth-child(6){left:60%; animation-duration:9s; animation-delay:5s}
+    .snowflake:nth-child(7){left:70%; animation-duration:13s; animation-delay:6s}
+    .snowflake:nth-child(8){left:80%; animation-duration:6s; animation-delay:7s}
+    .snowflake:nth-child(9){left:90%; animation-duration:10s; animation-delay:8s}
+    .snowflake:nth-child(10){left:95%; animation-duration:8s; animation-delay:9s}
+    
+    @keyframes fall{
+      0%{transform:translateY(-10vh) rotate(0deg); opacity:1}
+      100%{transform:translateY(110vh) rotate(360deg); opacity:0}
+    }
+    
 
-    /* 0) 랜딩: 모이티 느낌의 미니멀 시작화면 */
-    .landing{background:linear-gradient(180deg,#fff,#faf8f6)}
-    .landing-inner{display:grid; gap:12px; text-align:center; padding:24px}
-    .landing .names{font-family:'Playfair Display',serif; font-size:clamp(28px,6vw,44px); font-weight:600}
-    .landing .date{letter-spacing:.28em; color:#8b6e66}
-    .scroll-cue{position:absolute; bottom:20px; left:0; right:0; text-align:center; font-size:12px; color:#999}
-    .scroll-cue:after{content:""; display:block; width:1px; height:36px; margin:8px auto 0; background:#ddd; animation:drop 1.6s infinite}
-    @keyframes drop{0%{transform:translateY(-6px); opacity:.3} 50%{opacity:1} 100%{transform:translateY(6px); opacity:.3}}
 
-    /* 0.5) 미니 게임: Scratch Reveal (캔버스) */
-    .game{background:#000}
-    .game-bg{position:absolute; inset:0; background:url('your-photo.jpg') center/cover no-repeat; filter:saturate(1.05) contrast(1.03)}
-    .game-overlay{position:absolute; inset:0; background:radial-gradient(1200px 800px at 50% -10%, rgba(0,0,0,.65), rgba(0,0,0,.85));}
-    .game-canvas{position:absolute; inset:0}
-    .game-ui{position:absolute; inset:0; display:grid; place-items:center; text-align:center; color:#fff; pointer-events:none}
-    .game-ui .date{font-family:'Playfair Display',serif; font-size:clamp(56px,18vw,160px); line-height:.9; text-shadow:0 8px 40px rgba(0,0,0,.45)}
-    .hint{position:absolute; bottom:24px; left:0; right:0; text-align:center; color:#e5e7eb; font-size:13px; opacity:.85}
-    .skip{position:absolute; top:16px; right:16px; z-index:10; padding:10px 14px; border-radius:999px; border:1px solid rgba(255,255,255,.35); background:rgba(0,0,0,.4); color:#fff; cursor:pointer}
-    .reveal-fade{opacity:1; transition:opacity .8s ease}
-    .reveal-fade.done{opacity:0; pointer-events:none}
+    /* INVITATION */
+    .invitation{ text-align:center }
+    .invitation h2{font-size:30px; margin-bottom:16px}
+    .invitation p{margin:6px 0; color:#444}
 
-    /* 1) 첫 스크롤 화면: 화보+대형 날짜 260118 + 패럴랙스 */
-    .feature{background:#000}
-    .feature img.parallax{position:absolute; inset:-5vh 0 0 0; width:100%; height:110%; object-fit:cover; filter:saturate(1.05) contrast(1.03)}
-    .feature .veil{position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,.45),rgba(0,0,0,.15))}
-    .corner{position:absolute; font-family:'Playfair Display',serif; color:#fff; letter-spacing:.18em; font-size:clamp(12px,2.6vw,16px)}
-    .tl{top:20px; left:20px} .tr{top:20px; right:20px} .bl{bottom:20px; left:20px} .br{bottom:20px; right:20px}
-    .date-stack{position:absolute; inset:0; display:grid; place-items:center; text-align:center}
-    .date-stack .num{font-family:'Playfair Display',serif; font-weight:600; line-height:0.88; color:#fff; text-shadow:0 2px 18px rgba(0,0,0,.35)}
-    .date-stack .num span{display:block; font-size:clamp(72px,18vw,180px)}
+    /* INTERVIEW / STORY */
+    .story{max-width:880px}
+    .story h2{font-size:26px; margin-bottom:22px}
+    .qa{display:grid; gap:12px}
+    .qac{padding:18px; border:1px solid var(--line); border-radius:var(--radius); background:#fff; box-shadow:var(--soft); text-align:left}
+    .q{font-family:'Marcellus',serif; letter-spacing:.03em; color:#111}
+    .a{color:#4b4b4b; margin-top:6px}
 
-    .particles{pointer-events:none; position:absolute; inset:0;}
-    .bubble{position:absolute; width:6px; height:6px; border-radius:999px; background:rgba(255,255,255,.8); filter:blur(1px); animation:f 8s linear infinite}
-    @keyframes f{from{transform:translateY(20vh)} to{transform:translateY(-120vh)}}
+    /* FAMILY */
+    .family{display:grid; gap:18px}
+    .fam-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:10px}
+    .fam-card{border:1px solid var(--line); border-radius:var(--radius); padding:14px; background:#fff}
+    .fam-card .role{font-size:13px; color:var(--muted)}
 
-    /* ===== 기본 섹션(사용자 제공 레이아웃) ===== */
-    .section{padding:40px 20px; text-align:center}
-    .section.alt{background:#fafafa}
-    h2{font-size:1.5rem; margin-bottom:20px}
-    .date-line{font-size:1.2rem; margin:10px 0}
-    .location{font-size:1.05rem; color:#555}
-    .btn{display:inline-block; padding:12px 24px; margin-top:20px; background:#c89f9c; color:#fff; border-radius:30px; font-weight:600}
+    /* GALLERY */
+    .gallery h2{margin-bottom:14px}
+    .gallery-container{position:relative}
+    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:16px}
+    .grid img{border-radius:10px; cursor:pointer; aspect-ratio:1/1; object-fit:cover; transition:transform 0.2s}
+    .grid img:hover{transform:scale(1.05)}
+    .gallery-nav{display:flex; justify-content:center; gap:12px; margin-bottom:12px}
+    .nav-btn{width:44px; height:44px; border-radius:50%; border:1px solid var(--line); background:#fff; color:var(--ink); font-size:20px; cursor:pointer; transition:all 0.2s}
+    .nav-btn:hover{background:var(--accent); color:#fff; border-color:var(--accent)}
+    .nav-btn:disabled{opacity:0.5; cursor:not-allowed}
+    .gallery-info{text-align:center; color:var(--muted); font-size:14px}
+    .lightbox{position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.85); opacity:0; visibility:hidden; transition:.3s; z-index:100}
+    .lightbox.active{opacity:1; visibility:visible}
+    .lightbox img{max-width:90%; max-height:82%; border-radius:12px; box-shadow:0 10px 25px rgba(0,0,0,.5)}
+    .lightbox .nav{position:absolute; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; border:0; background:rgba(255,255,255,.2); color:#fff; font-size:28px; display:grid; place-items:center; cursor:pointer}
+    .lightbox .prev{left:16px}
+    .lightbox .next{right:16px}
+    .lightbox .close{position:absolute; top:16px; right:20px; width:40px; height:40px; border-radius:50%; border:0; background:rgba(255,255,255,.2); color:#fff; font-size:22px; cursor:pointer}
 
-    /* 히어로 섹션(사용자 제공) */
-    .hero{height:400px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:2rem; font-weight:700; text-shadow:1px 1px 5px rgba(0,0,0,.6); background:url('wedding.jpg') no-repeat center/cover}
+    /* LOCATION */
+    .location h2{margin-bottom:10px}
+    .loc-card{border:1px solid var(--line); border-radius:var(--radius); padding:18px; background:#fff; box-shadow:var(--soft)}
+    .loc-meta{color:#555}
+    .loc-buttons{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:14px}
+    .chip{padding:10px 14px; border-radius:999px; border:1px solid var(--line); background:#fff}
 
-    /* --- 지도 섹션 (카카오/네이버 탭) --- */
-    .map-section{padding:40px 16px}
-    .tabs{display:flex; gap:8px; justify-content:center; margin-bottom:12px}
-    .tab{padding:8px 12px; border:1px solid #e6e2dd; border-radius:999px; background:#fff; cursor:pointer}
-    .tab[aria-selected="true"]{background:#1b2230; color:#fff; border-color:#1b2230}
-    .map-frames{max-width:820px; margin:0 auto; border:1px solid #ece7e2; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(17,24,39,.08)}
-    .map-frames iframe{width:100%; height:360px; border:0}
-    .map-links{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:10px}
-    .map-links a{padding:10px 14px; border:1px solid #ece7e2; border-radius:12px}
+    /* ACCOUNT */
+    .account .cards{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; max-width:720px; margin:16px auto 0}
+    .acc{border:1px solid var(--line); border-radius:var(--radius); padding:14px; background:#fff}
+    .acc .who{font-weight:500}
+    .acc .bank{color:#555}
 
-    /* --- 갤러리 슬라이더 --- */
-    .slider{position:relative; overflow:hidden; max-width:920px; margin:0 auto}
-    .track{display:flex; gap:10px; scroll-snap-type:x mandatory; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:6px}
-    .slide{flex:0 0 80%; max-width:80%; scroll-snap-align:center; border-radius:16px; overflow:hidden; border:1px solid #ece7e2}
-    .nav-btn{position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,.5); color:#fff; border:0; width:42px; height:42px; border-radius:50%; display:grid; place-items:center; cursor:pointer}
-    .nav-btn.prev{left:8px} .nav-btn.next{right:8px}
-
-    /* --- RSVP 폼 --- */
-    .rsvp{max-width:760px; margin:0 auto; text-align:left}
-    form{display:grid; gap:12px}
-    .field{display:grid; gap:6px}
+    /* RSVP */
+    .rsvp .form{max-width:760px; margin:0 auto; text-align:left}
+    .field{display:grid; gap:6px; margin-bottom:10px}
     label{font-size:13px; color:#6b7280}
-    input, select, textarea{width:100%; padding:12px 14px; border-radius:12px; border:1px solid #e6e2dd; background:#fff}
-    input:focus, select:focus, textarea:focus{outline:2px solid rgba(127,108,241,.25)}
-    .submit{padding:12px 16px; border-radius:12px; background:linear-gradient(135deg,#7f6cf1,#a78bfa); border:0; color:#fff; cursor:pointer}
+    input,select,textarea{width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--line); background:#fff}
+    button.primary{display:inline-block; padding:12px 18px; border-radius:12px; background:var(--accent); color:#fff; border:0; cursor:pointer}
     .status{font-size:14px; color:#6b7280}
 
-    /* --- 공유 바 --- */
-    .sharebar{position:sticky; bottom:12px; display:flex; justify-content:center; gap:10px; padding:10px;}
-    .sharebar .cta{display:inline-flex; align-items:center; gap:8px; padding:12px 16px; border-radius:14px; border:1px solid #e6e2dd; background:#fff; box-shadow:0 6px 20px rgba(17,24,39,.08)}
-    .sharebar .primary{background:linear-gradient(135deg,#7f6cf1,#a78bfa); color:#fff; border-color:transparent}
+    /* SHAREBAR */
+    .sharebar{position:sticky; bottom:12px; display:flex; justify-content:center; gap:10px; padding:10px}
+    .sharebar .cta{display:inline-flex; align-items:center; gap:8px; padding:12px 16px; border-radius:14px; border:1px solid var(--line); background:#fff; box-shadow:var(--soft)}
+    .sharebar .primary{background:var(--accent); color:#fff; border-color:transparent}
 
-    /* --- 스크롤 페이드 인 --- */
-    .reveal{opacity:0; transform:translateY(12px); transition:opacity .7s ease, transform .7s ease}
-    .reveal.show{opacity:1; transform:none}
+    /* small */
+    @media (max-width:520px){ .fam-grid{grid-template-columns:1fr} .account .cards{grid-template-columns:1fr} }
   </style>
 </head>
 <body>
-  <!-- 0) 랜딩 화면 (모이티 느낌의 미니멀) -->
-  <section class="screen landing" id="landing">
-    <div class="center">
-      <div class="landing-inner">
-        <div class="date">2026 · 01 · 18</div>
-        <div class="names">지섭 & 지연</div>
-        <div class="muted">INVITATION</div>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-date">2026.01.18 SAT 1PM</div>
+      <div class="countdown" id="countdown" aria-label="예식까지 남은 시간">
+        <div class="cd-box"><div class="num" id="cd-d">00</div><div class="lab">DAYS</div></div>
+        <div class="cd-box"><div class="num" id="cd-h">00</div><div class="lab">HRS</div></div>
+        <div class="cd-box"><div class="num" id="cd-m">00</div><div class="lab">MIN</div></div>
+        <div class="cd-box"><div class="num" id="cd-s">00</div><div class="lab">SEC</div></div>
       </div>
     </div>
-    <div class="scroll-cue">SCROLL</div>
+    <!-- Snowflakes -->
+    <div class="snowflakes" aria-hidden="true">
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❆</div>
+    </div>
+  </header>
+
+  <!-- INVITATION -->
+  <section class="invitation">
+    <h2>INVITATION</h2>
+    <p>저희 두 사람의 작은 만남이</p>
+    <p>사랑의 결실을 이루어</p>
+    <p>소중한 결혼식을 올리게 되었습니다.</p>
   </section>
 
-  <!-- 0.5) 미니 게임: Scratch Reveal (짧고 가벼운 인터랙션) -->
-  <section class="screen game" id="game" aria-label="스크래치 게임">
-    <div class="game-bg" aria-hidden="true"></div>
-    <button class="skip" id="skipGame" type="button">건너뛰기</button>
-    <!-- 어두운 오버레이 + 긁어서 지우는 캔버스 -->
-    <div class="reveal-fade" id="gameCover">
-      <canvas class="game-canvas" id="scratch"></canvas>
-      <div class="game-overlay"></div>
-    </div>
-    <!-- 중앙 UI (목표 텍스트) -->
-    <div class="game-ui" aria-hidden="true">
-      <div class="date" id="gameDate">26 01 18</div>
-      <div class="hint">화면을 긁어 날짜를 드러내주세요 · 40% 이상 드러나면 자동으로 넘어갑니다</div>
+  <!-- STORY / INTERVIEW -->
+  <section class="story">
+    <h2>OUR STORY</h2>
+    <div class="qa">
+      <div class="qac"><div class="q">어떻게 만나게 되었나요?💕</div><div class="a">친구의 소개로 첫 만남을 가졌고, 긴 대화 끝에 서로의 마음을 확인했습니다.</div></div>
+      <div class="qac"><div class="q">프로포즈는?💍</div><div class="a">크리스마스 이브🎄, 런던 하이드파크에서 조용히 마음을 전했습니다.</div></div>
+      <div class="qac"><div class="q">닮은 점은?</div><div class="a">얼굴뿐만 아니라, 소소한 일상도 소중히 여기는 마음이 닮았습니다.</div></div>
     </div>
   </section>
 
-  <!-- 1) 첫 스크롤 시작 화면: 화보 + 260118 + 패럴랙스 -->
-  <section class="screen feature" id="feature">
-    <img class="parallax" src="your-photo.jpg" alt="커플 화보">
-    <div class="veil"></div>
-    <div class="corner tl">SIMPLY</div>
-    <div class="corner tr">MEANT</div>
-    <div class="corner bl">TO BE</div>
-    <div class="corner br">TOGETHER</div>
-    <div class="date-stack" aria-label="결혼식 날짜">
-      <div class="num">
-        <span>26</span>
-        <span>01</span>
-        <span>18</span>
+  <!-- FAMILY -->
+  <section class="family">
+    <h2>FAMILY</h2>
+    <div class="fam-grid">
+      <div class="fam-card"><div class="role">신랑</div><div class="name">한지섭</div><div class="role">부 • 모</div><div>한상민 · 이효재</div></div>
+      <div class="fam-card"><div class="role">신부</div><div class="name">유지연</div><div class="role">부 • 모</div><div>유성태 · 서문숙</div></div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery">
+    <h2>GALLERY</h2>
+    <div class="gallery-container">
+      <div class="grid" id="gallery">
+        <!-- Images will be loaded here by JavaScript -->
+      </div>
+      <div class="gallery-nav">
+        <button class="nav-btn prev" id="galleryPrev" aria-label="이전 페이지">‹</button>
+        <button class="nav-btn next" id="galleryNext" aria-label="다음 페이지">›</button>
+      </div>
+      <div class="gallery-info">
+        <span id="galleryPage">1</span> / <span id="galleryTotal">1</span>
       </div>
     </div>
-    <div class="particles" aria-hidden="true">
-      <div class="bubble" style="left:10%; animation-duration:9s"></div>
-      <div class="bubble" style="left:24%; width:8px; height:8px; animation-duration:11s"></div>
-      <div class="bubble" style="left:58%; animation-duration:10s"></div>
-      <div class="bubble" style="left:72%; width:10px; height:10px; animation-duration:12s"></div>
-      <div class="bubble" style="left:86%; animation-duration:8s"></div>
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="확대 보기">
+      <button class="nav prev" id="lbPrev" aria-label="이전">‹</button>
+      <img src="" alt="확대 이미지" id="lbImg">
+      <button class="nav next" id="lbNext" aria-label="다음">›</button>
+      <button class="close" id="lbClose" aria-label="닫기">×</button>
     </div>
   </section>
 
-  <!-- 2) 초대 메시지 (풀스크린) -->
-  <section class="screen invite" id="invite">
-    <div class="center">
-      <div class="invite-inner reveal">
-        <h2>INVITATION</h2>
-        <h3>소중한 분들을 초대합니다</h3>
-        <p>저희 두 사람의 작은 만남이</p>
-        <p>사랑의 결실을 이루어</p>
-        <p>소중한 결혼식을 올리게 되었습니다.</p>
+  <!-- LOCATION -->
+  <section class="location">
+    <h2>LOCATION</h2>
+    <div class="loc-card">
+      <div class="loc-name">소노펠리체 컨벤션 3층</div>
+      <div class="loc-meta">서울 강남구 영동대로 517 · 2026년 1월 18일 (토) 오후 1시</div>
+      <div class="loc-buttons" role="group" aria-label="길찾기">
+        <a class="chip" href="https://map.naver.com/p/search/서울%20강남구%20영동대로%20517" target="_blank" rel="noopener">네이버지도</a>
+        <a class="chip" href="https://map.kakao.com/link/search/서울%20강남구%20영동대로%20517" target="_blank" rel="noopener">카카오맵</a>
+        <a class="chip" href="https://maps.apple.com/?address=서울%20강남구%20영동대로%20517" target="_blank" rel="noopener">Apple 지도</a>
+        <a class="chip" href="https://maps.google.com/?q=서울%20강남구%20영동대로%20517" target="_blank" rel="noopener">Google 지도</a>
       </div>
+      <div id="map" style="width:100%; height:360px; border-radius:12px; margin-top:14px"></div>
     </div>
   </section>
 
-  <!-- 3) 사용자 제공 섹션들 -->
-  <div class="hero reveal">
-    <div>우리 결혼합니다</div>
-  </div>
-
-  <div class="section reveal">
-    <h2>신랑 지섭 ♥ 신부 지연</h2>
-    <p class="date-line">2026년 1월 18일 (토) 오후 1시</p>
-    <p class="location">서울 강남구 소노펠리체 컨벤션 3층</p>
-    <a href="https://map.naver.com" class="btn">오시는 길</a>
-  </div>
-
-  <!-- 4) 지도 섹션: 카카오 / 네이버 임베드 탭 -->
-  <section class="map-section reveal" aria-labelledby="map-h">
-    <h2 id="map-h" style="text-align:center; margin-bottom:14px">오시는 길</h2>
-    <div class="tabs" role="tablist">
-      <button class="tab" role="tab" aria-selected="true" aria-controls="kakao-map" id="kakao-tab">카카오맵</button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="naver-map" id="naver-tab">네이버지도</button>
-    </div>
-    <div class="map-frames">
-      <!-- 실제 적용 시: 아래 iframe을 카카오 RoughMap 스크립트 혹은 지도 퍼가기 URL로 교체하세요. -->
-      <iframe id="kakao-map" title="카카오맵" role="tabpanel" aria-labelledby="kakao-tab" srcdoc="<style>body,html{margin:0;height:100%} .ph{height:100%;display:flex;align-items:center;justify-content:center;font-family:sans-serif;color:#555;background:#f3f2f0}</style><div class='ph'>카카오맵 임베드 자리<br/>관리자 페이지에서 RoughMap 스크립트를 붙여주세요</div>"></iframe>
-      <iframe id="naver-map" title="네이버지도" role="tabpanel" aria-labelledby="naver-tab" hidden srcdoc="<style>body,html{margin:0;height:100%} .ph{height:100%;display:flex;align-items:center;justify-content:center;font-family:sans-serif;color:#555;background:#f3f2f0}</style><div class='ph'>네이버 지도 임베드 자리<br/>장소 공유의 퍼가기 URL을 붙여주세요</div>"></iframe>
-    </div>
-    <div class="map-links" role="group" aria-label="지도 앱 열기">
-      <a href="https://naver.me/xxxx" target="_blank" rel="noopener">네이버지도 열기</a>
-      <a href="https://kko.to/xxxx" target="_blank" rel="noopener">카카오맵 열기</a>
-      <a href="https://maps.apple.com/?address=..." target="_blank" rel="noopener">Apple 지도</a>
-      <a href="https://maps.google.com/?q=..." target="_blank" rel="noopener">Google 지도</a>
-    </div>
-  </section>
-
-  <!-- 5) 갤러리 슬라이더 (터치 스와이프) -->
-  <section class="section alt reveal" aria-labelledby="gal-h">
-    <h2 id="gal-h">갤러리</h2>
-    <div class="slider" id="slider">
-      <button class="nav-btn prev" aria-label="이전">‹</button>
-      <div class="track" id="track">
-        <figure class="slide"><img src="photo1.jpg" alt="사진 1"></figure>
-        <figure class="slide"><img src="photo2.jpg" alt="사진 2"></figure>
-        <figure class="slide"><img src="photo3.jpg" alt="사진 3"></figure>
-        <figure class="slide"><img src="photo4.jpg" alt="사진 4"></figure>
-      </div>
-      <button class="nav-btn next" aria-label="다음">›</button>
-    </div>
-  </section>
-
-  <!-- 6) 마음 전하실 곳 -->
-  <div class="section reveal">
+  <!-- ACCOUNT -->
+  <section class="account">
     <h2>마음 전하실 곳</h2>
-    <p>신랑 계좌: 국민은행 123-456-789</p>
-    <p>신부 계좌: 우리은행 987-654-321</p>
-  </div>
-
-  <!-- 7) RSVP -->
-  <section class="section reveal" id="rsvp" aria-labelledby="rsvp-h">
-    <h2 id="rsvp-h">RSVP 참석 회신</h2>
-    <div class="rsvp">
-      <form id="rsvpForm" novalidate>
-        <div class="field">
-          <label for="name">성함</label>
-          <input id="name" name="name" placeholder="홍길동" required />
-        </div>
-        <div class="field">
-          <label for="phone">연락처</label>
-          <input id="phone" name="phone" type="tel" inputmode="numeric" placeholder="010-1234-5678" required />
-        </div>
-        <div class="field">
-          <label for="attend">참석 여부</label>
-          <select id="attend" name="attend" required>
-            <option value="">선택하세요</option>
-            <option>참석</option>
-            <option>불참</option>
-            <option>미정</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="guest">동반 인원</label>
-          <select id="guest" name="guest">
-            <option>0명</option>
-            <option>1명</option>
-            <option>2명</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="note">메시지 (선택)</label>
-          <textarea id="note" name="note" rows="3" placeholder="축하 메시지나 전달 사항"></textarea>
-        </div>
-        <button class="submit" type="submit">전송하기</button>
-        <p id="rsvpMsg" class="status" role="status" aria-live="polite"></p>
-      </form>
-      <!-- Google Form/Webhook 연결 가이드: 아래 상수에 값을 넣으면 POST합니다.  -->
-      <!-- GOOGLE_FORM_ACTION 예: https://docs.google.com/forms/d/e/폼ID/formResponse  -->
-      <!-- 각 항목은 entry.xxxxxx 키로 매핑 필요 (폼에서 항목 ID 확인)  -->
+    <div class="cards">
+      <div class="acc"><div class="who">신랑측</div><div class="bank">하나은행 233-891128-47907 (한지섭)</div></div>
+      <div class="acc"><div class="who">신부측</div><div class="bank">국민은행 476-10101-388646 (유지연)</div></div>
     </div>
   </section>
 
-  <!-- 8) 공유 바 -->
-  <div class="sharebar" aria-label="공유 및 전화">
-    <button class="cta" id="callGroom">신랑에게 전화</button>
-    <button class="cta" id="callBride">신부에게 전화</button>
-    <button class="cta primary" id="shareBtn">링크 공유</button>
-  </div>
+  <!-- RSVP / GUESTBOOK -->
+   <!--
+  <section class="rsvp">
+    <h2>GUESTBOOK</h2>
+    <div class="form">
+      <div class="field"><label for="gb-name">이름</label><input id="gb-name" placeholder="홍길동" /></div>
+      <div class="field"><label for="gb-msg">메시지</label><textarea id="gb-msg" rows="3" placeholder="축하 메시지를 남겨주세요"></textarea></div>
+      <button class="primary" id="gb-send">남기기</button>
+      <p class="status" id="gb-status" role="status" aria-live="polite"></p>
+    </div>
+    <div id="gb-list" style="margin-top:18px; display:grid; gap:10px"></div>
+  </section>
+  -->
 
   <script>
-    // ====== Scratch 게임: 캔버스 설정 ======
-    const scratch = document.getElementById('scratch');
-    const gameCover = document.getElementById('gameCover');
-    const skipGame = document.getElementById('skipGame');
-    const DPR = Math.min(window.devicePixelRatio || 1, 2);
-    let ctx, drawing = false, clearedRatio = 0, sampleCooldown = 0;
-
-    function resizeCanvas(){
-      const rect = scratch.getBoundingClientRect();
-      scratch.width = Math.floor(rect.width * DPR);
-      scratch.height = Math.floor(rect.height * DPR);
-      scratch.style.width = rect.width + 'px';
-      scratch.style.height = rect.height + 'px';
-      ctx = scratch.getContext('2d');
-      ctx.scale(DPR, DPR);
-      // 덮개 그리기
-      ctx.fillStyle = 'rgba(0,0,0,0.92)';
-      ctx.fillRect(0,0,rect.width,rect.height);
-      ctx.globalCompositeOperation = 'destination-out';
+    // ===== Countdown (KST) =====
+    const target = new Date('2026-01-18T13:00:00+09:00').getTime();
+    const cdD = document.getElementById('cd-d');
+    const cdH = document.getElementById('cd-h');
+    const cdM = document.getElementById('cd-m');
+    const cdS = document.getElementById('cd-s');
+    function tick(){
+      const now = Date.now();
+      let diff = Math.max(0, target - now);
+      const d = Math.floor(diff/(1000*60*60*24)); diff -= d*86400000;
+      const h = Math.floor(diff/(1000*60*60)); diff -= h*3600000;
+      const m = Math.floor(diff/(1000*60)); diff -= m*60000;
+      const s = Math.floor(diff/1000);
+      cdD.textContent = String(d).padStart(2,'0');
+      cdH.textContent = String(h).padStart(2,'0');
+      cdM.textContent = String(m).padStart(2,'0');
+      cdS.textContent = String(s).padStart(2,'0');
     }
+    tick(); setInterval(tick, 1000);
 
-    function scratchAt(x,y){
-      const r = 22; // 브러시 반경
-      ctx.beginPath();
-      ctx.arc(x, y, r, 0, Math.PI*2);
-      ctx.fill();
-    }
-
-    function handleStart(e){ drawing = true; const p = getPoint(e); scratchAt(p.x,p.y); }
-    function handleMove(e){ if(!drawing) return; const p = getPoint(e); scratchAt(p.x,p.y); if(++sampleCooldown%12===0) measure(); }
-    function handleEnd(){ drawing = false; measure(true); }
-
-    function getPoint(e){
-      const rect = scratch.getBoundingClientRect();
-      if(e.touches && e.touches[0]){ return { x: e.touches[0].clientX-rect.left, y: e.touches[0].clientY-rect.top }; }
-      return { x: e.clientX-rect.left, y: e.clientY-rect.top };
-    }
-
-    function measure(force){
-      // 가벼운 샘플링으로 투명 픽셀 비율 추정
-      const rect = scratch.getBoundingClientRect();
-      const w = Math.floor(rect.width), h = Math.floor(rect.height);
-      const step = 12; // 샘플 간격
-      const img = ctx.getImageData(0,0,w,h).data;
-      let clear = 0, total = 0;
-      for(let y=0; y<h; y+=step){
-        for(let x=0; x<w; x+=step){
-          const idx = ((y*w)+x)*4 + 3; // alpha
-          total++;
-          if(img[idx] < 128) clear++;
+    // ===== Kakao Map =====
+    function initMap() {
+      const mapContainer = document.getElementById('map');
+      if (!mapContainer) return;
+      
+      const mapOption = {
+        center: new kakao.maps.LatLng(37.5665, 126.9780), // 서울 중심 좌표
+        level: 3
+      };
+      
+      const map = new kakao.maps.Map(mapContainer, mapOption);
+      
+      // 주소-좌표 변환 객체 생성
+      const geocoder = new kakao.maps.services.Geocoder();
+      
+      // 주소로 좌표 검색
+      geocoder.addressSearch('서울 강남구 영동대로 517', function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+          const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+          
+          // 결과값으로 받은 위치를 마커로 표시
+          const marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+          });
+          
+          // 인포윈도우로 장소에 대한 설명 표시
+          const infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="padding:5px;font-size:12px;">소노펠리체 컨벤션 3층</div>'
+          });
+          infowindow.open(map, marker);
+          
+          // 지도의 중심을 결과값으로 받은 위치로 이동
+          map.setCenter(coords);
         }
-      }
-      clearedRatio = clear/total;
-      if(clearedRatio >= 0.42 || force){ finishGame(); }
+      });
     }
-
-    function finishGame(){
-      // 오버레이 페이드아웃, 다음 섹션으로 자연스럽게 이동
-      gameCover.classList.add('done');
-      setTimeout(()=>{ document.getElementById('feature').scrollIntoView({behavior:'smooth'}); }, 450);
-    }
-
-    function bindScratch(){
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
-      scratch.addEventListener('mousedown', handleStart);
-      window.addEventListener('mousemove', handleMove);
-      window.addEventListener('mouseup', handleEnd);
-      scratch.addEventListener('touchstart', handleStart, {passive:true});
-      window.addEventListener('touchmove', handleMove, {passive:true});
-      window.addEventListener('touchend', handleEnd, {passive:true});
-      skipGame.addEventListener('click', finishGame);
-    }
-
-    // ====== 탭 전환(지도) ======
-    const tabs = document.querySelectorAll('.tab');
-    const kakao = document.getElementById('kakao-map');
-    const naver = document.getElementById('naver-map');
-    tabs.forEach(btn=>btn.addEventListener('click',()=>{
-      tabs.forEach(b=>b.setAttribute('aria-selected','false'));
-      btn.setAttribute('aria-selected','true');
-      const showKakao = btn.id === 'kakao-tab';
-      kakao.hidden = !showKakao; naver.hidden = showKakao;
-    }));
-
-    // ====== 갤러리 슬라이더 ======
-    const track = document.getElementById('track');
-    const prev = document.querySelector('.nav-btn.prev');
-    const next = document.querySelector('.nav-btn.next');
-    function move(delta){ track.scrollBy({left: delta, behavior:'smooth'}); }
-    prev.addEventListener('click', ()=> move(-window.innerWidth*0.7));
-    next.addEventListener('click', ()=> move(window.innerWidth*0.7));
-
-    // ====== Web Share API & 전화 ======
-    const shareBtn = document.getElementById('shareBtn');
-    shareBtn.addEventListener('click', async ()=>{
-      const data = {title: document.title, text: '우리 결혼식에 초대합니다 💐', url: window.location.href};
-      if(navigator.share){ try{ await navigator.share(data);}catch(e){} }
-      else { try{ await navigator.clipboard.writeText(data.url); shareBtn.textContent='링크 복사됨'; setTimeout(()=>shareBtn.textContent='링크 공유',1200);} catch(e){} }
-    });
-    document.getElementById('callGroom').onclick = ()=> location.href='tel:01012345678';
-    document.getElementById('callBride').onclick = ()=> location.href='tel:01098765432';
-
-    // ====== RSVP 제출: Google Form / Webhook 연동 ======
-    const GOOGLE_FORM_ACTION = '';
-    const GOOGLE_FORM_MAP = { name:'', phone:'', attend:'', guest:'', note:'' }; // entry.xxxxxx 키 매핑
-    const WEBHOOK_URL = '';
-    const form = document.getElementById('rsvpForm');
-    form.addEventListener('submit', async (e)=>{
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(form).entries());
-      const msg = document.getElementById('rsvpMsg');
-      if(!data.name || !data.phone || !data.attend){ msg.textContent='필수 항목을 입력해주세요.'; return; }
-
-      try{
-        if (GOOGLE_FORM_ACTION) {
-          const fd = new FormData();
-          if(GOOGLE_FORM_MAP.name)  fd.append(GOOGLE_FORM_MAP.name,  data.name);
-          if(GOOGLE_FORM_MAP.phone) fd.append(GOOGLE_FORM_MAP.phone, data.phone);
-          if(GOOGLE_FORM_MAP.attend)fd.append(GOOGLE_FORM_MAP.attend,data.attend);
-          if(GOOGLE_FORM_MAP.guest) fd.append(GOOGLE_FORM_MAP.guest, data.guest||'0명');
-          if(GOOGLE_FORM_MAP.note)  fd.append(GOOGLE_FORM_MAP.note,  data.note||'');
-          await fetch(GOOGLE_FORM_ACTION, { method:'POST', body:fd, mode:'no-cors' });
-        } else if (WEBHOOK_URL) {
-          await fetch(WEBHOOK_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)});
+    
+    // 카카오맵 API 로드 완료 후 지도 초기화
+    if (typeof kakao !== 'undefined') {
+      initMap();
+    } else {
+      window.addEventListener('load', function() {
+        if (typeof kakao !== 'undefined') {
+          initMap();
         }
-        msg.textContent='전송되었습니다. 감사합니다!';
-        form.reset();
-      }catch(err){
-        msg.textContent='전송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+      });
+    }
+
+    // ===== Gallery Pagination & Lightbox =====
+    const gallery = document.getElementById('gallery');
+    const galleryPrev = document.getElementById('galleryPrev');
+    const galleryNext = document.getElementById('galleryNext');
+    const galleryPage = document.getElementById('galleryPage');
+    const galleryTotal = document.getElementById('galleryTotal');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
+    const lbClose = document.getElementById('lbClose');
+    
+    // All image files from IMG_6121.JPG to IMG_6193.JPG
+    const allImages = [
+      'IMG_6121.JPG', 'IMG_6127.JPG', 'IMG_6128.JPG', 'IMG_6129.JPG', 'IMG_6131.JPG',
+      'IMG_6132.JPG', 'IMG_6133.JPG', 'IMG_6134.JPG', 'IMG_6135.JPG', 'IMG_6136.JPG',
+      'IMG_6137.JPG', 'IMG_6138.JPG', 'IMG_6186.JPG', 'IMG_6193.JPG'
+    ];
+    
+    const imagesPerPage = 9;
+    let currentPage = 1;
+    let currentImageIndex = 0;
+    
+    function loadGalleryPage(page) {
+      const startIndex = (page - 1) * imagesPerPage;
+      const endIndex = startIndex + imagesPerPage;
+      const pageImages = allImages.slice(startIndex, endIndex);
+      
+      gallery.innerHTML = '';
+      pageImages.forEach((src, index) => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `사진 ${startIndex + index + 1}`;
+        img.onclick = () => openLightbox(startIndex + index);
+        gallery.appendChild(img);
+      });
+      
+      // Update pagination info
+      galleryPage.textContent = page;
+      galleryTotal.textContent = Math.ceil(allImages.length / imagesPerPage);
+      
+      // Update button states
+      galleryPrev.disabled = page === 1;
+      galleryNext.disabled = page === Math.ceil(allImages.length / imagesPerPage);
+    }
+    
+    function nextPage() {
+      if (currentPage < Math.ceil(allImages.length / imagesPerPage)) {
+        currentPage++;
+        loadGalleryPage(currentPage);
       }
+    }
+    
+    function prevPage() {
+      if (currentPage > 1) {
+        currentPage--;
+        loadGalleryPage(currentPage);
+      }
+    }
+    
+    // Initialize gallery
+    loadGalleryPage(1);
+    galleryNext.addEventListener('click', nextPage);
+    galleryPrev.addEventListener('click', prevPage);
+    
+    // Lightbox functions
+    function openLightbox(index) {
+      currentImageIndex = index;
+      lbImg.src = allImages[index];
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    function showPrevImage() {
+      currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
+      lbImg.src = allImages[currentImageIndex];
+    }
+    
+    function showNextImage() {
+      currentImageIndex = (currentImageIndex + 1) % allImages.length;
+      lbImg.src = allImages[currentImageIndex];
+    }
+    
+    // Lightbox event listeners
+    lbClose.addEventListener('click', (e) => {e.stopPropagation(); closeLightbox()});
+    lbPrev.addEventListener('click', (e) => {e.stopPropagation(); showPrevImage()});
+    lbNext.addEventListener('click', (e) => {e.stopPropagation(); showNextImage()});
+    lightbox.addEventListener('click', (e) => {if(e.target === lightbox) closeLightbox()});
+    
+    // Keyboard navigation
+    window.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showPrevImage();
+      if (e.key === 'ArrowRight') showNextImage();
     });
 
-    // ====== 스크롤 페이드 인 ======
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); });
-    }, {threshold:0.15});
-    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    // ===== Guestbook (local demo) =====
+    const gbSend = document.getElementById('gb-send');
+    const gbName = document.getElementById('gb-name');
+    const gbMsg = document.getElementById('gb-msg');
+    const gbList = document.getElementById('gb-list');
+    const gbStatus = document.getElementById('gb-status');
+    const KEY = 'guestbook_v1';
+    function render(){
+      gbList.innerHTML='';
+      const items = JSON.parse(localStorage.getItem(KEY)||'[]');
+      items.forEach(({name,msg,at})=>{
+        const card = document.createElement('div');
+        card.style.cssText = 'border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff';
+        card.innerHTML = `<div style="font-weight:500">${name}</div><div style="color:#555;margin-top:4px">${msg}</div><div style="color:#999;margin-top:6px;font-size:12px">${new Date(at).toLocaleString()}</div>`;
+        gbList.appendChild(card);
+      });
+    }
+    gbSend.addEventListener('click',()=>{
+      const name = gbName.value.trim(); const msg = gbMsg.value.trim();
+      if(!name || !msg){ gbStatus.textContent='이름과 메시지를 입력해주세요.'; return; }
+      const items = JSON.parse(localStorage.getItem(KEY)||'[]');
+      items.unshift({name, msg, at: Date.now()});
+      localStorage.setItem(KEY, JSON.stringify(items));
+      gbName.value=''; gbMsg.value=''; gbStatus.textContent='남겨주셔서 감사합니다!';
+      render();
+    });
+    render();
 
-    // ====== 패럴랙스 효과 ======
-    const px = document.querySelector('.feature .parallax');
-    const onScroll = ()=>{
-      const rect = px.getBoundingClientRect();
-      const h = window.innerHeight || 1;
-      const progress = 1 - Math.min(Math.max(rect.top/h, -1), 1); // -1~1
-      px.style.transform = `translateY(${progress*20}px)`;
-    };
-    window.addEventListener('scroll', ()=> requestAnimationFrame(onScroll), {passive:true});
-    onScroll();
-
-    // 게임 바인딩 시작
-    bindScratch();
+    // ===== Share & Call =====
+    document.getElementById('shareBtn').addEventListener('click', async ()=>{
+      const data={title:document.title, text:'우리 결혼식에 초대합니다 💐', url:location.href};
+      if(navigator.share){ try{ await navigator.share(data);}catch{} }
+      else { try{ await navigator.clipboard.writeText(data.url); alert('링크 복사됨'); }catch{} }
+    });
+    document.getElementById('callGroom').onclick=()=> location.href='tel:01012345678';
+    document.getElementById('callBride').onclick=()=> location.href='tel:01098765432';
   </script>
 </body>
 </html>
