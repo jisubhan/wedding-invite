@@ -14,8 +14,8 @@
   
   <!-- 카카오톡 미리보기 -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Wedding—💛지섭 & 지연🤍" />
-  <meta name="twitter:description" content="2026년 1월 18일 (토) 오후 1시, 소노펠리체 컨벤션 3층💍" />
+  <meta name="twitter:title" content="Wedding — 한지섭 & 유지연" />
+  <meta name="twitter:description" content="2026년 1월 18일 (토) 오후 1시, 소노펠리체 컨벤션 3층에서 열리는 한지섭 & 유지연의 결혼식에 초대합니다." />
   <meta name="twitter:image" content="https://jisubhan.github.io/wedding-invite/w7.jpeg" />
   <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Noto+Serif+KR:wght@400;500&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=384533d32fee31cf668087354623031d&libraries=services"></script>
@@ -61,6 +61,8 @@
       0%{transform:translateY(-10vh) rotate(0deg); opacity:1}
       100%{transform:translateY(110vh) rotate(360deg); opacity:0}
     }
+    
+
 
     /* INVITATION */
     .invitation{ text-align:center }
@@ -92,120 +94,13 @@
     .nav-btn:hover{background:var(--accent); color:#fff; border-color:var(--accent)}
     .nav-btn:disabled{opacity:0.5; cursor:not-allowed}
     .gallery-info{text-align:center; color:var(--muted); font-size:14px}
-    
-    /* Improved Lightbox */
-    .lightbox{
-      position:fixed; 
-      inset:0; 
-      display:flex; 
-      align-items:center; 
-      justify-content:center; 
-      background:rgba(0,0,0,.9); 
-      opacity:0; 
-      visibility:hidden; 
-      transition:all .3s ease; 
-      z-index:100;
-      touch-action: none; /* 스크롤 방지 */
-      -webkit-user-select: none;
-      user-select: none;
-    }
+    .lightbox{position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.85); opacity:0; visibility:hidden; transition:.3s; z-index:100}
     .lightbox.active{opacity:1; visibility:visible}
-    
-    .lightbox-content {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .lightbox img{
-      max-width:90%; 
-      max-height:82%; 
-      border-radius:12px; 
-      box-shadow:0 10px 25px rgba(0,0,0,.5);
-      cursor: grab;
-      transition: transform 0.3s ease;
-    }
-    .lightbox img:active{
-      cursor: grabbing;
-    }
-    
-    .lightbox-swipe-hint{
-      position:absolute; 
-      bottom:20px; 
-      left:50%; 
-      transform:translateX(-50%); 
-      color:#fff; 
-      font-size:14px; 
-      text-align:center; 
-      opacity:0.8; 
-      pointer-events:none;
-      animation: fadeInOut 3s ease-in-out infinite;
-    }
-    
-    @keyframes fadeInOut {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 0.8; }
-    }
-    
-    .lightbox .nav{
-      position:absolute; 
-      top:50%; 
-      transform:translateY(-50%); 
-      width:50px; 
-      height:50px; 
-      border-radius:50%; 
-      border:0; 
-      background:rgba(255,255,255,.15); 
-      backdrop-filter: blur(4px);
-      color:#fff; 
-      font-size:24px; 
-      display:grid; 
-      place-items:center; 
-      cursor:pointer;
-      transition: all 0.2s ease;
-      z-index: 10;
-    }
-    .lightbox .nav:hover {
-      background:rgba(255,255,255,.25);
-      transform:translateY(-50%) scale(1.1);
-    }
-    .lightbox .prev{left:20px}
-    .lightbox .next{right:20px}
-    
-    .lightbox .close{
-      position:absolute; 
-      top:20px; 
-      right:20px; 
-      width:44px; 
-      height:44px; 
-      border-radius:50%; 
-      border:0; 
-      background:rgba(255,255,255,.15); 
-      backdrop-filter: blur(4px);
-      color:#fff; 
-      font-size:20px; 
-      cursor:pointer;
-      transition: all 0.2s ease;
-      z-index: 10;
-    }
-    .lightbox .close:hover {
-      background:rgba(255,255,255,.25);
-      transform: scale(1.1);
-    }
-    
-    /* 이미지 전환 애니메이션 */
-    .lightbox img.fade-out {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    
-    .lightbox img.fade-in {
-      opacity: 1;
-      transform: scale(1);
-    }
+    .lightbox img{max-width:90%; max-height:82%; border-radius:12px; box-shadow:0 10px 25px rgba(0,0,0,.5)}
+    .lightbox .nav{position:absolute; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; border:0; background:rgba(255,255,255,.2); color:#fff; font-size:28px; display:grid; place-items:center; cursor:pointer}
+    .lightbox .prev{left:16px}
+    .lightbox .next{right:16px}
+    .lightbox .close{position:absolute; top:16px; right:20px; width:40px; height:40px; border-radius:50%; border:0; background:rgba(255,255,255,.2); color:#fff; font-size:22px; cursor:pointer}
 
     /* LOCATION */
     .location h2{margin-bottom:10px}
@@ -234,13 +129,7 @@
     .sharebar .primary{background:var(--accent); color:#fff; border-color:transparent}
 
     /* small */
-    @media (max-width:520px){ 
-      .fam-grid{grid-template-columns:1fr} 
-      .account .cards{grid-template-columns:1fr}
-      .lightbox .nav{width:44px; height:44px; font-size:20px}
-      .lightbox .prev{left:16px}
-      .lightbox .next{right:16px}
-    }
+    @media (max-width:520px){ .fam-grid{grid-template-columns:1fr} .account .cards{grid-template-columns:1fr} }
   </style>
 </head>
 <body>
@@ -312,16 +201,11 @@
         <span id="galleryPage">1</span> / <span id="galleryTotal">1</span>
       </div>
     </div>
-    
-    <!-- Improved Lightbox -->
     <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="확대 보기">
-      <div class="lightbox-content">
-        <img src="" alt="확대 이미지" id="lbImg">
-        <button class="nav prev" id="lbPrev" aria-label="이전 사진">‹</button>
-        <button class="nav next" id="lbNext" aria-label="다음 사진">›</button>
-        <button class="close" id="lbClose" aria-label="닫기">×</button>
-        <div class="lightbox-swipe-hint">← 스와이프하여 사진 넘기기 →</div>
-      </div>
+      <button class="nav prev" id="lbPrev" aria-label="이전">‹</button>
+      <img src="" alt="확대 이미지" id="lbImg">
+      <button class="nav next" id="lbNext" aria-label="다음">›</button>
+      <button class="close" id="lbClose" aria-label="닫기">×</button>
     </div>
   </section>
 
@@ -344,9 +228,23 @@
     <h2>마음 전하실 곳</h2>
     <div class="cards">
       <div class="acc"><div class="who">신랑측</div><div class="bank">하나은행 233-891128-47907 (한지섭)</div></div>
-      <div class="acc"><div class="who">신부측</div><div class="bank">국민은행 476101-01-388646 (유지연)</div></div>
+      <div class="acc"><div class="who">신부측</div><div class="bank">국민은행 47610101-388646 (유지연)</div></div>
     </div>
   </section>
+
+  <!-- RSVP / GUESTBOOK -->
+   <!--
+  <section class="rsvp">
+    <h2>GUESTBOOK</h2>
+    <div class="form">
+      <div class="field"><label for="gb-name">이름</label><input id="gb-name" placeholder="홍길동" /></div>
+      <div class="field"><label for="gb-msg">메시지</label><textarea id="gb-msg" rows="3" placeholder="축하 메시지를 남겨주세요"></textarea></div>
+      <button class="primary" id="gb-send">남기기</button>
+      <p class="status" id="gb-status" role="status" aria-live="polite"></p>
+    </div>
+    <div id="gb-list" style="margin-top:18px; display:grid; gap:10px"></div>
+  </section>
+  -->
 
   <script>
     // ===== Countdown (KST) =====
@@ -378,7 +276,8 @@
           return;
         }
         
-        const venueCoords = new kakao.maps.LatLng(37.5133, 127.0582);
+                 // 소노펠리체 컨벤션의 정확한 좌표 (강남구 영동대로 517 - 아셈타워)
+         const venueCoords = new kakao.maps.LatLng(37.5133, 127.0582);
         
         const mapOption = {
           center: venueCoords,
@@ -387,19 +286,23 @@
         
         const map = new kakao.maps.Map(mapContainer, mapOption);
         
+        // 마커 생성
         const marker = new kakao.maps.Marker({
           map: map,
           position: venueCoords
         });
         
+        // 인포윈도우 생성
         const infowindow = new kakao.maps.InfoWindow({
           content: '<div style="padding:8px;font-size:14px;font-weight:bold;">소노펠리체 컨벤션 3층</div>'
         });
         
+        // 마커 클릭 시 인포윈도우 표시
         kakao.maps.event.addListener(marker, 'click', function() {
           infowindow.open(map, marker);
         });
         
+        // 지도 로드 완료 후 마커 클릭 이벤트 발생
         kakao.maps.event.addListener(map, 'tilesloaded', function() {
           infowindow.open(map, marker);
         });
@@ -407,6 +310,7 @@
         console.log('Kakao Map initialized successfully');
       } catch (error) {
         console.error('Error initializing Kakao Map:', error);
+        // 지도 로드 실패 시 대체 텍스트 표시
         const mapContainer = document.getElementById('map');
         if (mapContainer) {
           mapContainer.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;font-size:14px;">지도를 불러올 수 없습니다. 위의 링크를 이용해주세요.</div>';
@@ -414,6 +318,7 @@
       }
     }
     
+    // 카카오맵 API 로드 완료 후 지도 초기화
     function waitForKakaoMap() {
       if (typeof kakao !== 'undefined' && kakao.maps) {
         initMap();
@@ -422,13 +327,14 @@
       }
     }
     
+    // 페이지 로드 완료 후 지도 초기화 시도
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', waitForKakaoMap);
     } else {
       waitForKakaoMap();
     }
 
-    // ===== Improved Gallery & Lightbox =====
+    // ===== Gallery Pagination & Lightbox =====
     const gallery = document.getElementById('gallery');
     const galleryPrev = document.getElementById('galleryPrev');
     const galleryNext = document.getElementById('galleryNext');
@@ -436,10 +342,11 @@
     const galleryTotal = document.getElementById('galleryTotal');
     const lightbox = document.getElementById('lightbox');
     const lbImg = document.getElementById('lbImg');
-    const lbClose = document.getElementById('lbClose');
     const lbPrev = document.getElementById('lbPrev');
     const lbNext = document.getElementById('lbNext');
+    const lbClose = document.getElementById('lbClose');
     
+    // All image files from w1.jpeg to w21.jpeg
     const allImages = [
       'w1.jpeg', 'w2.jpeg', 'w3.jpeg', 'w4.jpeg', 'w5.jpeg',
       'w6.jpeg', 'w7.jpeg', 'w8.jpeg', 'w9.jpeg', 'w10.jpeg',
@@ -451,15 +358,6 @@
     const imagesPerPage = 9;
     let currentPage = 1;
     let currentImageIndex = 0;
-    let isAnimating = false;
-    
-    // 향상된 터치/스와이프 변수들
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchEndX = 0;
-    let touchEndY = 0;
-    let isDragging = false;
-    let startTime = 0;
     
     function loadGalleryPage(page) {
       const startIndex = (page - 1) * imagesPerPage;
@@ -475,9 +373,11 @@
         gallery.appendChild(img);
       });
       
+      // Update pagination info
       galleryPage.textContent = page;
       galleryTotal.textContent = Math.ceil(allImages.length / imagesPerPage);
       
+      // Update button states
       galleryPrev.disabled = page === 1;
       galleryNext.disabled = page === Math.ceil(allImages.length / imagesPerPage);
     }
@@ -496,220 +396,84 @@
       }
     }
     
-    // 라이트박스 함수들
-    function openLightbox(index) {
-      currentImageIndex = index;
-      lbImg.src = allImages[index];
-      lbImg.alt = `사진 ${index + 1}`;
-      lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
-      lightbox.setAttribute('aria-hidden', 'false');
-    }
-
-    function closeLightbox() {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = '';
-      lightbox.setAttribute('aria-hidden', 'true');
-    }
-
-    function showPrevImage() {
-      if (isAnimating) return;
-      isAnimating = true;
-      
-      currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
-      
-      lbImg.style.opacity = '0';
-      lbImg.style.transform = 'scale(0.95)';
-      
-      setTimeout(() => {
-        lbImg.src = allImages[currentImageIndex];
-        lbImg.alt = `사진 ${currentImageIndex + 1}`;
-        
-        setTimeout(() => {
-          lbImg.style.opacity = '1';
-          lbImg.style.transform = 'scale(1)';
-          isAnimating = false;
-        }, 50);
-      }, 150);
-    }
-
-    function showNextImage() {
-      if (isAnimating) return;
-      isAnimating = true;
-      
-      currentImageIndex = (currentImageIndex + 1) % allImages.length;
-      
-      lbImg.style.opacity = '0';
-      lbImg.style.transform = 'scale(0.95)';
-      
-      setTimeout(() => {
-        lbImg.src = allImages[currentImageIndex];
-        lbImg.alt = `사진 ${currentImageIndex + 1}`;
-        
-        setTimeout(() => {
-          lbImg.style.opacity = '1';
-          lbImg.style.transform = 'scale(1)';
-          isAnimating = false;
-        }, 50);
-      }, 150);
-    }
-    
-    // 개선된 터치 이벤트 처리
-    function handleTouchStart(e) {
-      e.preventDefault();
-      touchStartX = e.touches[0].clientX;
-      touchStartY = e.touches[0].clientY;
-      startTime = Date.now();
-      isDragging = true;
-    }
-
-    function handleTouchMove(e) {
-      if (!isDragging) return;
-      e.preventDefault();
-    }
-
-    function handleTouchEnd(e) {
-      if (!isDragging) return;
-      e.preventDefault();
-      
-      touchEndX = e.changedTouches[0].clientX;
-      touchEndY = e.changedTouches[0].clientY;
-      
-      const deltaX = touchStartX - touchEndX;
-      const deltaY = touchStartY - touchEndY;
-      const deltaTime = Date.now() - startTime;
-      
-      // 최소 이동 거리와 속도 체크
-      const minSwipeDistance = 50;
-      const maxSwipeTime = 300;
-      
-      if (Math.abs(deltaX) > Math.abs(deltaY) && 
-          Math.abs(deltaX) > minSwipeDistance && 
-          deltaTime < maxSwipeTime) {
-        
-        if (deltaX > 0) {
-          showNextImage(); // 왼쪽으로 스와이프 = 다음 이미지
-        } else {
-          showPrevImage(); // 오른쪽으로 스와이프 = 이전 이미지
-        }
-      }
-      
-      isDragging = false;
-    }
-
-    // 마우스 이벤트 처리 (데스크톱)
-    function handleMouseDown(e) {
-      e.preventDefault();
-      touchStartX = e.clientX;
-      touchStartY = e.clientY;
-      startTime = Date.now();
-      isDragging = true;
-    }
-
-    function handleMouseMove(e) {
-      if (!isDragging) return;
-      e.preventDefault();
-    }
-
-    function handleMouseUp(e) {
-      if (!isDragging) return;
-      e.preventDefault();
-      
-      touchEndX = e.clientX;
-      touchEndY = e.clientY;
-      
-      const deltaX = touchStartX - touchEndX;
-      const deltaY = touchStartY - touchEndY;
-      const deltaTime = Date.now() - startTime;
-      
-      const minSwipeDistance = 50;
-      const maxSwipeTime = 300;
-      
-      if (Math.abs(deltaX) > Math.abs(deltaY) && 
-          Math.abs(deltaX) > minSwipeDistance && 
-          deltaTime < maxSwipeTime) {
-        
-        if (deltaX > 0) {
-          showNextImage();
-        } else {
-          showPrevImage();
-        }
-      }
-      
-      isDragging = false;
-    }
-
-    // 갤러리 초기화
+    // Initialize gallery
     loadGalleryPage(1);
     galleryNext.addEventListener('click', nextPage);
     galleryPrev.addEventListener('click', prevPage);
     
-    // 라이트박스 이벤트 리스너
-    lbClose.addEventListener('click', (e) => { 
-      e.stopPropagation(); 
-      closeLightbox(); 
-    });
+    // Lightbox functions
+    function openLightbox(index) {
+      currentImageIndex = index;
+      lbImg.src = allImages[index];
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
     
-    lbPrev.addEventListener('click', (e) => { 
-      e.stopPropagation(); 
-      showPrevImage(); 
-    });
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
     
-    lbNext.addEventListener('click', (e) => { 
-      e.stopPropagation(); 
-      showNextImage(); 
-    });
+    function showPrevImage() {
+      currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
+      lbImg.src = allImages[currentImageIndex];
+    }
     
-    lightbox.addEventListener('click', (e) => { 
-      if (e.target === lightbox) closeLightbox(); 
-    });
-
-    // 이미지에 터치/마우스 이벤트 추가
-    lbImg.addEventListener('touchstart', handleTouchStart, { passive: false });
-    lbImg.addEventListener('touchmove', handleTouchMove, { passive: false });
-    lbImg.addEventListener('touchend', handleTouchEnd, { passive: false });
-
-    lbImg.addEventListener('mousedown', handleMouseDown);
-    lbImg.addEventListener('mousemove', handleMouseMove);
-    lbImg.addEventListener('mouseup', handleMouseUp);
+    function showNextImage() {
+      currentImageIndex = (currentImageIndex + 1) % allImages.length;
+      lbImg.src = allImages[currentImageIndex];
+    }
     
-    // 마우스가 이미지 밖으로 나갔을 때 드래그 종료
-    lbImg.addEventListener('mouseleave', () => {
-      isDragging = false;
-    });
-
-    // 키보드 네비게이션
+    // Lightbox event listeners
+    lbClose.addEventListener('click', (e) => {e.stopPropagation(); closeLightbox()});
+    lbPrev.addEventListener('click', (e) => {e.stopPropagation(); showPrevImage()});
+    lbNext.addEventListener('click', (e) => {e.stopPropagation(); showNextImage()});
+    lightbox.addEventListener('click', (e) => {if(e.target === lightbox) closeLightbox()});
+    
+    // Keyboard navigation
     window.addEventListener('keydown', (e) => {
       if (!lightbox.classList.contains('active')) return;
-      
-      switch(e.key) {
-        case 'Escape':
-          closeLightbox();
-          break;
-        case 'ArrowLeft':
-          e.preventDefault();
-          showPrevImage();
-          break;
-        case 'ArrowRight':
-          e.preventDefault();
-          showNextImage();
-          break;
-      }
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showPrevImage();
+      if (e.key === 'ArrowRight') showNextImage();
     });
 
-    // 브라우저 뒤로가기 버튼으로 라이트박스 닫기
-    window.addEventListener('popstate', () => {
-      if (lightbox.classList.contains('active')) {
-        closeLightbox();
-      }
+    // ===== Guestbook (local demo) =====
+    const gbSend = document.getElementById('gb-send');
+    const gbName = document.getElementById('gb-name');
+    const gbMsg = document.getElementById('gb-msg');
+    const gbList = document.getElementById('gb-list');
+    const gbStatus = document.getElementById('gb-status');
+    const KEY = 'guestbook_v1';
+    function render(){
+      gbList.innerHTML='';
+      const items = JSON.parse(localStorage.getItem(KEY)||'[]');
+      items.forEach(({name,msg,at})=>{
+        const card = document.createElement('div');
+        card.style.cssText = 'border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff';
+        card.innerHTML = `<div style="font-weight:500">${name}</div><div style="color:#555;margin-top:4px">${msg}</div><div style="color:#999;margin-top:6px;font-size:12px">${new Date(at).toLocaleString()}</div>`;
+        gbList.appendChild(card);
+      });
+    }
+    gbSend.addEventListener('click',()=>{
+      const name = gbName.value.trim(); const msg = gbMsg.value.trim();
+      if(!name || !msg){ gbStatus.textContent='이름과 메시지를 입력해주세요.'; return; }
+      const items = JSON.parse(localStorage.getItem(KEY)||'[]');
+      items.unshift({name, msg, at: Date.now()});
+      localStorage.setItem(KEY, JSON.stringify(items));
+      gbName.value=''; gbMsg.value=''; gbStatus.textContent='남겨주셔서 감사합니다!';
+      render();
     });
+    render();
 
-    // 라이트박스 열 때 히스토리에 추가
-    const originalOpenLightbox = openLightbox;
-    openLightbox = function(index) {
-      originalOpenLightbox(index);
-      history.pushState({ lightbox: true }, '');
-    };
+    // ===== Share & Call =====
+    document.getElementById('shareBtn').addEventListener('click', async ()=>{
+      const data={title:document.title, text:'우리 결혼식에 초대합니다 💐', url:location.href};
+      if(navigator.share){ try{ await navigator.share(data);}catch{} }
+      else { try{ await navigator.clipboard.writeText(data.url); alert('링크 복사됨'); }catch{} }
+    });
+    document.getElementById('callGroom').onclick=()=> location.href='tel:01012345678';
+    document.getElementById('callBride').onclick=()=> location.href='tel:01098765432';
   </script>
 </body>
 </html>
