@@ -634,6 +634,27 @@
       animation: fadeInOut 3s ease-in-out infinite;
     }
 
+    /* 라이트박스가 언제나 최상단에 오도록 (iOS 등 브라우저 변수를 고려해 넉넉히) */
+    .lightbox {
+      z-index: 2147483647;
+    }
+
+    /* 라이트박스 뜰 때 눈 효과/플로팅 요소가 위로 못 올라오게 */
+    body.modal-open .global-snowflakes {
+      display: none;
+    }
+
+    /* 배경 섹션들이 쓸데없이 위로 올라오지 않게 z-index 제거(초기화) */
+    .invitation,
+    .story,
+    .family,
+    .gallery,
+    .location,
+    .account,
+    .sharebar {
+      z-index: auto !important;
+    }
+
     @keyframes fadeInOut {
 
       0%,
@@ -1016,9 +1037,13 @@
       lbImg.src = allImages[index];
       lightbox.classList.add('active');
       document.body.style.overflow = 'hidden';
+      document.body.classList.add('modal-open');   // ← 추가: 배경 플로팅 요소 비활성/숨김
       requestAnimationFrame(() => { lbImg.style.opacity = '1'; });
     }
-    function closeLightbox() { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+    function closeLightbox() { 
+      lightbox.classList.remove('active'); document.body.style.overflow = '';
+      document.body.classList.remove('modal-open'); // ← 추가 
+    }
     function showPrevImage() {
       if (isAnimating) return; isAnimating = true;
       currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
