@@ -1,48 +1,102 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wedding — 한지섭 & 유지연</title>
-  
-  <!-- Open Graph / 카카오톡 미리보기 -->
+
+  <!-- Open Graph -->
   <meta property="og:title" content="wedding 💛지섭 & 지연🤍" />
   <meta property="og:description" content="26.01.18(일) 1:00PM, 소노펠리체컨벤션 3F" />
   <meta property="og:image" content="https://jisubhan.github.io/wedding-invite/w7.jpeg" />
   <meta property="og:url" content="https://jisubhan.github.io/wedding-invite/wedding.html" />
   <meta property="og:type" content="website" />
-  
-  <!-- 카카오톡 미리보기 -->
+
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Wedding — 한지섭 & 유지연" />
   <meta name="twitter:description" content="2026년 1월 18일 (일) 오후 1시, 소노펠리체 컨벤션 3층에서 열리는 한지섭 & 유지연의 결혼식에 초대합니다." />
   <meta name="twitter:image" content="https://jisubhan.github.io/wedding-invite/w7.jpeg" />
-  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Noto+Serif+KR:wght@400;500&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=384533d32fee31cf668087354623031d&libraries=services"></script>
-  <style>
-    :root{
-      --bg:#faf9f7; --ink:#2a2a2a; --muted:#6b6b6b; --accent:#8b6e66; --line:#ece7e2;
-      --radius:16px; --soft:0 10px 30px rgba(17,24,39,.08);
-    }
-    *{box-sizing:border-box; margin:0; padding:0}
-    html,body{height:100%}
-    body{
-      font-family:'Noto Serif KR',serif; 
-      background:var(--bg); 
-      color:var(--ink); 
-      line-height:1.65;
-      position:relative;
-      overflow-x:hidden;
-    }
-    h1,h2,h3{font-family:'Marcellus',serif; font-weight:400}
-    img{max-width:100%; display:block}
-    a{color:inherit; text-decoration:none}
-    section{padding:56px 20px; max-width:980px; margin:0 auto}
 
-     /* Global Snowflakes - 전체 페이지에 적용 */
-     .global-snowflakes {
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Marcellus&family=Noto+Serif+KR:wght@400;500&family=Dancing+Script:wght@400;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Kakao Map SDK -->
+  <script type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=384533d32fee31cf668087354623031d&libraries=services"></script>
+
+  <!-- Preload Hero & First Page Gallery -->
+  <link rel="preload" as="image" href="w7.jpeg" fetchpriority="high">
+  <link rel="preload" as="image" href="w1.jpeg">
+  <link rel="preload" as="image" href="w2.jpeg">
+  <link rel="preload" as="image" href="w3.jpeg">
+  <link rel="preload" as="image" href="w4.jpeg">
+  <link rel="preload" as="image" href="w5.jpeg">
+  <link rel="preload" as="image" href="w6.jpeg">
+  <link rel="preload" as="image" href="w7.jpeg">
+  <link rel="preload" as="image" href="w8.jpeg">
+  <link rel="preload" as="image" href="w9.jpeg">
+
+  <style>
+    :root {
+      --bg: #faf9f7;
+      --ink: #2a2a2a;
+      --muted: #6b6b6b;
+      --accent: #8b6e66;
+      --line: #ece7e2;
+      --radius: 16px;
+      --soft: 0 10px 30px rgba(17, 24, 39, .08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      font-family: 'Noto Serif KR', serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Marcellus', serif;
+      font-weight: 400
+    }
+
+    img {
+      max-width: 100%;
+      display: block
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    section {
+      padding: 56px 20px;
+      max-width: 980px;
+      margin: 0 auto
+    }
+
+    /* Global Snowflakes */
+    .global-snowflakes {
       position: fixed;
-      /* ← absolute → fixed */
       top: 0;
       left: 0;
       width: 100%;
@@ -50,230 +104,620 @@
       pointer-events: none;
       z-index: 10000;
       overflow: hidden;
-      /* 화면 밖(위)에서 시작한 눈을 깔끔히 잘라줌 */
     }
-    .snowflake{
-  position:absolute;   /* ← fixed → absolute (컨테이너 기준) */
-  top:-12vh;           /* ← 화면 위에서 시작 */
-  color:#fff;
-  font-size:8px;
-  opacity:0.8;
-  animation:snowfall linear infinite;
-  will-change: transform, opacity;
-}
 
-    
-    /* 다양한 눈송이들 - 각기 다른 시작점과 속도 */
-    .snowflake:nth-child(1){left:5%; animation-duration:12s; animation-delay:0s; font-size:6px;}
-    .snowflake:nth-child(2){left:15%; animation-duration:8s; animation-delay:1s; font-size:8px;}
-    .snowflake:nth-child(3){left:25%; animation-duration:15s; animation-delay:2s; font-size:7px;}
-    .snowflake:nth-child(4){left:35%; animation-duration:10s; animation-delay:3s; font-size:9px;}
-    .snowflake:nth-child(5){left:45%; animation-duration:13s; animation-delay:4s; font-size:6px;}
-    .snowflake:nth-child(6){left:55%; animation-duration:9s; animation-delay:5s; font-size:8px;}
-    .snowflake:nth-child(7){left:65%; animation-duration:14s; animation-delay:6s; font-size:7px;}
-    .snowflake:nth-child(8){left:75%; animation-duration:11s; animation-delay:7s; font-size:9px;}
-    .snowflake:nth-child(9){left:85%; animation-duration:16s; animation-delay:8s; font-size:6px;}
-    .snowflake:nth-child(10){left:95%; animation-duration:12s; animation-delay:9s; font-size:8px;}
-    .snowflake:nth-child(11){left:10%; animation-duration:9s; animation-delay:10s; font-size:7px;}
-    .snowflake:nth-child(12){left:30%; animation-duration:13s; animation-delay:11s; font-size:9px;}
-    .snowflake:nth-child(13){left:50%; animation-duration:11s; animation-delay:12s; font-size:6px;}
-    .snowflake:nth-child(14){left:70%; animation-duration:14s; animation-delay:13s; font-size:8px;}
-    .snowflake:nth-child(15){left:90%; animation-duration:10s; animation-delay:14s; font-size:7px;}
-    .snowflake:nth-child(16){left:8%; animation-duration:11s; animation-delay:15s; font-size:8px;}
-    .snowflake:nth-child(17){left:18%; animation-duration:14s; animation-delay:16s; font-size:7px;}
-    .snowflake:nth-child(18){left:28%; animation-duration:9s; animation-delay:17s; font-size:9px;}
-    .snowflake:nth-child(19){left:38%; animation-duration:12s; animation-delay:18s; font-size:6px;}
-    .snowflake:nth-child(20){left:48%; animation-duration:15s; animation-delay:19s; font-size:8px;}
-    .snowflake:nth-child(21){left:58%; animation-duration:10s; animation-delay:20s; font-size:7px;}
-    .snowflake:nth-child(22){left:68%; animation-duration:13s; animation-delay:21s; font-size:9px;}
-    .snowflake:nth-child(23){left:78%; animation-duration:8s; animation-delay:22s; font-size:6px;}
-    .snowflake:nth-child(24){left:88%; animation-duration:16s; animation-delay:23s; font-size:8px;}
-    .snowflake:nth-child(25){left:98%; animation-duration:11s; animation-delay:24s; font-size:7px;}
-    
-    @keyframes snowfall{
-  0%{
-    transform:translateY(0) translateX(-50px) rotate(0deg);
-    opacity:0;
-  }
-  10%{ opacity:0.8; }
-  90%{ opacity:0.8; }
-  100%{
-    transform:translateY(130vh) translateX(150px) rotate(360deg);
-    opacity:0;
-  }
-}
+    .snowflake {
+      position: absolute;
+      top: -12vh;
+      color: #fff;
+      font-size: 8px;
+      opacity: 0.8;
+      animation: snowfall linear infinite;
+      will-change: transform, opacity;
+    }
 
+    .snowflake:nth-child(1) {
+      left: 5%;
+      animation-duration: 12s;
+      animation-delay: 0s;
+      font-size: 6px;
+    }
+
+    .snowflake:nth-child(2) {
+      left: 15%;
+      animation-duration: 8s;
+      animation-delay: 1s;
+      font-size: 8px;
+    }
+
+    .snowflake:nth-child(3) {
+      left: 25%;
+      animation-duration: 15s;
+      animation-delay: 2s;
+      font-size: 7px;
+    }
+
+    .snowflake:nth-child(4) {
+      left: 35%;
+      animation-duration: 10s;
+      animation-delay: 3s;
+      font-size: 9px;
+    }
+
+    .snowflake:nth-child(5) {
+      left: 45%;
+      animation-duration: 13s;
+      animation-delay: 4s;
+      font-size: 6px;
+    }
+
+    .snowflake:nth-child(6) {
+      left: 55%;
+      animation-duration: 9s;
+      animation-delay: 5s;
+      font-size: 8px;
+    }
+
+    .snowflake:nth-child(7) {
+      left: 65%;
+      animation-duration: 14s;
+      animation-delay: 6s;
+      font-size: 7px;
+    }
+
+    .snowflake:nth-child(8) {
+      left: 75%;
+      animation-duration: 11s;
+      animation-delay: 7s;
+      font-size: 9px;
+    }
+
+    .snowflake:nth-child(9) {
+      left: 85%;
+      animation-duration: 16s;
+      animation-delay: 8s;
+      font-size: 6px;
+    }
+
+    .snowflake:nth-child(10) {
+      left: 95%;
+      animation-duration: 12s;
+      animation-delay: 9s;
+      font-size: 8px;
+    }
+
+    .snowflake:nth-child(11) {
+      left: 10%;
+      animation-duration: 9s;
+      animation-delay: 10s;
+      font-size: 7px;
+    }
+
+    .snowflake:nth-child(12) {
+      left: 30%;
+      animation-duration: 13s;
+      animation-delay: 11s;
+      font-size: 9px;
+    }
+
+    .snowflake:nth-child(13) {
+      left: 50%;
+      animation-duration: 11s;
+      animation-delay: 12s;
+      font-size: 6px;
+    }
+
+    .snowflake:nth-child(14) {
+      left: 70%;
+      animation-duration: 14s;
+      animation-delay: 13s;
+      font-size: 8px;
+    }
+
+    .snowflake:nth-child(15) {
+      left: 90%;
+      animation-duration: 10s;
+      animation-delay: 14s;
+      font-size: 7px;
+    }
+
+    .snowflake:nth-child(16) {
+      left: 8%;
+      animation-duration: 11s;
+      animation-delay: 15s;
+      font-size: 8px;
+    }
+
+    .snowflake:nth-child(17) {
+      left: 18%;
+      animation-duration: 14s;
+      animation-delay: 16s;
+      font-size: 7px;
+    }
+
+    .snowflake:nth-child(18) {
+      left: 28%;
+      animation-duration: 9s;
+      animation-delay: 17s;
+      font-size: 9px;
+    }
+
+    .snowflake:nth-child(19) {
+      left: 38%;
+      animation-duration: 12s;
+      animation-delay: 18s;
+      font-size: 6px;
+    }
+
+    .snowflake:nth-child(20) {
+      left: 48%;
+      animation-duration: 15s;
+      animation-delay: 19s;
+      font-size: 8px;
+    }
+
+    .snowflake:nth-child(21) {
+      left: 58%;
+      animation-duration: 10s;
+      animation-delay: 20s;
+      font-size: 7px;
+    }
+
+    .snowflake:nth-child(22) {
+      left: 68%;
+      animation-duration: 13s;
+      animation-delay: 21s;
+      font-size: 9px;
+    }
+
+    .snowflake:nth-child(23) {
+      left: 78%;
+      animation-duration: 8s;
+      animation-delay: 22s;
+      font-size: 6px;
+    }
+
+    .snowflake:nth-child(24) {
+      left: 88%;
+      animation-duration: 16s;
+      animation-delay: 23s;
+      font-size: 8px;
+    }
+
+    .snowflake:nth-child(25) {
+      left: 98%;
+      animation-duration: 11s;
+      animation-delay: 24s;
+      font-size: 7px;
+    }
+
+    @keyframes snowfall {
+      0% {
+        transform: translateY(0) translateX(-50px) rotate(0deg);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.8;
+      }
+
+      90% {
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: translateY(130vh) translateX(150px) rotate(360deg);
+        opacity: 0;
+      }
+    }
 
     /* HERO */
-    .hero{position:relative; min-height:100vh; display:flex; align-items:flex-end; justify-content:center; text-align:center; color:#fff;}
-    .hero::before{content:""; position:absolute; inset:0; background:url('w7.jpeg') center/cover no-repeat;}
-    .hero::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.5));}
-    .hero-inner{position:relative; z-index:2; display:grid; gap:16px; padding:20px; margin-bottom:60px}
-    .hero-date{font-family:'Marcellus',serif; font-size:clamp(20px,4vw,28px); color:#fff; letter-spacing:.15em; text-shadow:0 2px 10px rgba(0,0,0,.4)}
-    .hero .countdown{display:flex; gap:8px; justify-content:center; flex-wrap:wrap}
-    .hero .cd-box{min-width:50px; padding:8px 6px; border-radius:8px; background:rgba(255,255,255,.15); backdrop-filter:blur(4px); border:1px solid rgba(255,255,255,.2)}
-    .hero .cd-box .num{font-size:clamp(14px,3vw,20px); font-weight:500; color:#fff}
-    .hero .cd-box .lab{font-size:10px; color:rgba(255,255,255,.9); margin-top:2px}
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+    }
 
-    /* INVITATION */
-    .invitation{ text-align:center; position:relative; z-index:2; }
-    .invitation h2{font-size:30px; margin-bottom:16px}
-    .invitation p{margin:6px 0; color:#444}
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('w7.jpeg') center/cover no-repeat;
+    }
 
-    /* INTERVIEW / STORY */
-    .story{max-width:880px; position:relative; z-index:2;}
-    .story h2{font-size:26px; margin-bottom:22px}
-    .qa{display:grid; gap:12px}
-    .qac{padding:18px; border:1px solid var(--line); border-radius:var(--radius); background:#fff; box-shadow:var(--soft); text-align:left}
-    .q{font-family:'Marcellus',serif; letter-spacing:.03em; color:#111}
-    .a{color:#4b4b4b; margin-top:6px}
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, .35), rgba(0, 0, 0, .5));
+    }
 
-    /* FAMILY */
-    .family{display:grid; gap:18px; position:relative; z-index:2;}
-    .fam-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:10px}
-    .fam-card{border:1px solid var(--line); border-radius:var(--radius); padding:14px; background:#fff}
-    .fam-card .role{font-size:13px; color:var(--muted)}
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      gap: 16px;
+      padding: 20px;
+      margin-bottom: 60px
+    }
+
+    .hero-date {
+      font-family: 'Marcellus', serif;
+      font-size: clamp(20px, 4vw, 28px);
+      color: #fff;
+      letter-spacing: .15em;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, .4)
+    }
+
+    .hero .countdown {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap
+    }
+
+    .hero .cd-box {
+      min-width: 50px;
+      padding: 8px 6px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .15);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, .2)
+    }
+
+    .hero .cd-box .num {
+      font-size: clamp(14px, 3vw, 20px);
+      font-weight: 500;
+      color: #fff
+    }
+
+    .hero .cd-box .lab {
+      font-size: 10px;
+      color: rgba(255, 255, 255, .9);
+      margin-top: 2px
+    }
+
+    /* INVITATION / STORY / FAMILY (원본과 동일한 핵심만 유지) */
+    .invitation {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .story {
+      max-width: 880px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .family {
+      display: grid;
+      gap: 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .fam-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px
+    }
+
+    .fam-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+      background: #fff
+    }
+
+    .fam-card .role {
+      font-size: 13px;
+      color: var(--muted)
+    }
+
+    /* STORY / INTERVIEW (복구) */
+    .story h2 {
+      font-size: 26px;
+      margin-bottom: 22px
+    }
+
+    .qa {
+      display: grid;
+      gap: 12px;
+    }
+
+    .qac {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: var(--soft);
+      text-align: left;
+    }
+
+    .q {
+      font-family: 'Marcellus', serif;
+      letter-spacing: .03em;
+      color: #111;
+      font-size: 18px;
+    }
+
+    .a {
+      color: #4b4b4b;
+      margin-top: 6px;
+      font-size: 16px;
+      line-height: 1.7;
+    }
 
     /* GALLERY */
-    .gallery{position:relative; z-index:2;}
-    .gallery h2{margin-bottom:14px}
-    .gallery-container{position:relative}
-    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:16px}
-    .grid img{border-radius:10px; cursor:pointer; aspect-ratio:1/1; object-fit:cover; transition:transform 0.2s}
-    .grid img:hover{transform:scale(1.05)}
-    .gallery-nav{display:flex; justify-content:center; gap:12px; margin-bottom:12px}
-    .nav-btn{width:44px; height:44px; border-radius:50%; border:1px solid var(--line); background:#fff; color:var(--ink); font-size:20px; cursor:pointer; transition:all 0.2s}
-    .nav-btn:hover{background:var(--accent); color:#fff; border-color:var(--accent)}
-    .nav-btn:disabled{opacity:0.5; cursor:not-allowed}
-    .gallery-info{text-align:center; color:var(--muted); font-size:14px}
-    
-    /* Enhanced Lightbox with Swipe Support */
-    .lightbox{
-      position:fixed; 
-      inset:0; 
-      display:flex; 
-      align-items:center; 
-      justify-content:center; 
-      background:rgba(0,0,0,.85); 
-      opacity:0; 
-      visibility:hidden; 
-      transition:.3s; 
-      z-index:99999;
-      touch-action:none; 
-      -webkit-user-select:none;
-      user-select:none;
+    .gallery {
+      position: relative;
+      z-index: 2;
     }
-    .lightbox.active{opacity:1; visibility:visible}
-    
-    .lightbox img{
-      max-width:90%; 
-      max-height:82%; 
-      border-radius:12px; 
-      box-shadow:0 10px 25px rgba(0,0,0,.5);
-      cursor:grab;
-      transition:transform 0.3s ease, opacity 0.3s ease;
+
+    .gallery h2 {
+      margin-bottom: 14px
     }
-    .lightbox img:active{cursor:grabbing}
-    
-    .lightbox .nav{
-      position:absolute; 
-      top:50%; 
-      transform:translateY(-50%); 
-      width:44px; 
-      height:44px; 
-      border-radius:50%; 
-      border:0; 
-      background:rgba(255,255,255,.2); 
-      color:#fff; 
-      font-size:28px; 
-      display:grid; 
-      place-items:center; 
-      cursor:pointer;
-      transition:all 0.2s ease;
+
+    .gallery-container {
+      position: relative
     }
-    .lightbox .nav:hover{
-      background:rgba(255,255,255,.3);
-      transform:translateY(-50%) scale(1.1);
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+      opacity: 0;
+      transition: opacity .18s ease;
     }
-    .lightbox .prev{left:16px}
-    .lightbox .next{right:16px}
-    
-    .lightbox .close{
-      position:absolute; 
-      top:16px; 
-      right:20px; 
-      width:40px; 
-      height:40px; 
-      border-radius:50%; 
-      border:0; 
-      background:rgba(255,255,255,.2); 
-      color:#fff; 
-      font-size:22px; 
-      cursor:pointer;
-      transition:all 0.2s ease;
+
+    .grid.ready {
+      opacity: 1
     }
-    .lightbox .close:hover{
-      background:rgba(255,255,255,.3);
-      transform:scale(1.1);
+
+    .grid img {
+      border-radius: 10px;
+      cursor: pointer;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      transition: transform 0.2s
     }
-    
-    /* 스와이프 힌트 */
-    .lightbox-swipe-hint{
-      position:absolute; 
-      bottom:20px; 
-      left:50%; 
-      transform:translateX(-50%); 
-      color:#fff; 
-      font-size:14px; 
-      text-align:center; 
-      opacity:0.7; 
-      pointer-events:none;
-      animation:fadeInOut 3s ease-in-out infinite;
+
+    .grid img:hover {
+      transform: scale(1.05)
     }
-    
-    @keyframes fadeInOut{
-      0%, 100%{opacity:0.3}
-      50%{opacity:0.7}
+
+    .gallery-nav {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 12px
+    }
+
+    .nav-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.2s
+    }
+
+    .nav-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent)
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed
+    }
+
+    .gallery-info {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px
+    }
+
+    /* Skeleton (Shimmer) */
+    .skeleton {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #eee;
+      aspect-ratio: 1/1;
+    }
+
+    .skeleton::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .6) 50%, rgba(255, 255, 255, 0) 100%);
+      transform: translateX(-100%);
+      animation: shimmer 1.2s infinite;
+    }
+
+    @keyframes shimmer {
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, .85);
+      opacity: 0;
+      visibility: hidden;
+      transition: .3s;
+      z-index: 99999;
+      touch-action: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    .lightbox.active {
+      opacity: 1;
+      visibility: visible
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 82%;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, .5);
+      cursor: grab;
+      transition: transform .3s ease, opacity .3s ease;
+    }
+
+    .lightbox .nav,
+    .lightbox .close {
+      position: absolute;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .2);
+      color: #fff;
+      cursor: pointer;
+      transition: all .2s ease;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+    }
+
+    .lightbox .nav:hover,
+    .lightbox .close:hover {
+      background: rgba(255, 255, 255, .3);
+      transform: scale(1.1);
+    }
+
+    .lightbox .prev {
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .lightbox .next {
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .lightbox .close {
+      top: 16px;
+      right: 20px
+    }
+
+    .lightbox-swipe-hint {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      font-size: 14px;
+      opacity: .7;
+      pointer-events: none;
+      animation: fadeInOut 3s ease-in-out infinite;
+    }
+
+    @keyframes fadeInOut {
+
+      0%,
+      100% {
+        opacity: .3
+      }
+
+      50% {
+        opacity: .7
+      }
     }
 
     /* LOCATION */
-    .location{position:relative; z-index:2;}
-    .location h2{margin-bottom:10px}
-    .loc-card{border:1px solid var(--line); border-radius:var(--radius); padding:18px; background:#fff; box-shadow:var(--soft)}
-    .loc-meta{color:#555}
-    .loc-buttons{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:14px}
-    .chip{padding:10px 14px; border-radius:999px; border:1px solid var(--line); background:#fff}
+    .location {
+      position: relative;
+      z-index: 2;
+    }
+
+    .loc-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      background: #fff;
+      box-shadow: var(--soft)
+    }
+
+    .loc-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 14px
+    }
+
+    .chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff
+    }
 
     /* ACCOUNT */
-    .account{position:relative; z-index:2;}
-    .account .cards{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; max-width:720px; margin:16px auto 0}
-    .acc{border:1px solid var(--line); border-radius:var(--radius); padding:14px; background:#fff}
-    .acc .who{font-weight:500}
-    .acc .bank{color:#555}
+    .account {
+      position: relative;
+      z-index: 2;
+    }
 
-    /* RSVP */
-    .rsvp{position:relative; z-index:2;}
-    .rsvp .form{max-width:760px; margin:0 auto; text-align:left}
-    .field{display:grid; gap:6px; margin-bottom:10px}
-    label{font-size:13px; color:#6b7280}
-    input,select,textarea{width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--line); background:#fff}
-    button.primary{display:inline-block; padding:12px 18px; border-radius:12px; background:var(--accent); color:#fff; border:0; cursor:pointer}
-    .status{font-size:14px; color:#6b7280}
+    .account .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      max-width: 720px;
+      margin: 16px auto 0
+    }
 
-    /* SHAREBAR */
-    .sharebar{position:sticky; bottom:12px; display:flex; justify-content:center; gap:10px; padding:10px; z-index:2;}
-    .sharebar .cta{display:inline-flex; align-items:center; gap:8px; padding:12px 16px; border-radius:14px; border:1px solid var(--line); background:#fff; box-shadow:var(--soft)}
-    .sharebar .primary{background:var(--accent); color:#fff; border-color:transparent}
+    .acc {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+      background: #fff
+    }
 
-    /* small */
-    @media (max-width:520px){ 
-      .fam-grid{grid-template-columns:1fr} 
-      .account .cards{grid-template-columns:1fr} 
+    .acc .who {
+      font-weight: 500
+    }
+
+    .acc .bank {
+      color: #555
+    }
+
+    @media (max-width:520px) {
+      .fam-grid {
+        grid-template-columns: 1fr
+      }
+
+      .account .cards {
+        grid-template-columns: 1fr
+      }
     }
   </style>
 </head>
+
 <body>
-  <!-- Global Snowflakes - 전체 페이지 눈 효과 -->
+  <!-- Global Snowflakes -->
   <div class="global-snowflakes" aria-hidden="true">
     <div class="snowflake">●</div>
     <div class="snowflake">●</div>
@@ -304,10 +748,22 @@
     <div class="hero-inner">
       <div class="hero-date">2026.01.18 SUN 1PM</div>
       <div class="countdown" id="countdown" aria-label="예식까지 남은 시간">
-        <div class="cd-box"><div class="num" id="cd-d">00</div><div class="lab">DAYS</div></div>
-        <div class="cd-box"><div class="num" id="cd-h">00</div><div class="lab">HRS</div></div>
-        <div class="cd-box"><div class="num" id="cd-m">00</div><div class="lab">MIN</div></div>
-        <div class="cd-box"><div class="num" id="cd-s">00</div><div class="lab">SEC</div></div>
+        <div class="cd-box">
+          <div class="num" id="cd-d">00</div>
+          <div class="lab">DAYS</div>
+        </div>
+        <div class="cd-box">
+          <div class="num" id="cd-h">00</div>
+          <div class="lab">HRS</div>
+        </div>
+        <div class="cd-box">
+          <div class="num" id="cd-m">00</div>
+          <div class="lab">MIN</div>
+        </div>
+        <div class="cd-box">
+          <div class="num" id="cd-s">00</div>
+          <div class="lab">SEC</div>
+        </div>
       </div>
     </div>
   </header>
@@ -320,24 +776,30 @@
     <p>소중한 결혼식을 올리게 되었습니다.</p>
   </section>
 
-  <!-- STORY / INTERVIEW -->
+  <!-- STORY -->
   <section class="story">
     <h2>OUR STORY</h2>
     <div class="qa">
-      <div class="qac"><div class="q">어떻게 만나게 되었나요?💕</div><div class="a">친구의 소개로 첫 만남을 가졌고, 세 번의 만남 끝에 서로의 마음을 확인했습니다.</div></div>
-      <div class="qac"><div class="q">프로포즈는?💍</div><div class="a">크리스마스 이브🎄, 런던🇬🇧 하이드파크에서 조용히 마음을 전했습니다.</div></div>
-      <div class="qac"><div class="q">닮은 점은?👩‍❤️‍👨</div><div class="a">얼굴뿐만 아니라, 소소한 일상도 소중히 여기는 마음이 닮았습니다.</div></div>
+      <div class="qac">
+        <div class="q">어떻게 만나게 되었나요?💕</div>
+        <div class="a">친구의 소개로 첫 만남을 가졌고, 세 번의 만남 끝에 서로의 마음을 확인했습니다.</div>
+      </div>
+      <div class="qac">
+        <div class="q">프로포즈는?💍</div>
+        <div class="a">크리스마스 이브🎄, 런던🇬🇧 하이드파크에서 조용히 마음을 전했습니다.</div>
+      </div>
+      <div class="qac">
+        <div class="q">닮은 점은?👩‍❤️‍👨</div>
+        <div class="a">얼굴뿐만 아니라, 소소한 일상도 소중히 여기는 마음이 닮았습니다.</div>
+      </div>
     </div>
   </section>
-
 
   <!-- GALLERY -->
   <section class="gallery">
     <h2>GALLERY</h2>
     <div class="gallery-container">
-      <div class="grid" id="gallery">
-        <!-- Images will be loaded here by JavaScript -->
-      </div>
+      <div class="grid" id="gallery" aria-live="polite"></div>
       <div class="gallery-nav">
         <button class="nav-btn prev" id="galleryPrev" aria-label="이전 페이지">‹</button>
         <button class="nav-btn next" id="galleryNext" aria-label="다음 페이지">›</button>
@@ -359,8 +821,18 @@
   <section class="family">
     <h2>FAMILY</h2>
     <div class="fam-grid">
-      <div class="fam-card"><div class="role">신랑</div><div class="name">한지섭</div><div class="role">부 • 모</div><div>(故)한상민 · 이효재</div></div>
-      <div class="fam-card"><div class="role">신부</div><div class="name">유지연</div><div class="role">부 • 모</div><div>유성태 · 서문숙</div></div>
+      <div class="fam-card">
+        <div class="role">신랑</div>
+        <div class="name">한지섭</div>
+        <div class="role">부 • 모</div>
+        <div>(故)한상민 · 이효재</div>
+      </div>
+      <div class="fam-card">
+        <div class="role">신부</div>
+        <div class="name">유지연</div>
+        <div class="role">부 • 모</div>
+        <div>유성태 · 서문숙</div>
+      </div>
     </div>
   </section>
 
@@ -371,8 +843,10 @@
       <div class="loc-name">소노펠리체 컨벤션 3층</div>
       <div class="loc-meta">서울 강남구 영동대로 517 · 2026년 1월 18일 (토) 오후 1시</div>
       <div class="loc-buttons" role="group" aria-label="길찾기">
-        <a class="chip" href="https://map.naver.com/p/search/서울%20강남구%20영동대로%20517" target="_blank" rel="noopener">네이버지도</a>
-        <a class="chip" href="https://map.kakao.com/link/to/소노펠리체컨벤션,37.5133,127.0582" target="_blank" rel="noopener">카카오맵</a>
+        <a class="chip" href="https://map.naver.com/p/search/서울%20강남구%20영동대로%20517" target="_blank"
+          rel="noopener">네이버지도</a>
+        <a class="chip" href="https://map.kakao.com/link/to/소노펠리체컨벤션,37.5133,127.0582" target="_blank"
+          rel="noopener">카카오맵</a>
       </div>
       <div id="map" style="width:100%; height:360px; border-radius:12px; margin-top:14px"></div>
     </div>
@@ -382,8 +856,14 @@
   <section class="account">
     <h2>마음 전하실 곳</h2>
     <div class="cards">
-      <div class="acc"><div class="who">신랑측</div><div class="bank">하나은행 233-891128-47907 (한지섭)</div></div>
-      <div class="acc"><div class="who">신부측</div><div class="bank">국민은행 476101-01-388646 (유지연)</div></div>
+      <div class="acc">
+        <div class="who">신랑측</div>
+        <div class="bank">하나은행 233-891128-47907 (한지섭)</div>
+      </div>
+      <div class="acc">
+        <div class="who">신부측</div>
+        <div class="bank">국민은행 476101-01-388646 (유지연)</div>
+      </div>
     </div>
   </section>
 
@@ -394,17 +874,17 @@
     const cdH = document.getElementById('cd-h');
     const cdM = document.getElementById('cd-m');
     const cdS = document.getElementById('cd-s');
-    function tick(){
+    function tick() {
       const now = Date.now();
       let diff = Math.max(0, target - now);
-      const d = Math.floor(diff/(1000*60*60*24)); diff -= d*86400000;
-      const h = Math.floor(diff/(1000*60*60)); diff -= h*3600000;
-      const m = Math.floor(diff/(1000*60)); diff -= m*60000;
-      const s = Math.floor(diff/1000);
-      cdD.textContent = String(d).padStart(2,'0');
-      cdH.textContent = String(h).padStart(2,'0');
-      cdM.textContent = String(m).padStart(2,'0');
-      cdS.textContent = String(s).padStart(2,'0');
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24)); diff -= d * 86400000;
+      const h = Math.floor(diff / (1000 * 60 * 60)); diff -= h * 3600000;
+      const m = Math.floor(diff / (1000 * 60)); diff -= m * 60000;
+      const s = Math.floor(diff / 1000);
+      cdD.textContent = String(d).padStart(2, '0');
+      cdH.textContent = String(h).padStart(2, '0');
+      cdM.textContent = String(m).padStart(2, '0');
+      cdS.textContent = String(s).padStart(2, '0');
     }
     tick(); setInterval(tick, 1000);
 
@@ -412,62 +892,24 @@
     function initMap() {
       try {
         const mapContainer = document.getElementById('map');
-        if (!mapContainer) {
-          console.log('Map container not found');
-          return;
-        }
-        
+        if (!mapContainer) return;
         const venueCoords = new kakao.maps.LatLng(37.5133, 127.0582);
-        
-        const mapOption = {
-          center: venueCoords,
-          level: 3
-        };
-        
-        const map = new kakao.maps.Map(mapContainer, mapOption);
-        
-        const marker = new kakao.maps.Marker({
-          map: map,
-          position: venueCoords
-        });
-        
-        const infowindow = new kakao.maps.InfoWindow({
-          content: '<div style="padding:8px;font-size:14px;font-weight:bold;">소노펠리체 컨벤션 3층</div>'
-        });
-        
-        kakao.maps.event.addListener(marker, 'click', function() {
-          infowindow.open(map, marker);
-        });
-        
-        kakao.maps.event.addListener(map, 'tilesloaded', function() {
-          infowindow.open(map, marker);
-        });
-        
-        console.log('Kakao Map initialized successfully');
+        const map = new kakao.maps.Map(mapContainer, { center: venueCoords, level: 3 });
+        const marker = new kakao.maps.Marker({ map, position: venueCoords });
+        const infowindow = new kakao.maps.InfoWindow({ content: '<div style="padding:8px;font-size:14px;font-weight:bold;">소노펠리체 컨벤션 3층</div>' });
+        kakao.maps.event.addListener(marker, 'click', () => infowindow.open(map, marker));
+        kakao.maps.event.addListener(map, 'tilesloaded', () => infowindow.open(map, marker));
       } catch (error) {
-        console.error('Error initializing Kakao Map:', error);
         const mapContainer = document.getElementById('map');
         if (mapContainer) {
           mapContainer.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;font-size:14px;">지도를 불러올 수 없습니다. 위의 링크를 이용해주세요.</div>';
         }
       }
     }
-    
-    function waitForKakaoMap() {
-      if (typeof kakao !== 'undefined' && kakao.maps) {
-        initMap();
-      } else {
-        setTimeout(waitForKakaoMap, 100);
-      }
-    }
-    
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', waitForKakaoMap);
-    } else {
-      waitForKakaoMap();
-    }
+    function waitForKakaoMap() { if (typeof kakao !== 'undefined' && kakao.maps) initMap(); else setTimeout(waitForKakaoMap, 100); }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', waitForKakaoMap); else waitForKakaoMap();
 
-    // ===== Gallery Pagination & Lightbox with Swipe =====
+    // ===== Gallery (Skeleton + Preload + Decode) =====
     const gallery = document.getElementById('gallery');
     const galleryPrev = document.getElementById('galleryPrev');
     const galleryNext = document.getElementById('galleryNext');
@@ -478,224 +920,165 @@
     const lbPrev = document.getElementById('lbPrev');
     const lbNext = document.getElementById('lbNext');
     const lbClose = document.getElementById('lbClose');
-    
+
     const allImages = [
       'w1.jpeg', 'w2.jpeg', 'w3.jpeg', 'w4.jpeg', 'w5.jpeg',
       'w6.jpeg', 'w7.jpeg', 'w8.jpeg', 'w9.jpeg', 'w10.jpeg',
       'w11.jpeg', 'w12.jpeg', 'w13.jpeg', 'w14.jpeg', 'w15.jpeg',
-      'w16.jpeg', 'w17.jpeg', 'w18.jpeg', 'w19.jpeg', 'w20.jpeg',
-      'w21.jpeg'
+      'w16.jpeg', 'w17.jpeg', 'w18.jpeg', 'w19.jpeg', 'w20.jpeg', 'w21.jpeg'
     ];
-    
     const imagesPerPage = 9;
     let currentPage = 1;
     let currentImageIndex = 0;
     let isAnimating = false;
-    
-    // 스와이프 관련 변수들
-    let startX = 0;
-    let startY = 0;
-    let startTime = 0;
-    let isDragging = false;
-    
-    function loadGalleryPage(page) {
-      const startIndex = (page - 1) * imagesPerPage;
-      const endIndex = startIndex + imagesPerPage;
-      const pageImages = allImages.slice(startIndex, endIndex);
-      
+
+    // 이미지 프리로드 + 디코드 캐시
+    const _imgDecodeCache = new Map();
+    function preloadImages(srcs) {
+      return Promise.all(srcs.map(src => {
+        if (_imgDecodeCache.has(src)) return _imgDecodeCache.get(src);
+        const img = new Image();
+        const p = new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = reject;
+        }).then(() => (img.decode ? img.decode().catch(() => { }) : undefined));
+        img.src = src;
+        _imgDecodeCache.set(src, p);
+        return p;
+      }));
+    }
+
+    // 스켈레톤 생성
+    function renderSkeletons(count) {
+      gallery.classList.remove('ready');
       gallery.innerHTML = '';
+      const frag = document.createDocumentFragment();
+      for (let i = 0; i < count; i++) {
+        const sk = document.createElement('div');
+        sk.className = 'skeleton';
+        sk.setAttribute('aria-hidden', 'true');
+        frag.appendChild(sk);
+      }
+      gallery.appendChild(frag);
+    }
+
+    async function loadGalleryPage(page) {
+      const totalPages = Math.ceil(allImages.length / imagesPerPage);
+      currentPage = Math.min(Math.max(1, page), totalPages);
+
+      const startIndex = (currentPage - 1) * imagesPerPage;
+      const endIndex = Math.min(startIndex + imagesPerPage, allImages.length);
+      const pageImages = allImages.slice(startIndex, endIndex);
+
+      // 1) 스켈레톤 먼저 표시 (페이지에 맞는 개수)
+      renderSkeletons(pageImages.length);
+
+      // 2) 이미지 모두 준비(로딩+디코드)될 때까지 대기
+      try { await preloadImages(pageImages); } catch (e) { /* 실패해도 계속 */ }
+
+      // 3) 한 번에 교체 렌더
+      const frag = document.createDocumentFragment();
       pageImages.forEach((src, index) => {
         const img = document.createElement('img');
         img.src = src;
         img.alt = `사진 ${startIndex + index + 1}`;
+        img.decoding = 'async';
+        img.loading = 'eager';
         img.onclick = () => openLightbox(startIndex + index);
-        gallery.appendChild(img);
+        frag.appendChild(img);
       });
-      
-      galleryPage.textContent = page;
-      galleryTotal.textContent = Math.ceil(allImages.length / imagesPerPage);
-      
-      galleryPrev.disabled = page === 1;
-      galleryNext.disabled = page === Math.ceil(allImages.length / imagesPerPage);
+      gallery.innerHTML = '';
+      gallery.appendChild(frag);
+
+      // 페이지/버튼 상태 갱신
+      galleryPage.textContent = currentPage;
+      galleryTotal.textContent = totalPages;
+      galleryPrev.disabled = currentPage === 1;
+      galleryNext.disabled = currentPage === totalPages;
+
+      // 4) 한 프레임 뒤 부드럽게 나타나기
+      requestAnimationFrame(() => gallery.classList.add('ready'));
     }
-    
-    function nextPage() {
-      if (currentPage < Math.ceil(allImages.length / imagesPerPage)) {
-        currentPage++;
-        loadGalleryPage(currentPage);
-      }
-    }
-    
-    function prevPage() {
-      if (currentPage > 1) {
-        currentPage--;
-        loadGalleryPage(currentPage);
-      }
-    }
-    
+
+    function nextPage() { if (currentPage < Math.ceil(allImages.length / imagesPerPage)) loadGalleryPage(currentPage + 1); }
+    function prevPage() { if (currentPage > 1) loadGalleryPage(currentPage - 1); }
+
+    // 라이트박스
     function openLightbox(index) {
       currentImageIndex = index;
+      const neighbors = [
+        allImages[index],
+        allImages[(index - 1 + allImages.length) % allImages.length],
+        allImages[(index + 1) % allImages.length]
+      ];
+      preloadImages(neighbors).catch(() => { });
+      lbImg.style.opacity = '0';
       lbImg.src = allImages[index];
       lightbox.classList.add('active');
       document.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => { lbImg.style.opacity = '1'; });
     }
-    
-    function closeLightbox() {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-    
+    function closeLightbox() { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
     function showPrevImage() {
-      if (isAnimating) return;
-      isAnimating = true;
-      
+      if (isAnimating) return; isAnimating = true;
       currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
-      
-      lbImg.style.opacity = '0.5';
-      lbImg.style.transform = 'scale(0.95)';
-      
-      setTimeout(() => {
-        lbImg.src = allImages[currentImageIndex];
-        setTimeout(() => {
-          lbImg.style.opacity = '1';
-          lbImg.style.transform = 'scale(1)';
-          isAnimating = false;
-        }, 50);
-      }, 150);
+      lbImg.style.opacity = '0.5'; lbImg.style.transform = 'scale(0.95)';
+      setTimeout(() => { lbImg.src = allImages[currentImageIndex]; setTimeout(() => { lbImg.style.opacity = '1'; lbImg.style.transform = 'scale(1)'; isAnimating = false; }, 50); }, 150);
     }
-    
     function showNextImage() {
-      if (isAnimating) return;
-      isAnimating = true;
-      
+      if (isAnimating) return; isAnimating = true;
       currentImageIndex = (currentImageIndex + 1) % allImages.length;
-      
-      lbImg.style.opacity = '0.5';
-      lbImg.style.transform = 'scale(0.95)';
-      
-      setTimeout(() => {
-        lbImg.src = allImages[currentImageIndex];
-        setTimeout(() => {
-          lbImg.style.opacity = '1';
-          lbImg.style.transform = 'scale(1)';
-          isAnimating = false;
-        }, 50);
-      }, 150);
+      lbImg.style.opacity = '0.5'; lbImg.style.transform = 'scale(0.95)';
+      setTimeout(() => { lbImg.src = allImages[currentImageIndex]; setTimeout(() => { lbImg.style.opacity = '1'; lbImg.style.transform = 'scale(1)'; isAnimating = false; }, 50); }, 150);
     }
-    
-    // 터치 이벤트 핸들러
-    function handleTouchStart(e) {
-      e.preventDefault();
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-      startTime = Date.now();
-      isDragging = true;
-    }
-    
-    function handleTouchMove(e) {
-      if (!isDragging) return;
-      e.preventDefault();
-    }
-    
+
+    // 스와이프/드래그(라이트박스)
+    let startX = 0, startY = 0, startTime = 0, isDragging = false;
+    function handleTouchStart(e) { e.preventDefault(); startX = e.touches[0].clientX; startY = e.touches[0].clientY; startTime = Date.now(); isDragging = true; }
+    function handleTouchMove(e) { if (!isDragging) return; e.preventDefault(); }
     function handleTouchEnd(e) {
-      if (!isDragging) return;
-      e.preventDefault();
-      
-      const endX = e.changedTouches[0].clientX;
-      const endY = e.changedTouches[0].clientY;
-      const deltaX = startX - endX;
-      const deltaY = startY - endY;
-      const deltaTime = Date.now() - startTime;
-      
-      const minSwipeDistance = 50;
-      const maxSwipeTime = 300;
-      
-      if (Math.abs(deltaX) > Math.abs(deltaY) && 
-          Math.abs(deltaX) > minSwipeDistance && 
-          deltaTime < maxSwipeTime) {
-        
-        if (deltaX > 0) {
-          showNextImage();
-        } else {
-          showPrevImage();
-        }
-      }
-      
+      if (!isDragging) return; e.preventDefault();
+      const endX = e.changedTouches[0].clientX; const endY = e.changedTouches[0].clientY;
+      const dx = startX - endX, dy = startY - endY, dt = Date.now() - startTime;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50 && dt < 300) { dx > 0 ? showNextImage() : showPrevImage(); }
       isDragging = false;
     }
-    
-    // 마우스 이벤트 핸들러
-    function handleMouseDown(e) {
-      e.preventDefault();
-      startX = e.clientX;
-      startY = e.clientY;
-      startTime = Date.now();
-      isDragging = true;
-    }
-    
-    function handleMouseMove(e) {
-      if (!isDragging) return;
-      e.preventDefault();
-    }
-    
+    function handleMouseDown(e) { e.preventDefault(); startX = e.clientX; startY = e.clientY; startTime = Date.now(); isDragging = true; }
+    function handleMouseMove(e) { if (!isDragging) return; e.preventDefault(); }
     function handleMouseUp(e) {
-      if (!isDragging) return;
-      e.preventDefault();
-      
-      const endX = e.clientX;
-      const endY = e.clientY;
-      const deltaX = startX - endX;
-      const deltaY = startY - endY;
-      const deltaTime = Date.now() - startTime;
-      
-      const minSwipeDistance = 50;
-      const maxSwipeTime = 300;
-      
-      if (Math.abs(deltaX) > Math.abs(deltaY) && 
-          Math.abs(deltaX) > minSwipeDistance && 
-          deltaTime < maxSwipeTime) {
-        
-        if (deltaX > 0) {
-          showNextImage();
-        } else {
-          showPrevImage();
-        }
-      }
-      
+      if (!isDragging) return; e.preventDefault();
+      const endX = e.clientX, endY = e.clientY, dx = startX - endX, dy = startY - endY, dt = Date.now() - startTime;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50 && dt < 300) { dx > 0 ? showNextImage() : showPrevImage(); }
       isDragging = false;
     }
-    
-    // 갤러리 초기화
-    loadGalleryPage(1);
+
+    // 이벤트 바인딩
     galleryNext.addEventListener('click', nextPage);
     galleryPrev.addEventListener('click', prevPage);
-    
-    // 라이트박스 이벤트 리스너
-    lbClose.addEventListener('click', (e) => {e.stopPropagation(); closeLightbox()});
-    lbPrev.addEventListener('click', (e) => {e.stopPropagation(); showPrevImage()});
-    lbNext.addEventListener('click', (e) => {e.stopPropagation(); showNextImage()});
-    lightbox.addEventListener('click', (e) => {if(e.target === lightbox) closeLightbox()});
-    
-    // 이미지에 스와이프/드래그 이벤트 추가
+
+    lbClose.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
+    lbPrev.addEventListener('click', (e) => { e.stopPropagation(); showPrevImage(); });
+    lbNext.addEventListener('click', (e) => { e.stopPropagation(); showNextImage(); });
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
     lbImg.addEventListener('touchstart', handleTouchStart, { passive: false });
     lbImg.addEventListener('touchmove', handleTouchMove, { passive: false });
     lbImg.addEventListener('touchend', handleTouchEnd, { passive: false });
-    
     lbImg.addEventListener('mousedown', handleMouseDown);
     lbImg.addEventListener('mousemove', handleMouseMove);
     lbImg.addEventListener('mouseup', handleMouseUp);
-    
-    lbImg.addEventListener('mouseleave', () => {
-      isDragging = false;
-    });
-    
-    // 키보드 네비게이션
+    lbImg.addEventListener('mouseleave', () => { isDragging = false; });
+
     window.addEventListener('keydown', (e) => {
       if (!lightbox.classList.contains('active')) return;
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowLeft') showPrevImage();
       if (e.key === 'ArrowRight') showNextImage();
     });
+
+    // 초기 로드
+    loadGalleryPage(1);
   </script>
 </body>
+
 </html>
