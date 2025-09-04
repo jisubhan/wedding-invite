@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,10 +20,13 @@
   <meta name="twitter:image" content="https://jisubhan.github.io/wedding-invite/w7.jpeg" />
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Noto+Serif+KR:wght@400;500&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Marcellus&family=Noto+Serif+KR:wght@400;500&family=Dancing+Script:wght@400;700&display=swap"
+    rel="stylesheet">
 
   <!-- Kakao Map SDK -->
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=384533d32fee31cf668087354623031d&libraries=services"></script>
+  <script type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=384533d32fee31cf668087354623031d&libraries=services"></script>
 
   <!-- Preload Hero & First Page Gallery -->
   <link rel="preload" as="image" href="w7.jpeg" fetchpriority="high">
@@ -37,201 +41,909 @@
   <link rel="preload" as="image" href="w9.jpeg">
 
   <style>
-    :root{
-      --bg:#faf9f7; --ink:#2a2a2a; --muted:#6b6b6b; --accent:#8b6e66; --line:#ece7e2;
-      --radius:16px; --soft:0 10px 30px rgba(17,24,39,.08);
+    :root {
+      --bg: #faf9f7;
+      --ink: #2a2a2a;
+      --muted: #6b6b6b;
+      --accent: #8b6e66;
+      --line: #ece7e2;
+      --radius: 16px;
+      --soft: 0 10px 30px rgba(17, 24, 39, .08);
     }
-    *{box-sizing:border-box; margin:0; padding:0}
-    html,body{height:100%}
-    body{
-      font-family:'Noto Serif KR',serif;
-      background:var(--bg);
-      color:var(--ink);
-      line-height:1.65;
-      position:relative;
-      overflow-x:hidden;
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
     }
-    h1,h2,h3{font-family:'Marcellus',serif; font-weight:400}
-    img{max-width:100%; display:block}
-    a{color:inherit; text-decoration:none}
-    section{padding:56px 20px; max-width:980px; margin:0 auto}
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      font-family: 'Noto Serif KR', serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Marcellus', serif;
+      font-weight: 400
+    }
+
+    img {
+      max-width: 100%;
+      display: block
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    section {
+      padding: 56px 20px;
+      max-width: 980px;
+      margin: 0 auto
+    }
 
     /* Global Snowflakes */
-    .global-snowflakes{
-      position:fixed; top:0; left:0; width:100%; height:100%;
-      pointer-events:none; z-index:10000; overflow:hidden;
+    .global-snowflakes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10000;
+      overflow: hidden;
     }
-    .snowflake{position:absolute; top:-12vh; color:#fff; font-size:8px; opacity:0.8; animation:snowfall linear infinite; will-change: transform, opacity;}
-    .snowflake:nth-child(1){left:5%; animation-duration:12s; animation-delay:0s; font-size:6px;}
-    .snowflake:nth-child(2){left:15%; animation-duration:8s; animation-delay:1s; font-size:8px;}
-    .snowflake:nth-child(3){left:25%; animation-duration:15s; animation-delay:2s; font-size:7px;}
-    .snowflake:nth-child(4){left:35%; animation-duration:10s; animation-delay:3s; font-size:9px;}
-    .snowflake:nth-child(5){left:45%; animation-duration:13s; animation-delay:4s; font-size:6px;}
-    .snowflake:nth-child(6){left:55%; animation-duration:9s; animation-delay:5s; font-size:8px;}
-    .snowflake:nth-child(7){left:65%; animation-duration:14s; animation-delay:6s; font-size:7px;}
-    .snowflake:nth-child(8){left:75%; animation-duration:11s; animation-delay:7s; font-size:9px;}
-    .snowflake:nth-child(9){left:85%; animation-duration:16s; animation-delay:8s; font-size:6px;}
-    .snowflake:nth-child(10){left:95%; animation-duration:12s; animation-delay:9s; font-size:8px;}
-    .snowflake:nth-child(11){left:10%; animation-duration:9s; animation-delay:10s; font-size:7px;}
-    .snowflake:nth-child(12){left:30%; animation-duration:13s; animation-delay:11s; font-size:9px;}
-    .snowflake:nth-child(13){left:50%; animation-duration:11s; animation-delay:12s; font-size:6px;}
-    .snowflake:nth-child(14){left:70%; animation-duration:14s; animation-delay:13s; font-size:8px;}
-    .snowflake:nth-child(15){left:90%; animation-duration:10s; animation-delay:14s; font-size:7px;}
-    .snowflake:nth-child(16){left:8%; animation-duration:11s; animation-delay:15s; font-size:8px;}
-    .snowflake:nth-child(17){left:18%; animation-duration:14s; animation-delay:16s; font-size:7px;}
-    .snowflake:nth-child(18){left:28%; animation-duration:9s; animation-delay:17s; font-size:9px;}
-    .snowflake:nth-child(19){left:38%; animation-duration:12s; animation-delay:18s; font-size:6px;}
-    .snowflake:nth-child(20){left:48%; animation-duration:15s; animation-delay:19s; font-size:8px;}
-    .snowflake:nth-child(21){left:58%; animation-duration:10s; animation-delay:20s; font-size:7px;}
-    .snowflake:nth-child(22){left:68%; animation-duration:13s; animation-delay:21s; font-size:9px;}
-    .snowflake:nth-child(23){left:78%; animation-duration:8s; animation-delay:22s; font-size:6px;}
-    .snowflake:nth-child(24){left:88%; animation-duration:16s; animation-delay:23s; font-size:8px;}
-    .snowflake:nth-child(25){left:98%; animation-duration:11s; animation-delay:24s; font-size:7px;}
-    @keyframes snowfall{
-      0%{transform:translateY(0) translateX(-50px) rotate(0deg); opacity:0;}
-      10%{opacity:0.8;} 90%{opacity:0.8;}
-      100%{transform:translateY(130vh) translateX(150px) rotate(360deg); opacity:0;}
+
+    .snowflake {
+      position: absolute;
+      top: -12vh;
+      color: #fff;
+      font-size: 8px;
+      opacity: 0.8;
+      animation: snowfall linear infinite;
+      will-change: transform, opacity;
+    }
+
+    .snowflake:nth-child(1) {
+      left: 5%;
+      animation-duration: 12s;
+      animation-delay: 0s;
+      font-size: 6px;
+    }
+
+    .snowflake:nth-child(2) {
+      left: 15%;
+      animation-duration: 8s;
+      animation-delay: 1s;
+      font-size: 8px;
+    }
+
+    .snowflake:nth-child(3) {
+      left: 25%;
+      animation-duration: 15s;
+      animation-delay: 2s;
+      font-size: 7px;
+    }
+
+    .snowflake:nth-child(4) {
+      left: 35%;
+      animation-duration: 10s;
+      animation-delay: 3s;
+      font-size: 9px;
+    }
+
+    .snowflake:nth-child(5) {
+      left: 45%;
+      animation-duration: 13s;
+      animation-delay: 4s;
+      font-size: 6px;
+    }
+
+    .snowflake:nth-child(6) {
+      left: 55%;
+      animation-duration: 9s;
+      animation-delay: 5s;
+      font-size: 8px;
+    }
+
+    .snowflake:nth-child(7) {
+      left: 65%;
+      animation-duration: 14s;
+      animation-delay: 6s;
+      font-size: 7px;
+    }
+
+    .snowflake:nth-child(8) {
+      left: 75%;
+      animation-duration: 11s;
+      animation-delay: 7s;
+      font-size: 9px;
+    }
+
+    .snowflake:nth-child(9) {
+      left: 85%;
+      animation-duration: 16s;
+      animation-delay: 8s;
+      font-size: 6px;
+    }
+
+    .snowflake:nth-child(10) {
+      left: 95%;
+      animation-duration: 12s;
+      animation-delay: 9s;
+      font-size: 8px;
+    }
+
+    .snowflake:nth-child(11) {
+      left: 10%;
+      animation-duration: 9s;
+      animation-delay: 10s;
+      font-size: 7px;
+    }
+
+    .snowflake:nth-child(12) {
+      left: 30%;
+      animation-duration: 13s;
+      animation-delay: 11s;
+      font-size: 9px;
+    }
+
+    .snowflake:nth-child(13) {
+      left: 50%;
+      animation-duration: 11s;
+      animation-delay: 12s;
+      font-size: 6px;
+    }
+
+    .snowflake:nth-child(14) {
+      left: 70%;
+      animation-duration: 14s;
+      animation-delay: 13s;
+      font-size: 8px;
+    }
+
+    .snowflake:nth-child(15) {
+      left: 90%;
+      animation-duration: 10s;
+      animation-delay: 14s;
+      font-size: 7px;
+    }
+
+    .snowflake:nth-child(16) {
+      left: 8%;
+      animation-duration: 11s;
+      animation-delay: 15s;
+      font-size: 8px;
+    }
+
+    .snowflake:nth-child(17) {
+      left: 18%;
+      animation-duration: 14s;
+      animation-delay: 16s;
+      font-size: 7px;
+    }
+
+    .snowflake:nth-child(18) {
+      left: 28%;
+      animation-duration: 9s;
+      animation-delay: 17s;
+      font-size: 9px;
+    }
+
+    .snowflake:nth-child(19) {
+      left: 38%;
+      animation-duration: 12s;
+      animation-delay: 18s;
+      font-size: 6px;
+    }
+
+    .snowflake:nth-child(20) {
+      left: 48%;
+      animation-duration: 15s;
+      animation-delay: 19s;
+      font-size: 8px;
+    }
+
+    .snowflake:nth-child(21) {
+      left: 58%;
+      animation-duration: 10s;
+      animation-delay: 20s;
+      font-size: 7px;
+    }
+
+    .snowflake:nth-child(22) {
+      left: 68%;
+      animation-duration: 13s;
+      animation-delay: 21s;
+      font-size: 9px;
+    }
+
+    .snowflake:nth-child(23) {
+      left: 78%;
+      animation-duration: 8s;
+      animation-delay: 22s;
+      font-size: 6px;
+    }
+
+    .snowflake:nth-child(24) {
+      left: 88%;
+      animation-duration: 16s;
+      animation-delay: 23s;
+      font-size: 8px;
+    }
+
+    .snowflake:nth-child(25) {
+      left: 98%;
+      animation-duration: 11s;
+      animation-delay: 24s;
+      font-size: 7px;
+    }
+
+    @keyframes snowfall {
+      0% {
+        transform: translateY(0) translateX(-50px) rotate(0deg);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.8;
+      }
+
+      90% {
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: translateY(130vh) translateX(150px) rotate(360deg);
+        opacity: 0;
+      }
     }
 
     /* HERO */
-    .hero{position:relative; min-height:100vh; display:flex; align-items:flex-end; justify-content:center; text-align:center; color:#fff;}
-    .hero::before{content:""; position:absolute; inset:0; background:url('w7.jpeg') center/cover no-repeat;}
-    .hero::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.5));}
-    .hero-inner{position:relative; z-index:2; display:grid; gap:12px; padding:20px; margin-bottom:60px}
-    .hero-date{font-family:'Marcellus',serif; font-size:clamp(20px,4vw,28px); color:#fff; letter-spacing:.15em; text-shadow:0 2px 10px rgba(0,0,0,.4)}
-    .hero .countdown{display:flex; gap:8px; justify-content:center; flex-wrap:wrap}
-    .hero .cd-box{min-width:50px; padding:8px 6px; border-radius:8px; background:rgba(255,255,255,.15); backdrop-filter:blur(4px); border:1px solid rgba(255,255,255,.2)}
-    .hero .cd-box .num{font-size:clamp(14px,3vw,20px); font-weight:500; color:#fff}
-    .hero .cd-box .lab{font-size:10px; color:rgba(255,255,255,.9); margin-top:2px}
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('w7.jpeg') center/cover no-repeat;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, .35), rgba(0, 0, 0, .5));
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      gap: 12px;
+      padding: 20px;
+      margin-bottom: 60px
+    }
+
+    .hero-date {
+      font-family: 'Marcellus', serif;
+      font-size: clamp(20px, 4vw, 28px);
+      color: #fff;
+      letter-spacing: .15em;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, .4)
+    }
+
+    .hero .countdown {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap
+    }
+
+    .hero .cd-box {
+      min-width: 50px;
+      padding: 8px 6px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .15);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, .2)
+    }
+
+    .hero .cd-box .num {
+      font-size: clamp(14px, 3vw, 20px);
+      font-weight: 500;
+      color: #fff
+    }
+
+    .hero .cd-box .lab {
+      font-size: 10px;
+      color: rgba(255, 255, 255, .9);
+      margin-top: 2px
+    }
 
 
     /* INVITATION / STORY / FAMILY */
-    .invitation{ text-align:center; position:relative; z-index:2; }
-    .story{max-width:880px; position:relative; z-index:2;}
-    /* STORY 카드 복구 */
-    .story h2{font-size:26px; margin-bottom:22px}
-    .qa{display:grid; gap:12px}
-    .qac{padding:18px; border:1px solid var(--line); border-radius:var(--radius); background:#fff; box-shadow:var(--soft); text-align:left}
-    .q{font-family:'Marcellus',serif; letter-spacing:.03em; color:#111; font-size:18px}
-    .a{color:#4b4b4b; margin-top:6px; font-size:16px; line-height:1.7}
+    .invitation {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
 
-    .family{display:grid; gap:18px; position:relative; z-index:2;}
-    .fam-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:10px}
-    .fam-card{border:1px solid var(--line); border-radius:var(--radius); padding:14px; background:#fff}
-    .fam-card .role{font-size:13px; color:var(--muted)}
+    .story {
+      max-width: 880px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* STORY 카드 복구 */
+    .story h2 {
+      font-size: 26px;
+      margin-bottom: 22px
+    }
+
+    .qa {
+      display: grid;
+      gap: 12px
+    }
+
+    .qac {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: var(--soft);
+      text-align: left
+    }
+
+    .q {
+      font-family: 'Marcellus', serif;
+      letter-spacing: .03em;
+      color: #111;
+      font-size: 18px
+    }
+
+    .a {
+      color: #4b4b4b;
+      margin-top: 6px;
+      font-size: 16px;
+      line-height: 1.7
+    }
+
+    .family {
+      display: grid;
+      gap: 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .fam-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px
+    }
+
+    .fam-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+      background: #fff
+    }
+
+    .fam-card .role {
+      font-size: 13px;
+      color: var(--muted)
+    }
 
     /* GALLERY */
-    .gallery{position:relative; z-index:2;}
-    .gallery h2{margin-bottom:14px}
-    .gallery-container{position:relative}
-    .grid{
-      display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:16px;
-      opacity:0; transition:opacity .18s ease;
+    .gallery {
+      position: relative;
+      z-index: 2;
     }
-    .grid.ready{opacity:1}
-    .grid img{border-radius:10px; cursor:pointer; aspect-ratio:1/1; object-fit:cover; transition:transform 0.2s}
-    .grid img:hover{transform:scale(1.05)}
-    .gallery-nav{display:flex; justify-content:center; gap:12px; margin-bottom:12px}
-    .nav-btn{width:44px; height:44px; border-radius:50%; border:1px solid var(--line); background:#fff; color:#000; font-size:20px; cursor:pointer; transition:all 0.2s}
-    .nav-btn:hover{background:var(--accent); color:#fff; border-color:var(--accent)}
-    .nav-btn:disabled{opacity:0.5; cursor:not-allowed}
-    .gallery-info{text-align:center; color:var(--muted); font-size:14px}
+
+    .gallery h2 {
+      margin-bottom: 14px
+    }
+
+    .gallery-container {
+      position: relative
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+      opacity: 0;
+      transition: opacity .18s ease;
+    }
+
+    .grid.ready {
+      opacity: 1
+    }
+
+    .grid img {
+      border-radius: 10px;
+      cursor: pointer;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      transition: transform 0.2s
+    }
+
+    .grid img:hover {
+      transform: scale(1.05)
+    }
+
+    .gallery-nav {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 12px
+    }
+
+    .nav-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #000;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.2s
+    }
+
+    .nav-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent)
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed
+    }
+
+    .gallery-info {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px
+    }
 
     /* Skeleton (Shimmer) */
-    .skeleton{position:relative; border-radius:10px; overflow:hidden; background:#eee; aspect-ratio:1/1;}
-    .skeleton::after{content:""; position:absolute; inset:0; background:linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.6) 50%, rgba(255,255,255,0) 100%); transform:translateX(-100%); animation:shimmer 1.2s infinite;}
-    @keyframes shimmer{100%{ transform:translateX(100%); }}
+    .skeleton {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #eee;
+      aspect-ratio: 1/1;
+    }
+
+    .skeleton::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .6) 50%, rgba(255, 255, 255, 0) 100%);
+      transform: translateX(-100%);
+      animation: shimmer 1.2s infinite;
+    }
+
+    @keyframes shimmer {
+      100% {
+        transform: translateX(100%);
+      }
+    }
 
     /* Lightbox */
-    .lightbox{
-      position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
-      background:rgba(0,0,0,.85); opacity:0; visibility:hidden; transition:.3s; z-index:2147483647;
-      touch-action:none; -webkit-user-select:none; user-select:none;
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, .85);
+      opacity: 0;
+      visibility: hidden;
+      transition: .3s;
+      z-index: 2147483647;
+      touch-action: none;
+      -webkit-user-select: none;
+      user-select: none;
     }
-    .lightbox.active{opacity:1; visibility:visible}
-    .lightbox img{max-width:90%; max-height:82%; border-radius:12px; box-shadow:0 10px 25px rgba(0,0,0,.5); cursor:grab; transition:transform .3s ease, opacity .3s ease;}
-    .lightbox .nav, .lightbox .close{
-      position:absolute; border:0; border-radius:50%; background:rgba(255,255,255,.2); color:#fff; cursor:pointer; transition:all .2s ease;
-      width:44px; height:44px; display:grid; place-items:center; font-size:22px;
+
+    .lightbox.active {
+      opacity: 1;
+      visibility: visible
     }
-    .lightbox .nav:hover, .lightbox .close:hover{background:rgba(255,255,255,.3); transform:scale(1.1);}
-    .lightbox .prev{left:16px; top:50%; transform:translateY(-50%);}
-    .lightbox .next{right:16px; top:50%; transform:translateY(-50%);}
-    .lightbox .close{top:16px; right:20px}
-    .lightbox-swipe-hint{position:absolute; bottom:20px; left:50%; transform:translateX(-50%); color:#fff; font-size:14px; opacity:.7; pointer-events:none; animation:fadeInOut 3s ease-in-out infinite;}
-    @keyframes fadeInOut{0%,100%{opacity:.3}50%{opacity:.7}}
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 82%;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, .5);
+      cursor: grab;
+      transition: transform .3s ease, opacity .3s ease;
+    }
+
+    .lightbox .nav,
+    .lightbox .close {
+      position: absolute;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .2);
+      color: #fff;
+      cursor: pointer;
+      transition: all .2s ease;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+    }
+
+    .lightbox .nav:hover,
+    .lightbox .close:hover {
+      background: rgba(255, 255, 255, .3);
+      transform: scale(1.1);
+    }
+
+    .lightbox .prev {
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .lightbox .next {
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .lightbox .close {
+      top: 16px;
+      right: 20px
+    }
+
+    .lightbox-swipe-hint {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      font-size: 14px;
+      opacity: .7;
+      pointer-events: none;
+      animation: fadeInOut 3s ease-in-out infinite;
+    }
+
+    @keyframes fadeInOut {
+
+      0%,
+      100% {
+        opacity: .3
+      }
+
+      50% {
+        opacity: .7
+      }
+    }
 
     /* LOCATION */
-    .location{position:relative; z-index:2;}
-    .loc-card{border:1px solid var(--line); border-radius:var(--radius); padding:18px; background:#fff; box-shadow:var(--soft)}
-    .loc-buttons{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:14px}
-    .chip{padding:10px 14px; border-radius:999px; border:1px solid var(--line); background:#fff}
+    .location {
+      position: relative;
+      z-index: 2;
+    }
+
+    .loc-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      background: #fff;
+      box-shadow: var(--soft)
+    }
+
+    .loc-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 14px
+    }
+
+    .chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff
+    }
 
     /* ACCOUNT */
-    .account{position:relative; z-index:2;}
-    .account .cards{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; max-width:720px; margin:16px auto 0}
-    .acc{border:1px solid var(--line); border-radius:var(--radius); padding:14px; background:#fff}
-    .acc .who{font-weight:500}
-    .acc .bank{color:#555}
+    .account {
+      position: relative;
+      z-index: 2;
+    }
+
+    .account .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      max-width: 720px;
+      margin: 16px auto 0
+    }
+
+    .acc {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+      background: #fff
+    }
+
+    .acc .who {
+      font-weight: 500
+    }
+
+    .acc .bank {
+      color: #555
+    }
 
     /* 라이트박스/모달 중 배경 플로팅 숨김 */
-    body.modal-open .global-snowflakes{ display:none; }
+    body.modal-open .global-snowflakes {
+      display: none;
+    }
 
     /* 배경 섹션들이 스택 위로 못 올라오게 초기화 */
-    .invitation, .story, .family, .gallery, .location, .account, .sharebar{ z-index:auto !important; }
+    .invitation,
+    .story,
+    .family,
+    .gallery,
+    .location,
+    .account,
+    .sharebar {
+      z-index: auto !important;
+    }
 
-    @media (max-width:520px){
-      .fam-grid{grid-template-columns:1fr}
-      .account .cards{grid-template-columns:1fr}
+    @media (max-width:520px) {
+      .fam-grid {
+        grid-template-columns: 1fr
+      }
+
+      .account .cards {
+        grid-template-columns: 1fr
+      }
     }
 
     /* ===== RSVP MODAL ===== */
-    .modal{
-      position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
-      background:rgba(0,0,0,.55); opacity:0; visibility:hidden; transition:.25s ease;
-      z-index:2147483646; /* 라이트박스 바로 아래 */
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, .55);
+      opacity: 0;
+      visibility: hidden;
+      transition: .25s ease;
+      z-index: 2147483646;
+      /* 라이트박스 바로 아래 */
     }
-    .modal.active{ opacity:1; visibility:visible; }
-    .modal-card{
-      width:min(680px, 92vw); max-height:86vh; overflow:auto; padding:22px 18px 20px;
-      border-radius:18px; background:#fff; box-shadow:0 25px 70px rgba(0,0,0,.25);
-      background-image: radial-gradient(closest-side, rgba(0,0,0,0.02), rgba(0,0,0,0) 100%);
-      position:relative;
+
+    .modal.active {
+      opacity: 1;
+      visibility: visible;
     }
-    .modal header{ text-align:center; padding:8px 8px 4px }
-    .modal header h3{ font-family:'Marcellus', serif; font-weight:400; font-size:22px; }
-    .modal .close{ position:absolute; top:10px; right:12px; width:40px; height:40px; border:0; border-radius:50%; background:#f3f3f3; color:#444; font-size:20px; cursor:pointer; }
-    .modal .close:hover{ background:#e9e9e9; }
-    .modal .intro{ margin:12px 6px 18px; color:#444; text-align:center; line-height:1.8; }
-    .modal .meta{ display:grid; gap:8px; margin:14px 6px 18px; color:#333; font-size:15px; }
-    .modal .meta .row{ display:flex; gap:8px; align-items:center; }
-    .modal .meta .ico{ width:18px; text-align:center; }
-    .modal .actions{ display:flex; flex-direction:column; align-items:center; gap:10px; margin-top:6px; }
-    .modal .btn{ display:inline-flex; align-items:center; justify-content:center; min-width:200px; padding:12px 18px; border:0; border-radius:12px; background:var(--accent); color:#fff; cursor:pointer; font-size:15px; box-shadow:var(--soft); }
-    .modal .btn:hover{ filter:brightness(.98); }
-    .modal .muted{ color:#777; font-size:13px; display:flex; align-items:center; gap:6px; }
-    .modal .muted input{ transform:translateY(1px); }
-    .rsvp-form{ display:grid; gap:12px; margin-top:8px; }
-    .field{ display:grid; gap:6px; }
-    .field label{ font-size:13px; color:#6b7280; }
-    .field .row{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-    .chips{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
-    .chip-btn{ padding:12px 10px; text-align:center; border:1px solid var(--line); border-radius:12px; background:#fff; cursor:pointer; }
-    .chip-btn.active{ border-color:var(--accent); box-shadow:0 0 0 2px rgba(139,110,102,.18) inset; }
-    input[type="text"], input[type="number"]{ width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--line); background:#fff; }
-    @media (max-width:520px){ .chips{ grid-template-columns:repeat(3,1fr); } .field .row{ grid-template-columns:1fr 1fr; } }
+
+    .modal-card {
+      width: min(680px, 92vw);
+      max-height: 86vh;
+      overflow: auto;
+      padding: 22px 18px 20px;
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, .25);
+      background-image: radial-gradient(closest-side, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0) 100%);
+      position: relative;
+    }
+
+    .modal header {
+      text-align: center;
+      padding: 8px 8px 4px
+    }
+
+    .modal header h3 {
+      font-family: 'Marcellus', serif;
+      font-weight: 400;
+      font-size: 22px;
+    }
+
+    .modal .close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      width: 40px;
+      height: 40px;
+      border: 0;
+      border-radius: 50%;
+      background: #f3f3f3;
+      color: #444;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .modal .close:hover {
+      background: #e9e9e9;
+    }
+
+    .modal .intro {
+      margin: 12px 6px 18px;
+      color: #444;
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    .modal .meta {
+      display: grid;
+      gap: 8px;
+      margin: 14px 6px 18px;
+      color: #333;
+      font-size: 15px;
+    }
+
+    .modal .meta .row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .modal .meta .ico {
+      width: 18px;
+      text-align: center;
+    }
+
+    .modal .actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .modal .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 200px;
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--accent);
+      color: #fff;
+      cursor: pointer;
+      font-size: 15px;
+      box-shadow: var(--soft);
+    }
+
+    .modal .btn:hover {
+      filter: brightness(.98);
+    }
+
+    .modal .muted {
+      color: #777;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .modal .muted input {
+      transform: translateY(1px);
+    }
+
+    .rsvp-form {
+      display: grid;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .field label {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .field .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .chips {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .chip-btn {
+      padding: 12px 10px;
+      text-align: center;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .chip-btn.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(139, 110, 102, .18) inset;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    @media (max-width:520px) {
+      .chips {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .field .row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
   </style>
 </head>
+
 <body>
   <!-- Global Snowflakes -->
   <div class="global-snowflakes" aria-hidden="true">
-    <div class="snowflake">●</div><div class="snowflake">●</div><div class="snowflake">●</div>
-    <div class="snowflake">●</div><div class="snowflake">●</div><div class="snowflake">●</div>
-    <div class="snowflake">●</div><div class="snowflake">●</div><div class="snowflake">●</div>
-    <div class="snowflake">●</div><div class="snowflake">●</div><div class="snowflake">●</div>
-    <div class="snowflake">●</div><div class="snowflake">●</div><div class="snowflake">●</div>
-    <div class="snowflake">●</div><div class="snowflake">●</div><div class="snowflake">●</div>
-    <div class="snowflake">●</div><div class="snowflake">●</div><div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
+    <div class="snowflake">●</div>
     <div class="snowflake">●</div>
   </div>
 
@@ -240,10 +952,22 @@
     <div class="hero-inner">
       <div class="hero-date">2026.01.18 SUN 1PM</div>
       <div class="countdown" id="countdown" aria-label="예식까지 남은 시간">
-        <div class="cd-box"><div class="num" id="cd-d">00</div><div class="lab">DAYS</div></div>
-        <div class="cd-box"><div class="num" id="cd-h">00</div><div class="lab">HRS</div></div>
-        <div class="cd-box"><div class="num" id="cd-m">00</div><div class="lab">MIN</div></div>
-        <div class="cd-box"><div class="num" id="cd-s">00</div><div class="lab">SEC</div></div>
+        <div class="cd-box">
+          <div class="num" id="cd-d">00</div>
+          <div class="lab">DAYS</div>
+        </div>
+        <div class="cd-box">
+          <div class="num" id="cd-h">00</div>
+          <div class="lab">HRS</div>
+        </div>
+        <div class="cd-box">
+          <div class="num" id="cd-m">00</div>
+          <div class="lab">MIN</div>
+        </div>
+        <div class="cd-box">
+          <div class="num" id="cd-s">00</div>
+          <div class="lab">SEC</div>
+        </div>
       </div>
     </div>
   </header>
@@ -260,9 +984,18 @@
   <section class="story">
     <h2>OUR STORY</h2>
     <div class="qa">
-      <div class="qac"><div class="q">어떻게 만나게 되었나요?💕</div><div class="a">친구의 소개로 첫 만남을 가졌고, 세 번의 만남 끝에 서로의 마음을 확인했습니다.</div></div>
-      <div class="qac"><div class="q">프로포즈는?💍</div><div class="a">크리스마스 이브🎄, 런던🇬🇧 하이드파크에서 조용히 마음을 전했습니다.</div></div>
-      <div class="qac"><div class="q">닮은 점은?👩‍❤️‍👨</div><div class="a">얼굴뿐만 아니라, 소소한 일상도 소중히 여기는 마음이 닮았습니다.</div></div>
+      <div class="qac">
+        <div class="q">어떻게 만나게 되었나요?💕</div>
+        <div class="a">친구의 소개로 첫 만남을 가졌고, 세 번의 만남 끝에 서로의 마음을 확인했습니다.</div>
+      </div>
+      <div class="qac">
+        <div class="q">프로포즈는?💍</div>
+        <div class="a">크리스마스 이브🎄, 런던🇬🇧 하이드파크에서 조용히 마음을 전했습니다.</div>
+      </div>
+      <div class="qac">
+        <div class="q">닮은 점은?👩‍❤️‍👨</div>
+        <div class="a">얼굴뿐만 아니라, 소소한 일상도 소중히 여기는 마음이 닮았습니다.</div>
+      </div>
     </div>
   </section>
 
@@ -292,8 +1025,18 @@
   <section class="family">
     <h2>FAMILY</h2>
     <div class="fam-grid">
-      <div class="fam-card"><div class="role">신랑</div><div class="name">한지섭</div><div class="role">부 • 모</div><div>(故)한상민 · 이효재</div></div>
-      <div class="fam-card"><div class="role">신부</div><div class="name">유지연</div><div class="role">부 • 모</div><div>유성태 · 서문숙</div></div>
+      <div class="fam-card">
+        <div class="role">신랑</div>
+        <div class="name">한지섭</div>
+        <div class="role">부 • 모</div>
+        <div>(故)한상민 · 이효재</div>
+      </div>
+      <div class="fam-card">
+        <div class="role">신부</div>
+        <div class="name">유지연</div>
+        <div class="role">부 • 모</div>
+        <div>유성태 · 서문숙</div>
+      </div>
     </div>
   </section>
 
@@ -304,8 +1047,10 @@
       <div class="loc-name">소노펠리체 컨벤션 3층</div>
       <div class="loc-meta">서울 강남구 영동대로 517 · 2026년 1월 18일 (토) 오후 1시</div>
       <div class="loc-buttons" role="group" aria-label="길찾기">
-        <a class="chip" href="https://map.naver.com/p/search/서울%20강남구%20영동대로%20517" target="_blank" rel="noopener">네이버지도</a>
-        <a class="chip" href="https://map.kakao.com/link/to/소노펠리체컨벤션,37.5133,127.0582" target="_blank" rel="noopener">카카오맵</a>
+        <a class="chip" href="https://map.naver.com/p/search/서울%20강남구%20영동대로%20517" target="_blank"
+          rel="noopener">네이버지도</a>
+        <a class="chip" href="https://map.kakao.com/link/to/소노펠리체컨벤션,37.5133,127.0582" target="_blank"
+          rel="noopener">카카오맵</a>
       </div>
       <div id="map" style="width:100%; height:360px; border-radius:12px; margin-top:14px"></div>
     </div>
@@ -315,8 +1060,14 @@
   <section class="account">
     <h2>마음 전하실 곳</h2>
     <div class="cards">
-      <div class="acc"><div class="who">신랑측</div><div class="bank">하나은행 233-891128-47907 (한지섭)</div></div>
-      <div class="acc"><div class="who">신부측</div><div class="bank">국민은행 476101-01-388646 (유지연)</div></div>
+      <div class="acc">
+        <div class="who">신랑측</div>
+        <div class="bank">하나은행 233-891128-47907 (한지섭)</div>
+      </div>
+      <div class="acc">
+        <div class="who">신부측</div>
+        <div class="bank">국민은행 476101-01-388646 (유지연)</div>
+      </div>
     </div>
   </section>
 
@@ -327,10 +1078,12 @@
 
       <!-- STEP 1 : 안내 -->
       <section id="rsvpStep1">
-        <header><h3 id="rsvpTitle">참석 여부 전달</h3></header>
+        <header>
+          <h3 id="rsvpTitle">참석 여부 전달</h3>
+        </header>
         <div class="intro">
-          결혼식에 참석해주시는 모든 분들을 더욱 특별하게 모시고자 하여,<br/>
-          좌석지정 예식으로 진행되며 인원수에 맞게 식사가 준비됩니다.<br/>
+          결혼식에 참석해주시는 모든 분들을 더욱 특별하게 모시고자 하여,<br />
+          좌석지정 예식으로 진행되며 인원수에 맞게 식사가 준비됩니다.<br />
           귀한 걸음 하시기 전, 참석여부 및 식사여부를 전달해주시면 감사하겠습니다.
         </div>
         <div class="meta">
@@ -346,7 +1099,9 @@
 
       <!-- STEP 2 : 폼 -->
       <section id="rsvpStep2" style="display:none;">
-        <header><h3>참석 여부 전달</h3></header>
+        <header>
+          <h3>참석 여부 전달</h3>
+        </header>
         <form id="rsvpForm" class="rsvp-form">
           <div class="field">
             <label>어느 측 하객이신가요? <span style="color:#d33">*</span></label>
@@ -398,23 +1153,26 @@
   </div>
 
   <script>
+    // ===== RSVP 저장용 Web App URL (Apps Script 배포 URL로 교체) =====
+    const RSVP_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbx3B5UyS2UxlYPTERehQqKl4LDSDYypYJ1YxS-WmXmPb-0lls8NNecuO5i-UYOFlXTrkw/exec';
+
     // ===== Countdown (KST) =====
     const target = new Date('2026-01-18T13:00:00+09:00').getTime();
     const cdD = document.getElementById('cd-d');
     const cdH = document.getElementById('cd-h');
     const cdM = document.getElementById('cd-m');
     const cdS = document.getElementById('cd-s');
-    function tick(){
+    function tick() {
       const now = Date.now();
       let diff = Math.max(0, target - now);
-      const d = Math.floor(diff/(1000*60*60*24)); diff -= d*86400000;
-      const h = Math.floor(diff/(1000*60*60)); diff -= h*3600000;
-      const m = Math.floor(diff/(1000*60)); diff -= m*60000;
-      const s = Math.floor(diff/1000);
-      cdD.textContent = String(d).padStart(2,'0');
-      cdH.textContent = String(h).padStart(2,'0');
-      cdM.textContent = String(m).padStart(2,'0');
-      cdS.textContent = String(s).padStart(2,'0');
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24)); diff -= d * 86400000;
+      const h = Math.floor(diff / (1000 * 60 * 60)); diff -= h * 3600000;
+      const m = Math.floor(diff / (1000 * 60)); diff -= m * 60000;
+      const s = Math.floor(diff / 1000);
+      cdD.textContent = String(d).padStart(2, '0');
+      cdH.textContent = String(h).padStart(2, '0');
+      cdM.textContent = String(m).padStart(2, '0');
+      cdS.textContent = String(s).padStart(2, '0');
     }
     tick(); setInterval(tick, 1000);
 
@@ -436,7 +1194,7 @@
         }
       }
     }
-    function waitForKakaoMap(){ if (typeof kakao !== 'undefined' && kakao.maps) initMap(); else setTimeout(waitForKakaoMap, 100); }
+    function waitForKakaoMap() { if (typeof kakao !== 'undefined' && kakao.maps) initMap(); else setTimeout(waitForKakaoMap, 100); }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', waitForKakaoMap); else waitForKakaoMap();
 
     // ===== Gallery (Skeleton + Preload + Decode) =====
@@ -452,10 +1210,10 @@
     const lbClose = document.getElementById('lbClose');
 
     const allImages = [
-      'w1.jpeg','w2.jpeg','w3.jpeg','w4.jpeg','w5.jpeg',
-      'w6.jpeg','w7.jpeg','w8.jpeg','w9.jpeg','w10.jpeg',
-      'w11.jpeg','w12.jpeg','w13.jpeg','w14.jpeg','w15.jpeg',
-      'w16.jpeg','w17.jpeg','w18.jpeg','w19.jpeg','w20.jpeg','w21.jpeg'
+      'w1.jpeg', 'w2.jpeg', 'w3.jpeg', 'w4.jpeg', 'w5.jpeg',
+      'w6.jpeg', 'w7.jpeg', 'w8.jpeg', 'w9.jpeg', 'w10.jpeg',
+      'w11.jpeg', 'w12.jpeg', 'w13.jpeg', 'w14.jpeg', 'w15.jpeg',
+      'w16.jpeg', 'w17.jpeg', 'w18.jpeg', 'w19.jpeg', 'w20.jpeg', 'w21.jpeg'
     ];
     const imagesPerPage = 9;
     let currentPage = 1;
@@ -463,28 +1221,28 @@
     let isAnimating = false;
 
     const _imgDecodeCache = new Map();
-    function preloadImages(srcs){
-      return Promise.all(srcs.map(src=>{
+    function preloadImages(srcs) {
+      return Promise.all(srcs.map(src => {
         if (_imgDecodeCache.has(src)) return _imgDecodeCache.get(src);
         const img = new Image();
-        const p = new Promise((resolve,reject)=>{
+        const p = new Promise((resolve, reject) => {
           img.onload = resolve;
           img.onerror = reject;
-        }).then(() => (img.decode ? img.decode().catch(()=>{}) : undefined));
+        }).then(() => (img.decode ? img.decode().catch(() => { }) : undefined));
         img.src = src;
         _imgDecodeCache.set(src, p);
         return p;
       }));
     }
 
-    function renderSkeletons(count){
+    function renderSkeletons(count) {
       gallery.classList.remove('ready');
       gallery.innerHTML = '';
       const frag = document.createDocumentFragment();
-      for(let i=0;i<count;i++){
+      for (let i = 0; i < count; i++) {
         const sk = document.createElement('div');
         sk.className = 'skeleton';
-        sk.setAttribute('aria-hidden','true');
+        sk.setAttribute('aria-hidden', 'true');
         frag.appendChild(sk);
       }
       gallery.appendChild(frag);
@@ -499,7 +1257,7 @@
       const pageImages = allImages.slice(startIndex, endIndex);
 
       renderSkeletons(pageImages.length);
-      try { await preloadImages(pageImages); } catch(e){}
+      try { await preloadImages(pageImages); } catch (e) { }
 
       const frag = document.createDocumentFragment();
       pageImages.forEach((src, index) => {
@@ -522,8 +1280,8 @@
       requestAnimationFrame(() => gallery.classList.add('ready'));
     }
 
-    function nextPage(){ if (currentPage < Math.ceil(allImages.length / imagesPerPage)) loadGalleryPage(currentPage + 1); }
-    function prevPage(){ if (currentPage > 1) loadGalleryPage(currentPage - 1); }
+    function nextPage() { if (currentPage < Math.ceil(allImages.length / imagesPerPage)) loadGalleryPage(currentPage + 1); }
+    function prevPage() { if (currentPage > 1) loadGalleryPage(currentPage - 1); }
 
     function openLightbox(index) {
       currentImageIndex = index;
@@ -532,62 +1290,62 @@
         allImages[(index - 1 + allImages.length) % allImages.length],
         allImages[(index + 1) % allImages.length]
       ];
-      preloadImages(neighbors).catch(()=>{});
+      preloadImages(neighbors).catch(() => { });
       lbImg.style.opacity = '0';
       lbImg.src = allImages[index];
       lightbox.classList.add('active');
       document.body.style.overflow = 'hidden';
       document.body.classList.add('modal-open');   // 배경 효과 숨김
-      requestAnimationFrame(()=>{ lbImg.style.opacity = '1'; });
+      requestAnimationFrame(() => { lbImg.style.opacity = '1'; });
     }
-    function closeLightbox(){
+    function closeLightbox() {
       lightbox.classList.remove('active');
       document.body.style.overflow = '';
       document.body.classList.remove('modal-open');
     }
-    function showPrevImage(){
+    function showPrevImage() {
       if (isAnimating) return; isAnimating = true;
       currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
-      lbImg.style.opacity='0.5'; lbImg.style.transform='scale(0.95)';
-      setTimeout(()=>{ lbImg.src = allImages[currentImageIndex]; setTimeout(()=>{ lbImg.style.opacity='1'; lbImg.style.transform='scale(1)'; isAnimating=false; }, 50); }, 150);
+      lbImg.style.opacity = '0.5'; lbImg.style.transform = 'scale(0.95)';
+      setTimeout(() => { lbImg.src = allImages[currentImageIndex]; setTimeout(() => { lbImg.style.opacity = '1'; lbImg.style.transform = 'scale(1)'; isAnimating = false; }, 50); }, 150);
     }
-    function showNextImage(){
+    function showNextImage() {
       if (isAnimating) return; isAnimating = true;
       currentImageIndex = (currentImageIndex + 1) % allImages.length;
-      lbImg.style.opacity='0.5'; lbImg.style.transform='scale(0.95)';
-      setTimeout(()=>{ lbImg.src = allImages[currentImageIndex]; setTimeout(()=>{ lbImg.style.opacity='1'; lbImg.style.transform='scale(1)'; isAnimating=false; }, 50); }, 150);
+      lbImg.style.opacity = '0.5'; lbImg.style.transform = 'scale(0.95)';
+      setTimeout(() => { lbImg.src = allImages[currentImageIndex]; setTimeout(() => { lbImg.style.opacity = '1'; lbImg.style.transform = 'scale(1)'; isAnimating = false; }, 50); }, 150);
     }
 
-    lbClose.addEventListener('click', (e)=>{e.stopPropagation(); closeLightbox();});
-    lbPrev.addEventListener('click', (e)=>{e.stopPropagation(); showPrevImage();});
-    lbNext.addEventListener('click', (e)=>{e.stopPropagation(); showNextImage();});
-    lightbox.addEventListener('click', (e)=>{ if(e.target===lightbox) closeLightbox(); });
+    lbClose.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
+    lbPrev.addEventListener('click', (e) => { e.stopPropagation(); showPrevImage(); });
+    lbNext.addEventListener('click', (e) => { e.stopPropagation(); showNextImage(); });
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
 
-    let startX=0, startY=0, startTime=0, isDragging=false;
-    function handleTouchStart(e){ e.preventDefault(); startX=e.touches[0].clientX; startY=e.touches[0].clientY; startTime=Date.now(); isDragging=true; }
-    function handleTouchMove(e){ if(!isDragging) return; e.preventDefault(); }
-    function handleTouchEnd(e){
-      if(!isDragging) return; e.preventDefault();
-      const endX=e.changedTouches[0].clientX; const endY=e.changedTouches[0].clientY;
-      const dx=startX-endX, dy=startY-endY, dt=Date.now()-startTime;
-      if (Math.abs(dx)>Math.abs(dy) && Math.abs(dx)>50 && dt<300){ dx>0?showNextImage():showPrevImage(); }
-      isDragging=false;
+    let startX = 0, startY = 0, startTime = 0, isDragging = false;
+    function handleTouchStart(e) { e.preventDefault(); startX = e.touches[0].clientX; startY = e.touches[0].clientY; startTime = Date.now(); isDragging = true; }
+    function handleTouchMove(e) { if (!isDragging) return; e.preventDefault(); }
+    function handleTouchEnd(e) {
+      if (!isDragging) return; e.preventDefault();
+      const endX = e.changedTouches[0].clientX; const endY = e.changedTouches[0].clientY;
+      const dx = startX - endX, dy = startY - endY, dt = Date.now() - startTime;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50 && dt < 300) { dx > 0 ? showNextImage() : showPrevImage(); }
+      isDragging = false;
     }
-    function handleMouseDown(e){ e.preventDefault(); startX=e.clientX; startY=e.clientY; startTime=Date.now(); isDragging=true; }
-    function handleMouseMove(e){ if(!isDragging) return; e.preventDefault(); }
-    function handleMouseUp(e){
-      if(!isDragging) return; e.preventDefault();
-      const endX=e.clientX, endY=e.clientY, dx=startX-endX, dy=startY-endY, dt=Date.now()-startTime;
-      if (Math.abs(dx)>Math.abs(dy) && Math.abs(dx)>50 && dt<300){ dx>0?showNextImage():showPrevImage(); }
-      isDragging=false;
+    function handleMouseDown(e) { e.preventDefault(); startX = e.clientX; startY = e.clientY; startTime = Date.now(); isDragging = true; }
+    function handleMouseMove(e) { if (!isDragging) return; e.preventDefault(); }
+    function handleMouseUp(e) {
+      if (!isDragging) return; e.preventDefault();
+      const endX = e.clientX, endY = e.clientY, dx = startX - endX, dy = startY - endY, dt = Date.now() - startTime;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50 && dt < 300) { dx > 0 ? showNextImage() : showPrevImage(); }
+      isDragging = false;
     }
-    lbImg.addEventListener('touchstart', handleTouchStart, { passive:false });
-    lbImg.addEventListener('touchmove', handleTouchMove, { passive:false });
-    lbImg.addEventListener('touchend', handleTouchEnd, { passive:false });
+    lbImg.addEventListener('touchstart', handleTouchStart, { passive: false });
+    lbImg.addEventListener('touchmove', handleTouchMove, { passive: false });
+    lbImg.addEventListener('touchend', handleTouchEnd, { passive: false });
     lbImg.addEventListener('mousedown', handleMouseDown);
     lbImg.addEventListener('mousemove', handleMouseMove);
     lbImg.addEventListener('mouseup', handleMouseUp);
-    lbImg.addEventListener('mouseleave', () => { isDragging=false; });
+    lbImg.addEventListener('mouseleave', () => { isDragging = false; });
 
     window.addEventListener('keydown', (e) => {
       if (!lightbox.classList.contains('active')) return;
@@ -608,71 +1366,115 @@
     const rsvpForm = document.getElementById('rsvpForm');
     const rsvpBack = document.getElementById('rsvpBack');
 
-    function todayKey(){
-      const d=new Date();
-      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    function todayKey() {
+      const d = new Date();
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
     }
-    function openRSVP(){
+    function openRSVP() {
       rsvpModal.classList.add('active');
-      rsvpModal.setAttribute('aria-hidden','false');
+      rsvpModal.setAttribute('aria-hidden', 'false');
       document.body.classList.add('modal-open');
     }
-    function closeRSVP(){
+    function closeRSVP() {
       rsvpModal.classList.remove('active');
-      rsvpModal.setAttribute('aria-hidden','true');
+      rsvpModal.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('modal-open');
       if (rsvpNoToday.checked) localStorage.setItem('rsvp_hide_until', todayKey());
     }
-    function toStep2(){ rsvpStep1.style.display='none'; rsvpStep2.style.display='block'; }
-    function toStep1(){ rsvpStep2.style.display='none'; rsvpStep1.style.display='block'; }
+    function toStep2() { rsvpStep1.style.display = 'none'; rsvpStep2.style.display = 'block'; }
+    function toStep1() { rsvpStep2.style.display = 'none'; rsvpStep1.style.display = 'block'; }
 
     rsvpClose.addEventListener('click', closeRSVP);
     if (rsvpStart) rsvpStart.addEventListener('click', toStep2);
     if (rsvpBack) rsvpBack.addEventListener('click', toStep1);
-    rsvpModal.addEventListener('click', (e)=>{ if(e.target===rsvpModal) closeRSVP(); });
-    window.addEventListener('keydown',(e)=>{ if(e.key==='Escape' && rsvpModal.classList.contains('active')) closeRSVP(); });
+    rsvpModal.addEventListener('click', (e) => { if (e.target === rsvpModal) closeRSVP(); });
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && rsvpModal.classList.contains('active')) closeRSVP(); });
 
-    document.addEventListener('DOMContentLoaded', ()=>{
+    document.addEventListener('DOMContentLoaded', () => {
       const hidden = localStorage.getItem('rsvp_hide_until') === todayKey();
       if (!hidden) openRSVP();
     });
 
-    const chipState = { side:null, attend:null, meal:null };
-    rsvpForm.addEventListener('click', (e)=>{
+    const chipState = { side: null, attend: null, meal: null };
+    rsvpForm.addEventListener('click', (e) => {
       const btn = e.target.closest('.chip-btn');
-      if(!btn) return;
+      if (!btn) return;
       const name = btn.dataset.name, val = btn.dataset.value;
-      if(!name) return;
-      rsvpForm.querySelectorAll(`.chip-btn[data-name="${name}"]`).forEach(el=>el.classList.remove('active'));
+      if (!name) return;
+      rsvpForm.querySelectorAll(`.chip-btn[data-name="${name}"]`).forEach(el => el.classList.remove('active'));
       btn.classList.add('active');
       chipState[name] = val;
     });
 
-    rsvpForm.addEventListener('submit', async (e)=>{
+    /* 제출 */
+    rsvpForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      // 버튼 상태 잠금 & 문구 변경
+      const submitBtn = rsvpForm.querySelector('button.btn[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = '전달 중...';
+      submitBtn.disabled = true;
+
       const payload = {
         side: chipState.side,
         attend: chipState.attend,
         meal: chipState.meal,
         name: document.getElementById('rsvpName').value.trim(),
-        guests: Number(document.getElementById('rsvpGuests').value || 0),
-        agree: document.getElementById('rsvpAgree').checked
+        guests: String(Number(document.getElementById('rsvpGuests').value || 0)), // URL-encoded 위해 문자열화
+        agree: String(document.getElementById('rsvpAgree').checked),
+        userAgent: navigator.userAgent,
+        referer: location.href
       };
-      if(!payload.side || !payload.attend || !payload.meal || !payload.name){
-        alert('필수 항목을 모두 선택/입력해주세요.'); return;
+
+      // 간단 검증
+      if (!payload.side || !payload.attend || !payload.meal || !payload.name) {
+        alert('필수 항목을 모두 선택/입력해주세요.');
+        submitBtn.textContent = originalText; submitBtn.disabled = false; return;
       }
-      if(!payload.agree){
-        alert('개인정보 수집 및 활용에 동의해주세요.'); return;
+      if (payload.attend === '불참석') { payload.meal = 'X'; } // 불참이면 식사 X로 정규화
+      if (payload.attend === '참석' && payload.meal === 'X' && Number(payload.guests) > 0) {
+        // 참석하지만 본인 식사 X + 동행 있음 → 종종 실수. 필요 없으면 제거하세요.
       }
-      try{
-        console.log('RSVP payload:', payload);
-        alert('참석 여부가 전달되었습니다. 감사합니다!');
-        closeRSVP();
-      }catch(err){
+      if (payload.attend === '참석' && document.getElementById('rsvpAgree').checked !== true) {
+        alert('개인정보 수집 및 활용에 동의해주세요.');
+        submitBtn.textContent = originalText; submitBtn.disabled = false; return;
+      }
+
+      try {
+        // CORS/프리플라이트 없이 안전하게: x-www-form-urlencoded 로 전송
+        const res = await fetch(RSVP_WEBAPP_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+          body: new URLSearchParams(payload)  // key=value&... 형식
+        });
+
+        // 응답 파싱(실패해도 조용히 넘어가도록 보호)
+        let ok = true;
+        try {
+          const json = await res.json();
+          ok = !!json.ok;
+        } catch (_) { /* Apps Script가 JSON을 못 돌려줘도 그냥 성공 처리 */ }
+
+        if (ok) {
+          alert('참석 여부가 전달되었습니다. 감사합니다!');
+          // 성공 시 폼 초기화 & 오늘 하루 보지 않기 적용(원하면 주석 처리)
+          rsvpForm.reset();
+          localStorage.setItem('rsvp_hide_until', todayKey());
+          closeRSVP();
+        } else {
+          throw new Error('서버 응답이 올바르지 않습니다.');
+        }
+      } catch (err) {
         console.error(err);
         alert('전달 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
+      } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
       }
     });
+
   </script>
 </body>
+
 </html>
