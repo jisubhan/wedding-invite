@@ -1083,7 +1083,6 @@
         </header>
         <div class="intro">
           결혼식에 참석해주시는 모든 분들을 더욱 특별하게 모시고자 하여,<br />
-          좌석지정 예식으로 진행되며 인원수에 맞게 식사가 준비됩니다.<br />
           귀한 걸음 하시기 전, 참석여부 및 식사여부를 전달해주시면 감사하겠습니다.
         </div>
         <div class="meta">
@@ -1134,7 +1133,7 @@
           </div>
 
           <div class="field">
-            <label>동행인 수 (본인 제외)</label>
+            <label>동행인 수 <span style="color:#d33">(본인 제외)</span></label>
             <input type="number" id="rsvpGuests" inputmode="numeric" min="0" max="10" value="0">
           </div>
 
@@ -1460,7 +1459,7 @@
           alert('참석 여부가 전달되었습니다. 감사합니다!');
           // 성공 시 폼 초기화 & 오늘 하루 보지 않기 적용(원하면 주석 처리)
           rsvpForm.reset();
-          localStorage.setItem('rsvp_hide_until', todayKey());
+          //localStorage.setItem('rsvp_hide_until', todayKey());
           closeRSVP();
         } else {
           throw new Error('서버 응답이 올바르지 않습니다.');
