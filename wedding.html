@@ -971,6 +971,40 @@
         transform: none !important;
       }
     }
+
+    /* 이미지 저장 억제: 길게누르기/선택/드래그 막기 */
+    img,
+    .lightbox img {
+      -webkit-user-drag: none;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      /* iOS 길게누르기 메뉴 방지 */
+    }
+
+    .img-wrap {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      aspect-ratio: 1/1;
+      cursor: pointer;
+    }
+
+    .img-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: transform .18s ease;
+    }
+
+    @media (hover:hover) and (pointer:fine) {
+      .img-wrap:hover::before {
+        transform: scale(1.03);
+      }
+    }
   </style>
 </head>
 
@@ -1320,6 +1354,9 @@
         img.decoding = 'async';
         img.loading = 'eager';
         img.onclick = () => openLightbox(startIndex + index);
+        img.setAttribute('draggable', 'false');    // 드래그 저장 방지
+        img.setAttribute('oncontextmenu', 'return false;'); // 우클릭 바로 차단
+
         frag.appendChild(img);
       });
       gallery.innerHTML = '';
@@ -1525,6 +1562,24 @@
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
       }
+    });
+
+    // ===== 이미지 저장 억제 (우클릭/드래그/선택) =====
+    // 우클릭 메뉴 차단 (이미지/라이트박스 내부만)
+    document.addEventListener('contextmenu', function (e) {
+      if (e.target.closest('img') || e.target.id === 'lbImg') {
+        e.preventDefault();
+      }
+    }, { capture: true });
+
+    // 이미지 드래그로 바탕화면 저장 방지
+    document.addEventListener('dragstart', function (e) {
+      if (e.target.closest('img')) e.preventDefault();
+    });
+
+    // 이미지 선택 시작 자체를 방지 (일부 브라우저 추가 보호)
+    document.addEventListener('selectstart', function (e) {
+      if (e.target.closest('img')) e.preventDefault();
     });
 
   </script>
