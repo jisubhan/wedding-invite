@@ -711,6 +711,27 @@
       display: none;
     }
 
+    /* 팝업 열렸을 때 배경 스크롤 완전 잠금 */
+    html.modal-open,
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    body.modal-open {
+      position: fixed;
+      width: 100%;
+    }
+
+    /* 모달 내부만 스크롤 허용(관성 스크롤) */
+    .modal {
+      overscroll-behavior: contain;
+    }
+
+    .modal-card {
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
     /* 배경 섹션들이 스택 위로 못 올라오게 초기화 */
     .invitation,
     .story,
@@ -916,6 +937,38 @@
 
       .field .row {
         grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* 1) 공통: GPU 최적화 힌트 */
+    .grid img {
+      will-change: transform;
+      transform-origin: center center;
+    }
+
+    /* 2) 마우스/트랙패드(hover 지원 & 정밀 포인터)에서만 확대 효과 */
+    @media (hover: hover) and (pointer: fine) {
+      .grid img {
+        transition: transform .18s ease;
+      }
+
+      .grid img:hover {
+        transform: scale(1.03);
+      }
+
+      /* 살짝만 확대 (1.05 → 1.03) */
+    }
+
+    /* 3) 터치 디바이스(hover 없음)에서는 확대 효과 완전히 비활성화 */
+    @media (hover: none) {
+      .grid img {
+        transition: none !important;
+      }
+
+      .grid img:hover,
+      .grid img:active,
+      .grid img:focus {
+        transform: none !important;
       }
     }
   </style>
