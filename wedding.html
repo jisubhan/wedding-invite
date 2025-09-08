@@ -1270,12 +1270,27 @@
       try {
         const mapContainer = document.getElementById('map');
         if (!mapContainer) return;
-        const venueCoords = new kakao.maps.LatLng(37.5133, 127.0582);
-        const map = new kakao.maps.Map(mapContainer, { center: venueCoords, level: 3 });
-        const marker = new kakao.maps.Marker({ map, position: venueCoords });
-        const infowindow = new kakao.maps.InfoWindow({ content: '<div style="padding:8px;font-size:14px;font-weight:bold;">소노펠리체 컨벤션 3층</div>' });
-        kakao.maps.event.addListener(marker, 'click', () => infowindow.open(map, marker));
-        kakao.maps.event.addListener(map, 'tilesloaded', () => infowindow.open(map, marker));
+
+        const geocoder = new kakao.maps.services.Geocoder();
+        const address = '서울 강남구 삼성동 159-6';
+
+        geocoder.addressSearch(address, function (results, status) {
+          if (status === kakao.maps.services.Status.OK && results && results.length > 0) {
+            const y = Number(results[0].y);
+            const x = Number(results[0].x);
+            const coords = new kakao.maps.LatLng(y, x);
+
+            const map = new kakao.maps.Map(mapContainer, { center: coords, level: 3 });
+            const marker = new kakao.maps.Marker({ map, position: coords });
+            const infowindow = new kakao.maps.InfoWindow({
+              content: '<div style="padding:8px;font-size:14px;font-weight:bold;">소노펠리체 컨벤션 3층</div>'
+            });
+            kakao.maps.event.addListener(marker, 'click', () => infowindow.open(map, marker));
+            kakao.maps.event.addListener(map, 'tilesloaded', () => infowindow.open(map, marker));
+          } else {
+            mapContainer.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;font-size:14px;">지도를 불러올 수 없습니다. 위의 링크를 이용해주세요.</div>';
+          }
+        });
       } catch (error) {
         const mapContainer = document.getElementById('map');
         if (mapContainer) {
