@@ -1296,6 +1296,10 @@
     const lbNext = document.getElementById('lbNext');
     const lbClose = document.getElementById('lbClose');
 
+    // ✅ 추가: 갤러리 페이지 네비게이션 버튼 이벤트
+    galleryPrev.addEventListener('click', prevPage);
+    galleryNext.addEventListener('click', nextPage);
+
     const allImages = [
       'w1.jpeg', 'w2.jpeg', 'w3.jpeg', 'w4.jpeg', 'w5.jpeg',
       'w6.jpeg', 'w7.jpeg', 'w8.jpeg', 'w9.jpeg', 'w10.jpeg',
