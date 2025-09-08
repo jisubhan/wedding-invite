@@ -1132,18 +1132,18 @@
   <section class="location">
     <h2>LOCATION</h2>
     <div class="loc-card">
-      
+
       <div class="loc-meta">📍 서울 강남구 삼성동 159-6<br>
         <div class="loc-name">💍 소노펠리체 컨벤션 3층</div>
         <div class="loc-meta">🗓️ 2026년 1월 18일 (일) 오후 1시</div>
-      <div class="loc-buttons" role="group" aria-label="길찾기">
-        <a class="chip" href="https://map.naver.com/p/search/서울%20강남구%20삼성동%20159-6" target="_blank"
-          rel="noopener">네이버지도</a>
-        <a class="chip" href="https://map.kakao.com/link/search/서울 강남구 삼성동 159-6" target="_blank"
-          rel="noopener">카카오맵</a>
+        <div class="loc-buttons" role="group" aria-label="길찾기">
+          <a class="chip" href="https://map.naver.com/p/search/서울%20강남구%20삼성동%20159-6" target="_blank"
+            rel="noopener">네이버지도</a>
+          <a class="chip" href="https://map.kakao.com/link/search/서울 강남구 삼성동 159-6" target="_blank"
+            rel="noopener">카카오맵</a>
+        </div>
+        <div id="map" style="width:100%; height:360px; border-radius:12px; margin-top:14px"></div>
       </div>
-      <div id="map" style="width:100%; height:360px; border-radius:12px; margin-top:14px"></div>
-    </div>
   </section>
 
   <!-- ACCOUNT -->
@@ -1475,8 +1475,37 @@
       if (e.key === 'ArrowRight') showNextImage();
     });
 
-    loadGalleryPage(1);
 
+    // ===== 전역 프리로더 설정 =====
+    const PRELOAD_ALL_IMAGES = true;        // true: 전부 로드 끝날 때까지 첫 화면 표시 대기
+    const PRELOAD_TIMEOUT_MS = 7000;        // 너무 오래 걸리면 7초에서 폴백 (원하면 0으로 꺼도 됨)
+
+    async function warmAllImages() {
+      try {
+        if (!PRELOAD_ALL_IMAGES) return;
+        // 모든 이미지에 대해 네트워크 요청 + decode까지 완료
+        // (기존 _imgDecodeCache와 preloadImages 재사용)
+        if (PRELOAD_TIMEOUT_MS > 0) {
+          await Promise.race([
+            preloadImages(allImages),
+            new Promise(resolve => setTimeout(resolve, PRELOAD_TIMEOUT_MS))
+          ]);
+        } else {
+          await preloadImages(allImages);
+        }
+      } catch (e) {
+        // 실패해도 조용히 넘어가서 UX 저하 방지
+        console.warn('Preload skipped/fallback:', e);
+      }
+    }
+
+    // ===== 초기 진입 시점 로직 교체 =====
+    (async function boot() {
+      // 1) 전역 프리로더로 allImages 전부 미리 불러오기(디코드까지)
+      await warmAllImages();
+
+      loadGalleryPage(1);
+    })();
     /* ===== RSVP MODAL LOGIC ===== */
     const rsvpModal = document.getElementById('rsvpModal');
     const rsvpClose = document.getElementById('rsvpClose');
