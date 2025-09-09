@@ -1282,15 +1282,22 @@
       padding: 10px 12px;
     }
 
+    /* 아이콘 보장: 모바일에서 크기/표시 강제 */
     .chip.icon svg {
-      width: 16px;
-      height: 16px;
+      display: inline-block !important;
+      width: 18px !important;
+      height: 18px !important;
+      min-width: 18px;
+      min-height: 18px;
+      overflow: visible;
+      vertical-align: middle;
+      flex: 0 0 18px;
     }
 
     .chip.icon span {
       white-space: nowrap;
-      font-size: 14px;
     }
+
 
     /* 아주 좁은 폭 보정 */
     @media (max-width:360px) {
@@ -1529,7 +1536,7 @@
           </a>
           <!-- 카카오내비 -->
           <a id="btnKakaoNavi" class="chip icon" href="#" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="1.5" y="1.5" width="21" height="21" rx="5" fill="#FEE500" />
               <path d="M9 7l6 5-6 5V7z" fill="#3A63D1" />
             </svg>
@@ -1538,7 +1545,7 @@
 
           <!-- 네이버지도 -->
           <a id="btnNaver" class="chip icon" href="#" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="M12 2c4.4 0 8 3.3 8 7.5C20 15 12 22 12 22S4 15 4 9.5 7.6 2 12 2z" fill="#03C75A" />
               <path d="M9 14V8h2l2 3.2V8h2v6h-2l-2-3.2V14H9z" fill="#fff" />
             </svg>
