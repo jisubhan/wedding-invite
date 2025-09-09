@@ -1150,10 +1150,111 @@
       color: #444;
     }
 
-    /* 모바일 */
-    @media (max-width:520px) {
+    /* === WHO WE ARE: 모바일 한 화면 압축 === */
+
+    /* 조절용 변수 */
+    :root {
+      --who-photo-vh: 32vh;
+      /* 사진 높이 비율 */
+      --who-font: 15px;
+      /* 이름/역할 글자 */
+      --who-small: 13px;
+      /* 나머지 본문 글자 */
+      --who-gap: 10px;
+      /* 카드 내부 간격 */
+    }
+
+    /* 그리드 간격 살짝 축소 */
+    .couple-grid {
+      gap: 12px;
+    }
+
+    /* 카드 컴팩트 */
+    .family-v2 .profile-card {
+      padding: 12px;
+      border-radius: 18px;
+      gap: var(--who-gap);
+    }
+
+    /* 사진: 세로 공간 통제 */
+    .family-v2 .photo {
+      height: var(--who-photo-vh);
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .family-v2 .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* 타이포 축소 */
+    .family-v2 .role-name {
+      font-size: var(--who-font);
+      gap: 6px;
+    }
+
+    .family-v2 .bday,
+    .family-v2 .traits,
+    .family-v2 .parents {
+      font-size: var(--who-small);
+    }
+
+    /* 특성 리스트를 2열로: 세로 길이 반으로 */
+    .family-v2 .traits {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 10px;
+      /* 행/열 간격 */
+      line-height: 1.5;
+    }
+
+    .family-v2 .divider-soft {
+      margin: 2px 0;
+      font-size: 12px;
+    }
+
+    /* 화면 높이가 작은 폰(아이폰 미니/SE 등)에서 더 강하게 압축 */
+    @media (max-height: 740px) {
+      :root {
+        --who-photo-vh: 28vh;
+        --who-font: 14px;
+        --who-small: 12px;
+      }
+    }
+
+    @media (max-height: 660px) {
+      :root {
+        --who-photo-vh: 24vh;
+      }
+    }
+
+    /* 아주 좁은 폭에서도 두 칼럼 유지 (원하면 1열로 바꿔도 됨) */
+    @media (max-width: 360px) {
       .couple-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* === WHO WE ARE 고정 2열 (모바일 포함) === */
+    .family-v2 .couple-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 12px;
+    }
+
+    /* 혹시 남아있는 이전 규칙 무효화 */
+    @media (max-width: 520px) {
+      .family-v2 .couple-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+    }
+
+    /* 너무 좁은 기기에서 카드가 겹치면 안쪽 여백만 살짝 줄임 */
+    @media (max-width: 360px) {
+      .family-v2 .profile-card {
+        padding: 10px;
       }
     }
   </style>
@@ -1262,66 +1363,64 @@
 
   <section class="family family-v2">
     <h2>WHO WE ARE</h2>
-  
+
     <div class="couple-grid">
       <!-- 신랑 -->
       <article class="profile-card">
         <div class="photo">
           <img src="w17.jpeg" alt="신랑 사진">
         </div>
-  
+
         <div class="role-name">
           <span class="role badge-groom">신랑</span>
           <span class="name">한지섭</span>
-          <a class="tel" href="tel:010-3071-3054" aria-label="신랑에게 전화">📞</a>
         </div>
-  
+
         <div class="bday">94년 9월 12일</div>
-  
+
         <div class="traits" aria-label="신랑 소개">
           <div>수다쟁이</div>
-          <div class="thin">Sunshine</div>
-          <div>문제를 일으킴</div>
-          <div>절대 화내지 않음</div>
-          <div>유머러스함</div>
-          <div>익스트림 사랑</div>
-          <div>운동 러버</div>
+          <div class="thin">누뿡빵</div>
+          <div>-----</div>
+          <div>-----</div>
+          <div>-----</div>
+          <div>-----</div>
+          <div>-----</div>
         </div>
-  
+
         <div class="divider-soft">🤍We are</div>
         <div class="parents">한상민·이효재 의 장남</div>
       </article>
-  
+
       <!-- 신부 -->
       <article class="profile-card">
         <div class="photo">
           <img src="w1.jpeg" alt="신부 사진">
         </div>
-  
+
         <div class="role-name">
           <span class="role badge-bride">신부</span>
           <span class="name">유지연</span>
-          <a class="tel" href="tel:010-6217-9501" aria-label="신부에게 전화"></a>
         </div>
-  
+
         <div class="bday">95년 1월 26일</div>
-  
+
         <div class="traits" aria-label="신부 소개">
           <div>세젤예</div>
-          <div class="thin">Moonlight</div>
-          <div>문제에 동참함</div>
-          <div>감정 기복이 있는 편</div>
-          <div>웃음이 많음</div>
-          <div>"무서워!"</div>
-          <div>빵 러버</div>
+          <div class="thin">유짹짹</div>
+          <div>-----</div>
+          <div>-----</div>
+          <div>-----</div>
+          <div>-----</div>
+          <div>-----</div>
         </div>
-  
+
         <div class="divider-soft">in love💛</div>
         <div class="parents">유성태·서문숙 의 차녀</div>
       </article>
     </div>
   </section>
-  
+
 
   <!-- LOCATION -->
   <section class="location">
