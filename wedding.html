@@ -1510,9 +1510,23 @@
       transition: transform .2s ease;
     }
 
-    .acc-head[aria-expanded="false"] .chev {
+    /* 기본 스타일 */
+    .acc-head .chev {
+      width: 22px;
+      height: 22px;
+      /* 크기 */
+      color: #888;
+      /* 색상 */
+      transition: transform .2s ease;
+      pointer-events: none;
+      /* 클릭 방해 X */
+    }
+
+    /* 열렸을 때 위쪽 화살표처럼 보이게 */
+    .acc-head[aria-expanded="true"] .chev {
       transform: rotate(180deg);
     }
+
 
     /* 패널 */
     .acc-panel {
@@ -1933,9 +1947,13 @@
     <div class="acc-accordion" id="accAccordion">
 
       <!-- 신랑측 -->
-      <button class="acc-head groom" type="button" aria-expanded="true" aria-controls="acc-panel-groom">
+      <button class="acc-head groom" type="button" aria-expanded="false" aria-controls="acc-panel-groom">
         <span>신랑측</span>
-        <i class="chev"></i>
+        <!-- 화살표 ↓ : 열리면 CSS로 180° 회전시켜 ↑ 처럼 보이게 -->
+        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
       </button>
       <div class="acc-panel" id="acc-panel-groom">
         <div class="acc-row">
@@ -1958,9 +1976,13 @@
       </div>
 
       <!-- 신부측 -->
-      <button class="acc-head bride" type="button" aria-expanded="true" aria-controls="acc-panel-bride">
+      <button class="acc-head bride" type="button" aria-expanded="false" aria-controls="acc-panel-bride">
         <span>신부측</span>
-        <i class="chev"></i>
+        <!-- 화살표 ↓ : 열리면 CSS로 180° 회전시켜 ↑ 처럼 보이게 -->
+        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
       </button>
       <div class="acc-panel" id="acc-panel-bride">
         <div class="acc-row">
@@ -2579,23 +2601,17 @@
       });
     }
 
-    function wireAccordion() {
-      document.querySelectorAll('.acc-head').forEach(head => {
-        const panelId = head.getAttribute('aria-controls');
-        const panel = document.getElementById(panelId);
-        if (!panel) return;
-
-        // 초기 표시 상태
-        const expanded = head.getAttribute('aria-expanded') !== 'false';
-        panel.style.display = expanded ? 'block' : 'none';
-
-        head.addEventListener('click', () => {
-          const open = head.getAttribute('aria-expanded') === 'true';
-          head.setAttribute('aria-expanded', String(!open));
-          panel.style.display = open ? 'none' : 'block';
-        });
+    document.querySelectorAll('.acc-head').forEach(head => {
+      const panel = document.getElementById(head.getAttribute('aria-controls'));
+      head.addEventListener('click', () => {
+        const open = head.getAttribute('aria-expanded') === 'true';
+        head.setAttribute('aria-expanded', String(!open));
+        panel.style.display = open ? 'none' : 'block';   // 펼침/접힘
       });
-    }
+    });
+
+
+
 
     function initAccountSection() {
       wireAccountCopy();
