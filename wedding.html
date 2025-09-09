@@ -28,6 +28,9 @@
   <!-- Kakao Map SDK -->
   <script type="text/javascript"
     src="//dapi.kakao.com/v2/maps/sdk.js?appkey=384533d32fee31cf668087354623031d&libraries=services"></script>
+  <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+  <script> Kakao.init('384533d32fee31cf668087354623031d'); </script>
+
 
   <!-- Preload Hero & First Page Gallery -->
   <link rel="preload" as="image" href="w7.jpeg" fetchpriority="high">
@@ -1763,10 +1766,42 @@
               });
             }
 
-            // 카카오내비(공식 런치 URL)
-            if (btnKakaoNavi) {
-              btnKakaoNavi.href = `https://kakaonavi.kakao.com/launch/?y=${y}&x=${x}&name=${encodedName}`;
+            // 지오코딩 성공 후
+            const lng = parseFloat(results[0].x); // 경도(x)
+            const lat = parseFloat(results[0].y); // 위도(y)
+
+            // 값 검증
+            if (!Number.isFinite(lng) || !Number.isFinite(lat)) {
+              console.error('Invalid coords for Kakao.Navi:', { lng, lat, raw: results[0] });
+              // 필요 시 안내/폴백 처리
             }
+
+            // 카카오내비 버튼
+            if (btnKakaoNavi) {
+              const appkey = '여기_JS_앱키'; // Kakao Developers의 JavaScript 키
+              const fallback = `https://kakaonavi.kakao.com/launch?appkey=${encodeURIComponent(appkey)}&x=${lng}&y=${lat}&name=${encodeURIComponent(placeName)}&coord=wgs84`;
+
+              btnKakaoNavi.addEventListener('click', (e) => {
+                e.preventDefault();
+                try {
+                  if (window.Kakao && Kakao.isInitialized() && Kakao.Navi) {
+                    Kakao.Navi.start({
+                      name: placeName,
+                      x: lng,           // 꼭 number로!
+                      y: lat,           // 꼭 number로!
+                      coordType: 'wgs84'
+                    });
+                  } else {
+                    // SDK가 없으면 공식 URL로 폴백
+                    location.href = fallback;
+                  }
+                } catch (err) {
+                  console.error(err);
+                  location.href = fallback;
+                }
+              });
+            }
+
 
             // 네이버지도(검색 링크)
             if (btnNaver) {
