@@ -1257,6 +1257,33 @@
         padding: 10px;
       }
     }
+
+    /* === Nav chips (icon buttons) === */
+    .loc-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 14px;
+    }
+
+    .chip.icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #fff;
+      box-shadow: var(--soft);
+      font-weight: 500;
+    }
+
+    .chip.icon svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+    }
   </style>
 </head>
 
@@ -1380,7 +1407,7 @@
 
         <div class="traits" aria-label="신랑 소개">
           <div>수다쟁이</div>
-          <div class="thin">누뿡빵</div>
+          <div>누뿡빵</div>
           <div>-----</div>
           <div>-----</div>
           <div>-----</div>
@@ -1406,12 +1433,12 @@
         <div class="bday">95년 1월 26일</div>
 
         <div class="traits" aria-label="신부 소개">
-          <div>세젤예</div>
-          <div class="thin">유짹짹</div>
-          <div>-----</div>
-          <div>-----</div>
-          <div>-----</div>
-          <div>-----</div>
+          <div>세젤예✨</div>
+          <div>유짹짹</div>
+          <div>똑부러짐</div>
+          <div>So lovely💕</div>
+          <div>닭발 싫어함</div>
+          <div>제니 어깨가 되고싶어요</div>
           <div>-----</div>
         </div>
 
@@ -1431,10 +1458,37 @@
         <div class="loc-name">💍 소노펠리체 컨벤션 3층</div>
         <div class="loc-meta">🗓️ 2026년 1월 18일 (일) 오후 1시</div>
         <div class="loc-buttons" role="group" aria-label="길찾기">
-          <a class="chip" href="https://map.naver.com/p/search/서울%20강남구%20삼성동%20159-6" target="_blank"
-            rel="noopener">네이버지도</a>
-          <a class="chip" href="https://map.kakao.com/link/search/서울 강남구 삼성동 159-6" target="_blank"
-            rel="noopener">카카오맵</a>
+          <!-- T맵 -->
+          <a id="btnTmap" class="chip icon" href="#" target="_blank" rel="noopener">
+            <!-- 간단 T 로고 -->
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <defs>
+                <linearGradient id="tgrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#C94BF9" />
+                  <stop offset="1" stop-color="#2DD4FF" />
+                </linearGradient>
+              </defs>
+              <path fill="url(#tgrad)" d="M3 5h18v3h-7v11h-4V8H3z" />
+            </svg>
+            <span>티맵</span>
+          </a>
+          <!-- 카카오내비 -->
+          <a id="btnKakaoNavi" class="chip icon" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="1.5" y="1.5" width="21" height="21" rx="5" fill="#FEE500" />
+              <path d="M9 7l6 5-6 5V7z" fill="#3A63D1" />
+            </svg>
+            <span>카카오내비</span>
+          </a>
+
+          <!-- 네이버지도 -->
+          <a id="btnNaver" class="chip icon" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2c4.4 0 8 3.3 8 7.5C20 15 12 22 12 22S4 15 4 9.5 7.6 2 12 2z" fill="#03C75A" />
+              <path d="M9 14V8h2l2 3.2V8h2v6h-2l-2-3.2V14H9z" fill="#fff" />
+            </svg>
+            <span>네이버지도</span>
+          </a>
         </div>
         <div id="map" style="width:100%; height:360px; border-radius:12px; margin-top:14px"></div>
       </div>
@@ -1592,14 +1646,19 @@
     }
     tick(); setInterval(tick, 1000);
 
-    // ===== Kakao Map =====
     function initMap() {
       try {
         const mapContainer = document.getElementById('map');
         if (!mapContainer) return;
 
+        // 버튼 엘리먼트(있으면 링크 세팅)
+        const btnTmap = document.getElementById('btnTmap');
+        const btnKakaoNavi = document.getElementById('btnKakaoNavi');
+        const btnNaver = document.getElementById('btnNaver');
+
         const geocoder = new kakao.maps.services.Geocoder();
         const address = '서울 강남구 삼성동 159-6';
+        const placeName = '소노펠리체 컨벤션 3층';
 
         geocoder.addressSearch(address, function (results, status) {
           if (status === kakao.maps.services.Status.OK && results && results.length > 0) {
@@ -1609,32 +1668,64 @@
 
             const map = new kakao.maps.Map(mapContainer, { center: coords, level: 3 });
             const marker = new kakao.maps.Marker({ map, position: coords });
-            const placeName = '소노펠리체 컨벤션 3층';
+
             const kakaoMapUrl = 'https://map.kakao.com/link/map/' + encodeURIComponent(placeName) + ',' + y + ',' + x;
             const kakaoToUrl = 'https://map.kakao.com/link/to/' + encodeURIComponent(placeName) + ',' + y + ',' + x;
 
             const infowindow = new kakao.maps.InfoWindow({
               content: '<div style="padding:8px;font-size:14px;font-weight:bold;">' +
-                '<a href="' + kakaoMapUrl + '" target="_blank" rel="noopener" style="color:#111;text-decoration:underline;">' + placeName + '</a>' +
-                '</div>'
+                '<a href="' + kakaoMapUrl + '" target="_blank" rel="noopener" style="color:#111;text-decoration:underline;">' +
+                placeName + '</a></div>'
             });
-
-            kakao.maps.event.addListener(marker, 'click', () => {
-              window.open(kakaoToUrl, '_blank');
-            });
-
+            kakao.maps.event.addListener(marker, 'click', () => window.open(kakaoToUrl, '_blank'));
             kakao.maps.event.addListener(map, 'tilesloaded', () => infowindow.open(map, marker));
+
+            /* ===== 여기부터 추가: 버튼 링크 세팅 ===== */
+            const encodedName = encodeURIComponent(placeName);
+            const encodedAddr = encodeURIComponent(address);
+
+            // T맵 (모바일 앱 딥링크 우선, 실패 시 웹으로 폴백)
+            if (btnTmap) {
+              const tmapDeep = `tmap://route?goalx=${x}&goaly=${y}&goalname=${encodedName}`;
+              const tmapWeb = `https://m.tmap.co.kr/search/search.do?searchKeyword=${encodedName}`;
+              btnTmap.href = tmapWeb; // 기본은 웹
+              btnTmap.addEventListener('click', (e) => {
+                const isMobile = /iphone|ipad|ipod|android/i.test(navigator.userAgent);
+                if (!isMobile) return; // 데스크톱은 웹만
+                e.preventDefault();
+                const start = Date.now();
+                location.href = tmapDeep;          // 앱 시도
+                setTimeout(() => {                 // 실패하면 웹
+                  if (Date.now() - start < 1200) window.open(tmapWeb, '_blank');
+                }, 750);
+              });
+            }
+
+            // 카카오내비(공식 런치 URL)
+            if (btnKakaoNavi) {
+              btnKakaoNavi.href = `https://kakaonavi.kakao.com/launch/?y=${y}&x=${x}&name=${encodedName}`;
+            }
+
+            // 네이버지도(검색 링크)
+            if (btnNaver) {
+              btnNaver.href = `https://map.naver.com/p/search/${encodedAddr}`;
+            }
+            /* ===== 추가 끝 ===== */
+
           } else {
-            mapContainer.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;font-size:14px;">지도를 불러올 수 없습니다. 위의 링크를 이용해주세요.</div>';
+            mapContainer.innerHTML =
+              '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;font-size:14px;">지도를 불러올 수 없습니다. 위의 링크를 이용해주세요.</div>';
           }
         });
       } catch (error) {
         const mapContainer = document.getElementById('map');
         if (mapContainer) {
-          mapContainer.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;font-size:14px;">지도를 불러올 수 없습니다. 위의 링크를 이용해주세요.</div>';
+          mapContainer.innerHTML =
+            '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;font-size:14px;">지도를 불러올 수 없습니다. 위의 링크를 이용해주세요.</div>';
         }
       }
     }
+
     function waitForKakaoMap() { if (typeof kakao !== 'undefined' && kakao.maps) initMap(); else setTimeout(waitForKakaoMap, 100); }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', waitForKakaoMap); else waitForKakaoMap();
 
