@@ -1050,6 +1050,112 @@
         font-size: 17px
       }
     }
+
+    /* ===== FAMILY v2 ===== */
+    .family-v2 {
+      position: relative;
+    }
+
+    .family-v2 h2 {
+      margin-bottom: 14px;
+    }
+
+    .couple-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .profile-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: var(--soft);
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+      text-align: center;
+    }
+
+    .profile-card .photo {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .06);
+    }
+
+    .profile-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .role-name {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      font-size: 18px;
+    }
+
+    .role-name .role {
+      font-weight: 500;
+    }
+
+    .role-name .name {
+      color: #333;
+    }
+
+    .role-name .tel {
+      font-size: 18px;
+      line-height: 1;
+      filter: grayscale(.2);
+    }
+
+    .badge-groom {
+      color: #3c6e91;
+    }
+
+    /* 신랑 색 */
+    .badge-bride {
+      color: #b1637a;
+    }
+
+    /* 신부 색 */
+
+    .bday {
+      color: #444;
+      margin-top: 2px;
+    }
+
+    .traits {
+      display: grid;
+      gap: 6px;
+      color: #333;
+      line-height: 1.7;
+    }
+
+    .traits .thin {
+      color: #666;
+      font-family: 'Marcellus', serif;
+      letter-spacing: .02em;
+    }
+
+    .divider-soft {
+      margin-top: 4px;
+      color: #777;
+    }
+
+    .parents {
+      margin-top: 6px;
+      color: #444;
+    }
+
+    /* 모바일 */
+    @media (max-width:520px) {
+      .couple-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 
@@ -1154,24 +1260,68 @@
     </div>
   </section>
 
-  <!-- FAMILY -->
-  <section class="family">
-    <h2>FAMILY</h2>
-    <div class="fam-grid">
-      <div class="fam-card">
-        <div class="role">신랑</div>
-        <div class="name">한지섭</div>
-        <div class="role">부 • 모</div>
-        <div>한상민 · 이효재</div>
-      </div>
-      <div class="fam-card">
-        <div class="role">신부</div>
-        <div class="name">유지연</div>
-        <div class="role">부 • 모</div>
-        <div>유성태 · 서문숙</div>
-      </div>
+  <section class="family family-v2">
+    <h2>WHO WE ARE</h2>
+  
+    <div class="couple-grid">
+      <!-- 신랑 -->
+      <article class="profile-card">
+        <div class="photo">
+          <img src="w17.jpeg" alt="신랑 사진">
+        </div>
+  
+        <div class="role-name">
+          <span class="role badge-groom">신랑</span>
+          <span class="name">한지섭</span>
+          <a class="tel" href="tel:010-3071-3054" aria-label="신랑에게 전화">📞</a>
+        </div>
+  
+        <div class="bday">94년 9월 12일</div>
+  
+        <div class="traits" aria-label="신랑 소개">
+          <div>수다쟁이</div>
+          <div class="thin">Sunshine</div>
+          <div>문제를 일으킴</div>
+          <div>절대 화내지 않음</div>
+          <div>유머러스함</div>
+          <div>익스트림 사랑</div>
+          <div>운동 러버</div>
+        </div>
+  
+        <div class="divider-soft">🤍We are</div>
+        <div class="parents">한상민·이효재 의 장남</div>
+      </article>
+  
+      <!-- 신부 -->
+      <article class="profile-card">
+        <div class="photo">
+          <img src="w1.jpeg" alt="신부 사진">
+        </div>
+  
+        <div class="role-name">
+          <span class="role badge-bride">신부</span>
+          <span class="name">유지연</span>
+          <a class="tel" href="tel:010-6217-9501" aria-label="신부에게 전화"></a>
+        </div>
+  
+        <div class="bday">95년 1월 26일</div>
+  
+        <div class="traits" aria-label="신부 소개">
+          <div>세젤예</div>
+          <div class="thin">Moonlight</div>
+          <div>문제에 동참함</div>
+          <div>감정 기복이 있는 편</div>
+          <div>웃음이 많음</div>
+          <div>"무서워!"</div>
+          <div>빵 러버</div>
+        </div>
+  
+        <div class="divider-soft">in love💛</div>
+        <div class="parents">유성태·서문숙 의 차녀</div>
+      </article>
     </div>
   </section>
+  
 
   <!-- LOCATION -->
   <section class="location">
@@ -1200,7 +1350,7 @@
             <li class="muted">지하 코엑스몰 이동보다는 지상으로 찾아오시면 편리합니다.(약 10분)</li>
           </ul>
         </div>
-      
+
         <!-- 자차 -->
         <div class="guide-sec">
           <h3>🚗 자차</h3>
@@ -1209,7 +1359,7 @@
             <li class="muted">주차장은 도심공항터미널 건물 내에 있으며, 2시간 무료 주차 가능합니다.</li>
           </ul>
         </div>
-      
+
         <!-- 셔틀버스 배지 -->
         <div class="guide-sec">
           <h3>🚌 셔틀버스 운행</h3>
@@ -1219,8 +1369,8 @@
           </ul>
         </div>
       </div>
-      
-      
+
+
   </section>
 
 
