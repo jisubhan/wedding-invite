@@ -1306,6 +1306,39 @@
         gap: 8px;
       }
     }
+
+    /* === WHO WE ARE: traits 세로 스크롤 === */
+    .family-v2 .traits {
+      display: flex !important;
+      flex-direction: column !important;
+      /* 세로 배치 */
+      align-items: center;
+      /* 가운데 정렬 (왼쪽 정렬은 flex-start) */
+      gap: 6px;
+      line-height: 1.6;
+      max-height: 180px;
+      /* 카드 안에서 보이는 높이(원하면 120~160px로 조절) */
+      overflow-y: auto;
+      /* 세로 스크롤 */
+      -webkit-overflow-scrolling: touch;
+      /* iOS 부드러운 스크롤 */
+      padding-right: 4px;
+      /* 스크롤 여백 */
+    }
+
+    /* 각 항목은 한 줄로(줄바꿈 방지) + 길면 말줄임 */
+    .family-v2 .traits>div {
+      white-space: nowrap;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* 스크롤바 최소화 */
+    .family-v2 .traits::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
   </style>
 </head>
 
@@ -1428,13 +1461,13 @@
         <div class="bday">94년 9월 12일</div>
 
         <div class="traits" aria-label="신랑 소개">
-          <div>수다쟁이</div>
+          <div>바깥양반😎</div>
           <div>누뿡빵</div>
-          <div>-----</div>
-          <div>-----</div>
-          <div>-----</div>
-          <div>-----</div>
-          <div>-----</div>
+          <div>한과장😱</div>
+          <div>hansome guy👍</div>
+          <div>가재울최수종👨‍🍼</div>
+          <div>0초박서준</div>
+          <div>토마토🤮</div>
         </div>
 
         <div class="divider-soft">🤍We are</div>
@@ -1456,12 +1489,12 @@
 
         <div class="traits" aria-label="신부 소개">
           <div>세젤예✨</div>
-          <div>유짹짹</div>
-          <div>똑부러짐</div>
+          <div>유짹짹🐥</div>
+          <div>쫄둥이🫣</div>
           <div>So lovely💕</div>
-          <div>닭발 싫어함</div>
+          <div>흰선실세👑</div>
           <div>제니 어깨가 되고싶어요</div>
-          <div>-----</div>
+          <div>닭발 싫어요🙅🏻‍♀️</div>
         </div>
 
         <div class="divider-soft">in love💛</div>
