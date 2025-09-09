@@ -1005,6 +1005,51 @@
         transform: scale(1.03);
       }
     }
+
+    /* --- Location Guide --- */
+    .loc-guide {
+      margin-top: 18px;
+      display: grid;
+      gap: 22px
+    }
+
+    .guide-sec h3 {
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px
+    }
+
+    .guide-sec ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 6px;
+      color: #444
+    }
+
+    .guide-sec .muted {
+      color: var(--muted)
+    }
+
+    .guide-badge {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: #fff6cc;
+      border: 1px solid #f0e3a0;
+      color: #6b5c00;
+      font-weight: 500
+    }
+
+    @media (max-width:520px) {
+      .guide-sec h3 {
+        font-size: 17px
+      }
+    }
   </style>
 </head>
 
@@ -1144,18 +1189,51 @@
         </div>
         <div id="map" style="width:100%; height:360px; border-radius:12px; margin-top:14px"></div>
       </div>
+      <div class="loc-guide" aria-label="오시는 길 안내">
+        <!-- 지하철 -->
+        <div class="guide-sec">
+          <h3>🚇 지하철</h3>
+          <ul>
+            <li>2호선: 삼성역 5번 출구</li>
+            <li class="muted">5번출구에서 직진 후 현대백화점 코너 우측 약 150m 지점 도심공항터미널 3층(약 7분)</li>
+            <li>9호선: 봉은사역 7번 출구</li>
+            <li class="muted">지하 코엑스몰 이동보다는 지상으로 찾아오시면 편리합니다.(약 10분)</li>
+          </ul>
+        </div>
+      
+        <!-- 자차 -->
+        <div class="guide-sec">
+          <h3>🚗 자차</h3>
+          <ul>
+            <li>네비게이션: "소노펠리체 컨벤션" 검색</li>
+            <li class="muted">주차장은 도심공항터미널 건물 내에 있으며, 2시간 무료 주차 가능합니다.</li>
+          </ul>
+        </div>
+      
+        <!-- 셔틀버스 배지 -->
+        <div class="guide-sec">
+          <h3>🚌 셔틀버스 운행</h3>
+          <ul>
+            <li>📍 천안 출발</li>
+            <li class="muted">⏰ 삼거리 공원 출발 09:00</li>
+          </ul>
+        </div>
+      </div>
+      
+      
   </section>
+
 
   <!-- ACCOUNT -->
   <section class="account">
     <h2>마음 전하실 곳</h2>
     <div class="cards">
       <div class="acc">
-        <div class="who">신랑측</div>
+        <div class="who">🤵🏻신랑측</div>
         <div class="bank">하나은행 233-891128-47907 (한지섭)</div>
       </div>
       <div class="acc">
-        <div class="who">신부측</div>
+        <div class="who">👰🏻‍♀️신부측</div>
         <div class="bank">국민은행 476101-01-388646 (유지연)</div>
       </div>
     </div>
@@ -1176,7 +1254,7 @@
           귀한 걸음 하시기 전, 참석여부 및 식사여부를 전달해주시면 감사하겠습니다.
         </div>
         <div class="meta">
-          <div class="row"><span class="ico">🩷</span><span>신랑 <b>한지섭</b> 신부 <b>유지연</b></span></div>
+          <div class="row"><span class="ico">💛</span><span>신랑 <b>한지섭</b> 🤍 신부 <b>유지연</b></span></div>
           <div class="row"><span class="ico">📅</span><span>2026년 1월 18일 (일) 오후 1시</span></div>
           <div class="row"><span class="ico">📍</span><span>서울 강남구 삼성동 159-6 · 소노펠리체 컨벤션 3층</span></div>
         </div>
