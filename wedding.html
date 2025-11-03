@@ -1254,12 +1254,87 @@
       }
     }
 
-    /* 너무 좁은 기기에서 카드가 겹치면 안쪽 여백만 살짝 줄임 */
-    @media (max-width: 360px) {
-      .family-v2 .profile-card {
-        padding: 10px;
-      }
-    }
+     /* 너무 좁은 기기에서 카드가 겹치면 안쪽 여백만 살짝 줄임 */
+     @media (max-width: 360px) {
+       .family-v2 .profile-card {
+         padding: 10px;
+       }
+     }
+
+     /* ===== RSVP BUTTON SECTION ===== */
+     .rsvp-section {
+       position: relative;
+       z-index: 2;
+       padding: 20px;
+       max-width: 980px;
+       margin: 0 auto;
+     }
+
+     .rsvp-button-container {
+       display: flex;
+       justify-content: center;
+       margin-bottom: 20px;
+     }
+
+     .rsvp-trigger-btn {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       gap: 8px;
+       padding: 20px 24px;
+       border: 2px solid var(--accent);
+       border-radius: 16px;
+       background: linear-gradient(135deg, #fff 0%, #faf9f7 100%);
+       color: var(--accent);
+       cursor: pointer;
+       transition: all 0.3s ease;
+       box-shadow: var(--soft);
+       min-width: 280px;
+     }
+
+     .rsvp-trigger-btn:hover {
+       transform: translateY(-2px);
+       box-shadow: 0 15px 40px rgba(139, 110, 102, .15);
+       background: linear-gradient(135deg, #faf9f7 0%, #fff 100%);
+     }
+
+     .rsvp-trigger-btn:active {
+       transform: translateY(0);
+     }
+
+     .btn-icon {
+       font-size: 28px;
+       line-height: 1;
+     }
+
+     .btn-text {
+       font-family: 'Marcellus', serif;
+       font-size: 18px;
+       font-weight: 500;
+       color: var(--ink);
+     }
+
+     .btn-subtext {
+       font-size: 14px;
+       color: var(--muted);
+       text-align: center;
+       line-height: 1.4;
+     }
+
+     @media (max-width: 520px) {
+       .rsvp-trigger-btn {
+         min-width: 260px;
+         padding: 18px 20px;
+       }
+
+       .btn-text {
+         font-size: 16px;
+       }
+
+       .btn-subtext {
+         font-size: 13px;
+       }
+     }
 
     /* === Nav chips (icon buttons) === */
     .loc-buttons {
@@ -1920,19 +1995,34 @@
           </ul>
         </div>
 
-        <!-- 셔틀버스 배지 
+        <!-- 셔틀버스 배지 -->
         <div class="guide-sec">
           <h3>🚌 셔틀버스 운행</h3>
           <ul>
             <li>📍 천안 출발</li>
-            <li class="muted">⏰ 삼거리 공원 출발 09:00</li>
+            <li class="muted">출발시간 : 오전 10:30</li>
+            <li class="muted">탑승장소 : 천안 박물관 주차장</li>
+            <li>📍 서울 출발</li>
+            <li class="muted">출발시간 : 오후 3:00</li>
+            <li class="muted">탑승장소 : 소노펠리체 컨벤션</li>
           </ul>
         </div>
-      </div>-->
+      </div>
 
 
   </section>
 
+
+  <!-- RSVP BUTTON -->
+  <section class="rsvp-section">
+    <div class="rsvp-button-container">
+      <button class="rsvp-trigger-btn" id="rsvpTriggerBtn" type="button">
+        <span class="btn-icon">💌</span>
+        <span class="btn-text">참석 여부 전달</span>
+        <span class="btn-subtext">참석/불참 및 식사 여부를 알려주세요</span>
+      </button>
+    </div>
+  </section>
 
   <!-- ACCOUNT -->
   <section class="account" id="account">
@@ -2459,11 +2549,33 @@
     function toStep2() { rsvpStep1.style.display = 'none'; rsvpStep2.style.display = 'block'; }
     function toStep1() { rsvpStep2.style.display = 'none'; rsvpStep1.style.display = 'block'; }
 
-    rsvpClose.addEventListener('click', closeRSVP);
-    if (rsvpStart) rsvpStart.addEventListener('click', toStep2);
-    if (rsvpBack) rsvpBack.addEventListener('click', toStep1);
-    rsvpModal.addEventListener('click', (e) => { if (e.target === rsvpModal) closeRSVP(); });
-    window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && rsvpModal.classList.contains('active')) closeRSVP(); });
+     rsvpClose.addEventListener('click', closeRSVP);
+     if (rsvpStart) rsvpStart.addEventListener('click', toStep2);
+     if (rsvpBack) rsvpBack.addEventListener('click', toStep1);
+     rsvpModal.addEventListener('click', (e) => { if (e.target === rsvpModal) closeRSVP(); });
+     window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && rsvpModal.classList.contains('active')) closeRSVP(); });
+
+     // RSVP 트리거 버튼 이벤트 (수동 클릭용 - 오늘하루보지않기 무시)
+     const rsvpTriggerBtn = document.getElementById('rsvpTriggerBtn');
+     if (rsvpTriggerBtn) {
+       rsvpTriggerBtn.addEventListener('click', () => {
+         // 수동 클릭시에는 오늘하루보지않기 설정과 관계없이 항상 열림
+         // 그리고 바로 폼 단계로 이동 (첫 번째 단계 건너뛰기)
+         rsvpModal.classList.add('active');
+         rsvpModal.setAttribute('aria-hidden', 'false');
+         document.body.classList.add('modal-open');
+         
+         // 첫 번째 단계 숨기고 두 번째 단계(폼) 표시
+         rsvpStep1.style.display = 'none';
+         rsvpStep2.style.display = 'block';
+         
+         // 수동으로 열었을 때는 돌아가기 버튼 숨기기
+         const backBtn = document.getElementById('rsvpBack');
+         if (backBtn) {
+           backBtn.style.display = 'none';
+         }
+       });
+     }
 
     document.addEventListener('DOMContentLoaded', () => {
       const hidden = localStorage.getItem('rsvp_hide_until') === todayKey();
